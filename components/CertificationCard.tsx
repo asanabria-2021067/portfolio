@@ -7,6 +7,7 @@ interface CertificationCardProps {
   date: string;
   desc?: string;
   link?: string;
+  logo?: string;
 }
 
 export default function CertificationCard({
@@ -16,12 +17,19 @@ export default function CertificationCard({
   date,
   desc,
   link,
+  logo,
 }: CertificationCardProps) {
   return (
     <BentoCard className="flex flex-col">
       <div className="flex gap-4 items-start mb-4">
-        <div className="w-[54px] h-[54px] flex items-center justify-center text-[14px] font-extrabold text-white bg-grad rounded-[14px] shrink-0 font-mono shadow-[0_8px_20px_-4px_rgba(106,166,255,0.3)]">
-          {badge}
+        <div className="w-[54px] h-[54px] flex items-center justify-center rounded-[14px] shrink-0 overflow-hidden bg-white/5 border border-white/10 shadow-[0_8px_20px_-4px_rgba(0,0,0,0.3)]">
+          {logo ? (
+            <img src={logo} alt={org} className="w-full h-full object-contain p-2" />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-[14px] font-extrabold text-white bg-grad font-mono">
+              {badge}
+            </div>
+          )}
         </div>
         <div className="flex flex-col gap-[2px]">
           <span className="text-[10px] uppercase tracking-[0.1em] text-fg-mute font-mono">{date}</span>

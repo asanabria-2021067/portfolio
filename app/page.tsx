@@ -68,16 +68,16 @@ export default function Home() {
       />
       <ProjectPreview
         title="SeaSOS"
-        meta="Project · 2024"
-        desc="Marine life care platform focused on ODS 14, with data visualization and a full-stack reporting system for ocean health."
-        tags={["Python", "Flask"]}
+        meta="Feb. 2024 - May. 2024"
+        desc="Proyecto Full Stack enfocado en el cuidado de la vida marina y una solución tecnológica al ODS 14."
+        tags={["React", "Python", "Flask"]}
         badge="🌊 ODS 14"
         badgeStyle={{
           color: "#a78bfa",
           background: "rgba(167,139,250,0.12)",
           borderColor: "rgba(167,139,250,0.30)",
         }}
-        bullets={["Data viz with Pandas & Matplotlib", "Full stack: Flask, React, MongoDB"]}
+        bullets={["Stack: Python Flask, React, MongoDB", "Pandas & Matplotlib data viz"]}
         art={
           <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" className="block w-full h-full">
             <defs>

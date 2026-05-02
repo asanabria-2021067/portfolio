@@ -21,7 +21,7 @@ export default function CTA() {
         <ContactLinks />
 
         <div className="flex items-center gap-3 mt-auto pt-[14px] flex-wrap">
-          <a href="mailto:contact@angelsanabria.dev" className="inline-flex items-center gap-[10px] py-[13px] px-5 bg-grad text-white border-none rounded-xl text-[14px] font-semibold no-underline shadow-[0_12px_30px_-8px_rgba(106,166,255,0.4),0_1px_0_rgba(255,255,255,0.2)_inset] transition-all duration-200 hover:-translate-y-[1px] hover:shadow-[0_16px_36px_-8px_rgba(167,139,250,0.5),0_1px_0_rgba(255,255,255,0.3)_inset]">
+          <a href="mailto:as1945228@gmail.com" className="inline-flex items-center gap-[10px] py-[13px] px-5 bg-grad text-white border-none rounded-xl text-[14px] font-semibold no-underline shadow-[0_12px_30px_-8px_rgba(106,166,255,0.4),0_1px_0_rgba(255,255,255,0.2)_inset] transition-all duration-200 hover:-translate-y-[1px] hover:shadow-[0_16px_36px_-8px_rgba(167,139,250,0.5),0_1px_0_rgba(255,255,255,0.3)_inset]">
             <span>Start a conversation</span>
             <svg width="16" height="16" viewBox="0 0 16 16">
               <path

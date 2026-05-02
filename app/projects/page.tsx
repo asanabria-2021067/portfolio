@@ -26,7 +26,7 @@ export default function ProjectsPage() {
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-[10px] uppercase tracking-[0.12em] text-fg-mute font-mono">Stacks</span>
-            <span className="text-[22px] font-semibold tracking-[-0.02em] grad-text">MERN · Flask</span>
+            <span className="text-[22px] font-semibold tracking-[-0.02em] grad-text">MERN · Flask · Python</span>
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-[10px] uppercase tracking-[0.12em] text-fg-mute font-mono">Awards</span>
@@ -35,10 +35,10 @@ export default function ProjectsPage() {
         </div>
       </header>
 
-      <main className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-[18px]">
+      <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[18px]">
         {/* Shifu AI */}
         <ProjectCard
-          size="large"
+          size="medium"
           badge="⚡ Featured"
           badgeColor="violet"
           meta="2025 — Present · Hyperreality Company"
@@ -56,6 +56,7 @@ export default function ProjectsPage() {
             { label: "MongoDB", color: "#47a248" },
             { label: "Redis", color: "#dc382d" },
           ]}
+          demoLink="https://shifu.ai"
           art={
             <svg viewBox="0 0 700 300" preserveAspectRatio="xMidYMid slice" className="block w-full h-full">
               <defs>
@@ -96,14 +97,6 @@ export default function ProjectsPage() {
                 >
                   SHIFU AI
                 </text>
-                <g fill="rgba(255,255,255,0.14)">
-                  <rect x="14" y="80" width="112" height="22" rx="4" fill="rgba(106,166,255,0.18)" />
-                  <rect x="14" y="108" width="100" height="6" rx="2" />
-                  <rect x="14" y="120" width="80" height="6" rx="2" />
-                  <rect x="14" y="142" width="90" height="6" rx="2" />
-                  <rect x="14" y="154" width="70" height="6" rx="2" />
-                  <rect x="14" y="176" width="100" height="6" rx="2" />
-                </g>
                 <g transform="translate(160 50)">
                   <rect
                     width="420"
@@ -153,7 +146,9 @@ export default function ProjectsPage() {
           meta="Project · 2024"
           title="WaterWay+"
           desc="AI + maps for river protection. Visualizes pollution patterns and helps communities take action with environmental data."
-          tags={[{ label: "AI" }, { label: "Maps" }, { label: "Env. Data" }]}
+          tags={[{ label: "React Native", color: "#61dafb" }, { label: "Firebase", color: "#ffca28" }, { label: "Maps", color: "#4285f4" }]}
+          demoLink="#"
+          repoLink="#"
           art={
             <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" className="block w-full h-full">
               <defs>
@@ -199,11 +194,23 @@ export default function ProjectsPage() {
           size="medium"
           badge="🌊 ODS 14"
           badgeColor="violet"
-          meta="Project · 2024"
+          meta="Feb. 2024 - May. 2024"
           title="SeaSOS"
-          desc="Marine life care platform focused on ODS 14, with data visualization and a full-stack reporting system for ocean health."
-          bullets={["Data viz with Pandas & Matplotlib", "Full stack: Flask, React, MongoDB"]}
-          tags={[{ label: "Python" }, { label: "Flask" }]}
+          desc="Proyecto Full Stack enfocado en el cuidado de la vida marina y una solución tecnológica al ODS 14."
+          bullets={[
+            "Full Stack: Python Flask, React y MongoDB",
+            "Análisis de datos con Pandas & Matplotlib",
+            "Visualización geográfica con Leaflet",
+          ]}
+          tags={[
+            { label: "React.js", color: "#61dafb" },
+            { label: "Python", color: "#3776ab" },
+            { label: "Flask", color: "#fff" },
+            { label: "MongoDB", color: "#47a248" },
+            { label: "Pandas", color: "#150458" },
+          ]}
+          demoLink="#"
+          repoLink="#"
           art={
             <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" className="block w-full h-full">
               <defs>
@@ -246,10 +253,23 @@ export default function ProjectsPage() {
           size="small"
           badge="🏦 Banking"
           badgeColor="blue"
-          meta="MERN · 2024"
+          meta="Jun. 2023 - Jul. 2023"
           title="Sistema Bancario"
-          desc="Bank simulation system with transfers, payments, credits, and live currency conversion via external API."
-          tags={[{ label: "MERN" }, { label: "REST API" }]}
+          desc="Plataforma bancaria simulada con transferencias, depósitos, créditos y conversión de divisas en tiempo real."
+          bullets={[
+            "Integración con API ExchangeRates",
+            "Stack MERN (MongoDB, Express, React, Node)",
+            "Gestión de divisas y transacciones",
+          ]}
+          tags={[
+            { label: "React.js", color: "#61dafb" },
+            { label: "Node.js", color: "#339933" },
+            { label: "MongoDB", color: "#47a248" },
+            { label: "Firebase", color: "#ffca28" },
+            { label: "Java", color: "#007396" },
+          ]}
+          demoLink="#"
+          repoLink="#"
           art={
             <svg viewBox="0 0 400 212" preserveAspectRatio="xMidYMid slice" className="block w-full h-full">
               <defs>
@@ -305,10 +325,22 @@ export default function ProjectsPage() {
           size="small"
           badge="🗺️ Booking"
           badgeColor="green"
-          meta="MERN · 2023"
+          meta="Feb. 2023 - Abr. 2023"
           title="Gestor de Hoteles"
-          desc="Booking-style platform with real-time availability and interactive map view powered by Leaflet."
-          tags={[{ label: "MERN" }, { label: "Leaflet" }]}
+          desc="Sistema de gestión de reservas de hoteles con disponibilidad dinámica y mapas interactivos."
+          bullets={[
+            "Implementación de Leaflet & React-Leaflet",
+            "Gestión dinámica de reservas y hoteles",
+            "Hosteado en Firebase y Vercel",
+          ]}
+          tags={[
+            { label: "React.js", color: "#61dafb" },
+            { label: "MongoDB", color: "#47a248" },
+            { label: "Leaflet", color: "#199900" },
+            { label: "Firebase", color: "#ffca28" },
+          ]}
+          demoLink="#"
+          repoLink="#"
           art={
             <svg viewBox="0 0 400 212" preserveAspectRatio="xMidYMid slice" className="block w-full h-full">
               <defs>
@@ -362,10 +394,23 @@ export default function ProjectsPage() {
           size="small"
           badge="🤝 Social Impact"
           badgeColor="violet"
-          meta="Platform · 2024"
+          meta="Oct. 2023"
           title="Solidarisk"
-          desc="Resource management platform coordinating donations, logistics, and security across distributed networks."
-          tags={[{ label: "Logistics" }, { label: "Security" }]}
+          desc="Gestor de recursos (víveres, seguridad, donativos) diseñado para operar de manera dinámica e intuitiva."
+          bullets={[
+            "Stack MERN completo",
+            "Gestión de recursos y donativos",
+            "Diseño UX intuitivo y dinámico",
+          ]}
+          tags={[
+            { label: "React.js", color: "#61dafb" },
+            { label: "Node.js", color: "#339933" },
+            { label: "MongoDB", color: "#47a248" },
+            { label: "Firebase", color: "#ffca28" },
+            { label: "JWT", color: "#000" },
+          ]}
+          demoLink="#"
+          repoLink="#"
           art={
             <svg viewBox="0 0 400 212" preserveAspectRatio="xMidYMid slice" className="block w-full h-full">
               <defs>
