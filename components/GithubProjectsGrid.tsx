@@ -112,8 +112,8 @@ function RepoArt({ project, index }: { project: PortfolioProject; index: number 
   if (repoName.includes("seasos-front") || repoName.includes("api-rest-python")) {
     return <img src="/assets/images/seasos.png" alt="SeaSOS" className="w-full h-full object-cover" />;
   }
-  if (repoName.includes("smart-agriculture-frontend")) {
-    return <img src="/assets/images/smart_agriculture.png" alt="Smart Agriculture Frontend" className="w-full h-full object-cover" />;
+  if (repoName.includes("smart-agriculture")) {
+    return <img src="/assets/images/smart_agriculture.png" alt="Smart Agriculture" className="w-full h-full object-cover" />;
   }
   if (repoName.includes("tripwise")) {
     return <img src="/assets/images/tripwise.png" alt="TripWise" className="w-full h-full object-cover" />;
