@@ -5,13 +5,11 @@ const EXCLUDED_OWNER = "gq ideas";
 const EXCLUDED_OWNER_KEY = normalizeOwner(EXCLUDED_OWNER);
 
 const CURATED_REPOS = [
-  "asanabria-2021067/waterway-backend",
   "asanabria-2021067/proyecto-ingenieria-software",
-  "asanabria-2021067/seasos-front",
-  "asanabria-2021067/api-rest-python",
   "asanabria-2021067/proyecto2-db",
-  "asanabria-2021067/frontend-quimica",
   "asanabria-2021067/chemiq-backend",
+  "asanabria-2021067/frontend-quimica",
+  "asanabria-2021067/waterway-backend",
   "asanabria-2021067/Smart-Agriculture-FRONTEND-Node.js-OpenAI-Google-Sheets",
   "asanabria-2021067/Smart-Agriculture-Backend",
   "PabloVS044/TripWise",
@@ -50,6 +48,7 @@ const PROJECT_OVERRIDES: Record<string, ProjectOverride> = {
     badgeEn: "Hackathon Winner",
     badgeEs: "Ganador de hackathon",
     badgeColor: "gold",
+    productionUrl: "https://water-way.netlify.app/",
     categoryEn: "Environmental platform",
     categoryEs: "Plataforma ambiental",
     descriptionEn:

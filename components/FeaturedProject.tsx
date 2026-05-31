@@ -10,12 +10,8 @@ const repos = [
     href: "https://github.com/asanabria-2021067/waterway-backend",
   },
   {
-    label: "SeaSOS Frontend",
-    href: "https://github.com/asanabria-2021067/seasos-front",
-  },
-  {
-    label: "SeaSOS Backend",
-    href: "https://github.com/asanabria-2021067/api-rest-python",
+    label: "UVGenius (Monorepo)",
+    href: "https://github.com/asanabria-2021067/proyecto-ingenieria-software",
   },
 ];
 
@@ -60,7 +56,7 @@ export default function FeaturedProject() {
           <g transform="translate(386 74)">
             <rect width="248" height="148" rx="16" fill="rgba(7,8,13,0.66)" stroke="rgba(255,255,255,0.13)" />
             <text x="24" y="44" fill="rgba(255,255,255,0.58)" fontFamily="var(--font-mono)" fontSize="11">
-              SEASOS
+              UVGENIUS
             </text>
             <circle cx="124" cy="86" r="52" fill="url(#featured-pulse)" />
             <g stroke="rgba(255,255,255,0.16)" fill="none">
@@ -75,25 +71,35 @@ export default function FeaturedProject() {
       </div>
 
       <div className="flex items-center gap-2.5 text-[12px] text-fg-mute mb-2.5 font-mono flex-wrap">
-        <span>{locale === "en" ? "WaterWay+ / SeaSOS" : "WaterWay+ / SeaSOS"}</span>
+        <span>{locale === "en" ? "WaterWay+ & UVGenius" : "WaterWay+ y UVGenius"}</span>
         <span className="opacity-40">/</span>
-        <span>{locale === "en" ? "Environmental + marine tech" : "Tecnologia ambiental y marina"}</span>
+        <span>{locale === "en" ? "Environmental & Collab Portal" : "Tecnologia ambiental y colaboracion"}</span>
       </div>
 
       <h2 className="text-[26px] font-semibold tracking-[-0.02em] leading-[1.15] mb-3">
-        <span className="grad-text">WaterWay+ & SeaSOS</span>{" "}
-        {locale === "en" ? "for environmental action." : "para accion ambiental."}
+        <span className="grad-text">WaterWay+ & UVGenius</span>{" "}
+        {locale === "en" ? "for community impact." : "para impacto comunitario."}
       </h2>
       <p className="text-fg-dim text-[14px] leading-[1.6] mb-3.5 text-pretty">
         {locale === "en"
-          ? "Two full-stack projects around river protection and marine conservation: public repositories, API work, geospatial/data flows, and community-focused product thinking."
-          : "Dos proyectos full stack sobre proteccion de rios y conservacion marina: repositorios publicos, trabajo de API, flujos geoespaciales/de datos y producto enfocado en comunidad."}
+          ? "Two major full-stack systems focusing on river protection and university collaboration: featuring public API development, Docker Compose orchestration, NestJS services, and community-focused product thinking."
+          : "Dos sistemas full stack sobre proteccion de rios y colaboracion universitaria: desarrollo de APIs publicas, orquestacion con Docker Compose, servicios NestJS y producto enfocado en la comunidad."}
       </p>
 
       <ul className="list-none p-0 mb-[22px] grid grid-cols-1 md:grid-cols-2 gap-[8px_18px]">
         {(locale === "en"
-          ? ["WaterWay+ backend repository", "SeaSOS frontend repository", "SeaSOS Python API", "Hackathon and SDG-oriented builds"]
-          : ["Repositorio backend de WaterWay+", "Repositorio frontend de SeaSOS", "API en Python de SeaSOS", "Proyectos orientados a hackathon y ODS"]
+          ? [
+              "WaterWay+ backend API & Netlify deploy",
+              "UVGenius monorepo with NestJS & Next.js",
+              "Docker Compose multi-service architecture",
+              "Hackathon-winning and SDG-oriented solutions",
+            ]
+          : [
+              "API backend de WaterWay+ y despliegue Netlify",
+              "Monorepo UVGenius con NestJS y Next.js",
+              "Arquitectura multi-servicio con Docker Compose",
+              "Soluciones de hackathon y orientadas a ODS",
+            ]
         ).map((item) => (
           <li key={item} className="flex items-start gap-2 text-[13px] text-fg-dim leading-[1.45] before:content-[''] before:w-1.5 before:h-1.5 before:rounded-[2px] before:bg-[var(--grad)] before:mt-1.5 before:shrink-0">
             {item}
@@ -103,10 +109,10 @@ export default function FeaturedProject() {
 
       <div className="flex flex-col gap-5 mt-auto">
         <div className="flex flex-wrap gap-1.5">
-          <Chip label="React" dotColor="#61dafb" />
-          <Chip label="Python" dotColor="#3776ab" />
-          <Chip label="API" dotColor="#6aa6ff" />
-          <Chip label="ODS 14" dotColor="#a78bfa" />
+          <Chip label="React / Next.js" dotColor="#61dafb" />
+          <Chip label="NestJS" dotColor="#e0234e" />
+          <Chip label="Docker" dotColor="#2496ed" />
+          <Chip label="API / REST" dotColor="#6aa6ff" />
         </div>
 
         <div className="flex items-center justify-end border-t border-[var(--line)] pt-5 gap-3 flex-wrap">

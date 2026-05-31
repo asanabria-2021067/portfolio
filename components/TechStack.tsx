@@ -53,6 +53,7 @@ const stack = [
       { label: "Supabase", color: "#3ecf8e" },
       { label: "AWS (CI/CD)", color: "#ff9900" },
       { label: "GHCR (CI/CD)", color: "#2088ff" },
+      { label: "Firebase", color: "#ffca28" },
     ],
   },
   {
@@ -77,7 +78,7 @@ export default function TechStack() {
           <span className="w-1.5 h-1.5 rounded-full bg-blue-accent shadow-[0_0_10px_var(--color-blue-accent)]" />
           {locale === "en" ? "Tech Stack" : "Stack Tecnico"}
         </div>
-        <span className="text-fg-mute text-[12px] font-mono">35+</span>
+        <span className="text-fg-mute text-[12px] font-mono">36+</span>
       </div>
       <div className="flex flex-col gap-[14px]">
         {stack.map((cat) => (
