@@ -91,24 +91,24 @@ const PROJECT_OVERRIDES: Record<string, ProjectOverride> = {
     categoryEn: "Marine conservation frontend",
     categoryEs: "Frontend de conservacion marina",
     descriptionEn:
-      "Frontend for SeaSOS, a full-stack application focused on marine life care and SDG 14.",
+      "Frontend built in React using React Leaflet for interactive maps, custom markers, and heatmaps of marine species in danger of extinction.",
     descriptionEs:
-      "Frontend de SeaSOS, una aplicacion full stack enfocada en el cuidado de la vida marina y el ODS 14.",
-    bulletsEn: ["React interface", "Marine conservation workflows", "Paired with Python API"],
-    bulletsEs: ["Interfaz en React", "Flujos para conservacion marina", "Conectado con API en Python"],
-    tags: ["Frontend", "React", "SDG 14"],
+      "Frontend en React usando React Leaflet con mapas interactivos, marcadores personalizados y mapas de calor de especies marinas en peligro de extinción.",
+    bulletsEn: ["React interface for marine tracking", "Interactive maps with React Leaflet", "Heatmap visualization of species distribution"],
+    bulletsEs: ["Interfaz en React para el rastreo marino", "Mapas interactivos con React Leaflet", "Visualización de mapa de calor de distribución de especies"],
+    tags: ["React", "React Leaflet", "Frontend", "SDG 14"],
   },
   "asanabria-2021067/api-rest-python": {
     displayName: "SeaSOS Backend",
     categoryEn: "Marine conservation API",
     categoryEs: "API de conservacion marina",
     descriptionEn:
-      "Python REST API for SeaSOS, serving the backend logic for a marine conservation platform.",
+      "Python REST API built with Flask to serve data and backend processes for the SeaSOS platform.",
     descriptionEs:
-      "API REST en Python para SeaSOS, encargada de la logica backend de la plataforma de conservacion marina.",
-    bulletsEn: ["Python backend", "Production deployment available", "Supports the SeaSOS frontend"],
-    bulletsEs: ["Backend en Python", "Deployment de produccion disponible", "Soporta el frontend de SeaSOS"],
-    tags: ["Backend", "Python", "API"],
+      "API REST en Python construida con Flask para servir datos y procesos backend para la plataforma SeaSOS.",
+    bulletsEn: ["Flask REST API", "Endpoints for species tracking", "Backend logic"],
+    bulletsEs: ["API REST con Flask", "Endpoints para rastreo de especies", "Lógica del backend"],
+    tags: ["Flask", "Python", "API", "Backend"],
   },
   "asanabria-2021067/proyecto2-db": {
     displayName: "LibroManga Inventory",
@@ -124,40 +124,40 @@ const PROJECT_OVERRIDES: Record<string, ProjectOverride> = {
       "Aplicacion web full stack para gestionar inventario y ventas de una tienda de libros y mangas.",
     bulletsEn: ["Inventory and sales management", "Vue SPA deployed on Netlify", "Docker included in the project"],
     bulletsEs: ["Gestion de inventario y ventas", "SPA en Vue desplegada en Netlify", "Docker incluido en el proyecto"],
-    tags: ["Vue", "Docker", "Inventory", "Sales"],
+    tags: ["Vue", "Docker", "PostgreSQL", "Frontend"],
   },
   "asanabria-2021067/frontend-quimica": {
     displayName: "Chemical Engineering Portal Frontend",
-    badgeEn: "Pilot pending",
-    badgeEs: "Piloto pendiente",
-    badgeColor: "violet",
+    badgeEn: "Technical Lead",
+    badgeEs: "Líder Técnico",
+    badgeColor: "gold",
     productionUrl: "https://portal-chemiq.netlify.app/",
     categoryEn: "Student association portal",
     categoryEs: "Portal de asociacion estudiantil",
     descriptionEn:
-      "Frontend for the Chemical Engineering Student Association portal. I worked as Technical Lead, defining tasks, choosing technologies, coordinating stakeholders, and preparing the pilot test.",
+      "Portal frontend for the Chemical Engineering Student Association. I coordinated this project as Technical Lead, managing tasks, stack, and stakeholders.",
     descriptionEs:
-      "Frontend del portal para la Asociacion de Estudiantes de Ingenieria Quimica. Fui lider tecnico: defini tareas, tecnologias, comunicacion con interesados y la preparacion de la prueba piloto.",
-    bulletsEn: ["Public repository", "Docker included in the frontend repo", "Technical Lead role", "Pilot test pending"],
-    bulletsEs: ["Repositorio público", "Docker incluido en el repo frontend", "Rol de lider tecnico", "Prueba piloto pendiente"],
+      "Frontend del portal para la Asociación de Estudiantes de Ingeniería Química. Coordiné el proyecto como Líder Técnico, gestionando tareas, stack e interesados.",
+    bulletsEn: ["React frontend application", "Coordinated project as Technical Lead", "Defined tasks, stack, and stakeholder alignment"],
+    bulletsEs: ["Aplicación frontend en React", "Coordinación del proyecto como Líder Técnico", "Definición de tareas, stack y alineación de interesados"],
     roleEn: "Technical Lead",
     roleEs: "Lider tecnico",
-    tags: ["Frontend", "Docker", "SPA", "Leadership"],
+    tags: ["React", "Docker", "Frontend", "Leadership"],
     private: false,
   },
   "asanabria-2021067/chemiq-backend": {
     displayName: "Chemical Engineering Portal Backend",
-    badgeEn: "Dockerized API",
-    badgeEs: "API dockerizada",
-    badgeColor: "blue",
+    badgeEn: "Technical Lead",
+    badgeEs: "Líder Técnico",
+    badgeColor: "gold",
     categoryEn: "Student association API",
     categoryEs: "API de asociacion estudiantil",
     descriptionEn:
-      "Backend for the Chemical Engineering Student Association portal using Node.js, MongoDB, and Express.",
+      "Node.js backend for the Chemical Engineering Student Association portal using Express and MongoDB. Coordinated as Technical Lead.",
     descriptionEs:
-      "Backend del portal de la Asociacion de Estudiantes de Ingenieria Quimica usando Node.js, MongoDB y Express.",
-    bulletsEn: ["Public repository", "Node.js, MongoDB, Express", "Docker included in the backend repo", "Production backend configured"],
-    bulletsEs: ["Repositorio público", "Node.js, MongoDB y Express", "Docker incluido en el repo backend", "Backend en produccion configurado"],
+      "Backend en Node.js para el portal de la Asociación de Estudiantes de Ingeniería Química usando Express y MongoDB. Coordinado como Líder Técnico.",
+    bulletsEn: ["Node.js backend API", "MongoDB database integration", "Coordinated backend architecture as Technical Lead"],
+    bulletsEs: ["API backend en Node.js", "Integración de base de datos MongoDB", "Coordinación de arquitectura de backend como Líder Técnico"],
     roleEn: "Technical Lead",
     roleEs: "Lider tecnico",
     tags: ["Backend", "Node.js", "MongoDB", "Docker", "REST API"],
@@ -168,60 +168,60 @@ const PROJECT_OVERRIDES: Record<string, ProjectOverride> = {
     categoryEn: "IoT smart farming interface",
     categoryEs: "Interfaz IoT para agricultura",
     descriptionEn:
-      "Graphic interface for an IoT plant-care system. The experience was built like a Tamagotchi with games, plant status, and controls for a robotic arm that watered pots based on humidity sensors.",
+      "Graphic interface for an IoT plant-care system styled like a Tamagotchi. Includes plant stats and control for a robotic watering arm.",
     descriptionEs:
-      "Interfaz grafica para un sistema IoT de cuidado de plantas. La experiencia funcionaba como un Tamagotchi con juegos, estado de plantas y controles para un brazo que regaba macetas segun sensores de humedad.",
-    bulletsEn: ["Private repository", "Tamagotchi-style UI", "Google Sheets sensor data"],
-    bulletsEs: ["Repositorio privado", "UI estilo Tamagotchi", "Datos de sensores desde Google Sheets"],
-    tags: ["Frontend", "IoT", "OpenAI"],
+      "Interfaz gráfica para un sistema IoT de cuidado de plantas al estilo Tamagotchi. Incluye estadísticas de plantas y control para un brazo robótico de riego.",
+    bulletsEn: ["Tamagotchi-style plant care UI", "Google Sheets sensor data integration", "Robotic arm watering control interface"],
+    bulletsEs: ["UI estilo Tamagotchi para cuidado de plantas", "Integración de datos de sensores con Google Sheets", "Interfaz de control de riego para brazo robótico"],
+    tags: ["React", "IoT", "OpenAI", "Frontend"],
   },
   "asanabria-2021067/Smart-Agriculture-Backend": {
     displayName: "Smart Agriculture Backend",
     categoryEn: "AI-powered smart farming API",
     categoryEs: "API de agricultura inteligente",
     descriptionEn:
-      "Node.js backend for an AI-powered smart farming system with real-time data analysis and sensor communication.",
+      "Node.js backend for an IoT smart farming system, processing real-time sensor data and robotic arm controls.",
     descriptionEs:
-      "Backend en Node.js para un sistema de agricultura inteligente con analisis de datos en tiempo real y comunicacion con sensores.",
-    bulletsEn: ["Private repository", "WebSockets and sensor data", "AI-powered plant-care backend"],
-    bulletsEs: ["Repositorio privado", "WebSockets y datos de sensores", "Backend con IA para cuidado de plantas"],
-    tags: ["Backend", "Node.js", "IoT"],
+      "Backend en Node.js para un sistema de agricultura inteligente IoT, que procesa datos de sensores en tiempo real y controles del brazo robótico.",
+    bulletsEn: ["Node.js backend API", "Real-time sensor integration", "Robotic arm irrigation control"],
+    bulletsEs: ["API backend en Node.js", "Integración de sensores en tiempo real", "Control de riego para brazo robótico"],
+    tags: ["Node.js", "IoT", "Backend", "WebSockets"],
   },
   "PabloVS044/TripWise": {
     displayName: "TripWise",
-    categoryEn: "AI travel reservations",
-    categoryEs: "Reservas de viajes con IA",
+    categoryEn: "AI Travel Planner",
+    categoryEs: "Planificador de viajes con IA",
     descriptionEn:
       "Travel reservation app with AI-generated itineraries for planning richer trip experiences.",
     descriptionEs:
       "App para reservas de viajes con itinerarios generados por IA para planificar experiencias completas.",
-    bulletsEn: ["Public repository", "AI itinerary planning", "Travel booking experience"],
-    bulletsEs: ["Repositorio publico", "Planificacion de itinerarios con IA", "Experiencia de reservas de viaje"],
-    tags: ["AI", "Travel", "Kotlin"],
+    bulletsEn: ["AI-powered travel itinerary planning", "Mobile booking experience", "Kotlin & Android stack"],
+    bulletsEs: ["Planificación de itinerarios de viaje con IA", "Experiencia de reservas móvil", "Stack Kotlin y Android"],
+    tags: ["Kotlin", "Android", "AI", "Mobile"],
   },
   "asanabria-2021067/carpool-app-front": {
     displayName: "Carpool App Frontend",
-    categoryEn: "POO carpool frontend",
-    categoryEs: "Frontend POO de carpool",
+    categoryEn: "Student Carpool Portal",
+    categoryEs: "Portal de Carpool Estudiantil",
     descriptionEn:
-      "Frontend for a carpool application built for an object-oriented programming project.",
+      "Carpool application frontend created for Universidad del Valle de Guatemala to optimize traffic and reduce drop-off zone congestion.",
     descriptionEs:
-      "Frontend de una aplicacion de carpool creada para un proyecto de programacion orientada a objetos.",
-    bulletsEn: ["Private repository", "Carpool interface", "Paired with Node.js backend"],
-    bulletsEs: ["Repositorio privado", "Interfaz de carpool", "Conectado con backend en Node.js"],
-    tags: ["Frontend", "POO", "Carpool"],
+      "Frontend de aplicación de carpool creado para la Universidad del Valle de Guatemala para optimizar el tráfico y reducir la congestión en las zonas de drop-off.",
+    bulletsEn: ["React interface for carpooling", "Designed to address university drop-off congestion", "Paired with Node.js backend"],
+    bulletsEs: ["Interfaz en React para compartir auto", "Diseñado para mitigar congestión en drop-off universitario", "Conectado con backend en Node.js"],
+    tags: ["React", "Frontend", "Carpool", "UVG"],
   },
   "asanabria-2021067/carpool-backend-poo": {
-    displayName: "Carpool Backend POO",
-    categoryEn: "POO carpool backend",
-    categoryEs: "Backend POO de carpool",
+    displayName: "Carpool App Backend",
+    categoryEn: "OOP Carpool API",
+    categoryEs: "API de Carpool POO",
     descriptionEn:
-      "Node.js and MongoDB backend for a carpool application built with object-oriented programming principles.",
+      "Carpool backend API built using Object-Oriented Programming (OOP) principles in Node.js, Express, and MongoDB.",
     descriptionEs:
-      "Backend con Node.js y MongoDB para una aplicacion de carpool usando principios de programacion orientada a objetos.",
-    bulletsEn: ["Public repository", "Node.js and MongoDB", "Object-oriented backend structure"],
-    bulletsEs: ["Repositorio publico", "Node.js y MongoDB", "Estructura backend orientada a objetos"],
-    tags: ["Backend", "Node.js", "MongoDB"],
+      "Backend de carpool construido utilizando principios de Programación Orientada a Objetos (POO) con Node.js, Express y MongoDB.",
+    bulletsEn: ["OOP backend design patterns", "Express.js REST endpoints", "MongoDB database"],
+    bulletsEs: ["Patrones de diseño de backend POO", "Endpoints REST en Express.js", "Almacenamiento de datos en MongoDB"],
+    tags: ["Backend", "Node.js", "Express", "MongoDB", "OOP", "Backend"],
   },
 };
 
@@ -539,9 +539,8 @@ function toProject(repo: GithubRepo, commitCount: number, productionUrl?: string
   const isPrivate = override?.private !== undefined ? override.private : repo.private;
   const fallbackDescription = repo.description || "Repository pulled from GitHub activity.";
   const fallbackBullets = [
-    `${commitCount} commits by me`,
-    `Last push: ${repo.pushed_at ?? repo.updated_at}`,
     isPrivate ? "Private repository" : "Public repository",
+    `Last push: ${repo.pushed_at ?? repo.updated_at}`,
   ];
 
   return {

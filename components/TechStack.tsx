@@ -6,42 +6,6 @@ import { usePreferences } from "./PreferencesProvider";
 
 const stack = [
   {
-    category: "Frontend",
-    items: [
-      { label: "React", color: "#61dafb" },
-      { label: "Next.js", color: "#fff" },
-      { label: "Tailwind", color: "#06b6d4" },
-    ],
-  },
-  {
-    category: "Backend",
-    items: [
-      { label: "Node.js", color: "#68a063" },
-      { label: "Flask", color: "#000" },
-      { label: "Django", color: "#0c4b33" },
-      { label: "NestJS", color: "#e0234e" },
-    ],
-  },
-  {
-    category: "Infrastructure",
-    items: [
-      { label: "Kubernetes", color: "#326ce5" },
-      { label: "Docker", color: "#2496ed" },
-      { label: "vSphere", color: "#717074" },
-      { label: "Tanzu", color: "#00c389" },
-      { label: "CI/CD", color: "#fbbf24" },
-    ],
-  },
-  {
-    category: "Databases",
-    items: [
-      { label: "MongoDB", color: "#47a248" },
-      { label: "PostgreSQL", color: "#336791" },
-      { label: "MySQL", color: "#00758f" },
-      { label: "Redis", color: "#dc382d" },
-    ],
-  },
-  {
     category: "Languages",
     items: [
       { label: "TypeScript", color: "#3178c6" },
@@ -49,14 +13,56 @@ const stack = [
       { label: "Python", color: "#3776ab" },
       { label: "Go", color: "#00add8" },
       { label: "Java", color: "#ed8b00" },
+      { label: "HTML5", color: "#e34f26" },
+      { label: "CSS3", color: "#1572b6" },
     ],
   },
   {
-    category: "Design & UI/UX",
+    category: "Frameworks & Libraries",
     items: [
-      { label: "UI/UX Pro Max", color: "#ff5e62" },
-      { label: "Responsive Design", color: "#38bdf8" },
+      { label: "Next.js", color: "#ffffff" },
+      { label: "React", color: "#61dafb" },
+      { label: "NestJS", color: "#e0234e" },
+      { label: "Django", color: "#0c4b33" },
+      { label: "Node.js", color: "#68a063" },
+      { label: "Express.js", color: "#828282" },
+      { label: "Flask", color: "#828282" },
+      { label: "Tailwind CSS", color: "#38bdf8" },
+      { label: "Prisma", color: "#2d3748" },
+    ],
+  },
+  {
+    category: "Databases",
+    items: [
+      { label: "PostgreSQL", color: "#336791" },
+      { label: "MongoDB", color: "#47a248" },
+      { label: "MySQL", color: "#00758f" },
+      { label: "Redis", color: "#dc382d" },
+      { label: "Neo4j", color: "#008cc1" },
+    ],
+  },
+  {
+    category: "DevOps & Cloud",
+    items: [
+      { label: "Docker", color: "#2496ed" },
+      { label: "Kubernetes", color: "#326ce5" },
+      { label: "Azure", color: "#0089d6" },
+      { label: "GitHub Actions", color: "#2088ff" },
+      { label: "VMware", color: "#717074" },
+      { label: "Vercel", color: "#ffffff" },
+      { label: "Supabase", color: "#3ecf8e" },
+      { label: "AWS (CI/CD)", color: "#ff9900" },
+      { label: "GHCR (CI/CD)", color: "#2088ff" },
+    ],
+  },
+  {
+    category: "Tools",
+    items: [
+      { label: "Git", color: "#f05032" },
+      { label: "Postman", color: "#ff6c37" },
       { label: "Figma", color: "#f24e1e" },
+      { label: "Notion", color: "#ffffff" },
+      { label: "Neovim", color: "#57a143" },
     ],
   },
 ];
@@ -71,7 +77,7 @@ export default function TechStack() {
           <span className="w-1.5 h-1.5 rounded-full bg-blue-accent shadow-[0_0_10px_var(--color-blue-accent)]" />
           {locale === "en" ? "Tech Stack" : "Stack Tecnico"}
         </div>
-        <span className="text-fg-mute text-[12px] font-mono">22+</span>
+        <span className="text-fg-mute text-[12px] font-mono">35+</span>
       </div>
       <div className="flex flex-col gap-[14px]">
         {stack.map((cat) => (

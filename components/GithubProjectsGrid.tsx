@@ -82,8 +82,6 @@ function getTags(project: PortfolioProject) {
   const tags = [
     project.language,
     ...project.topics,
-    project.private ? "Private" : "Public",
-    project.productionUrl ? "Production" : "Source",
   ].filter(Boolean) as string[];
 
   return Array.from(new Set(tags)).slice(0, 5).map((label) => ({
@@ -260,7 +258,7 @@ export default function GithubProjectsGrid() {
               ? locale === "en" ? "Private case study" : "Caso privado"
               : index === 0
                 ? locale === "en" ? "Featured" : "Destacado"
-                : `${project.commitCount} commits`)
+                : undefined)
           }
           badgeColor={project.badgeColor ?? (project.private ? "violet" : index === 0 ? "gold" : "blue")}
           meta={`${locale === "en" ? project.categoryEn : project.categoryEs} / ${project.language ?? "Stack"}`}
@@ -268,9 +266,8 @@ export default function GithubProjectsGrid() {
           desc={locale === "en" ? project.descriptionEn : project.descriptionEs}
           bullets={[
             ...(locale === "en" ? project.bulletsEn : project.bulletsEs),
-            `${locale === "en" ? "My commits" : "Mis commits"}: ${project.commitCount}`,
             `${locale === "en" ? "Last push" : "Ultimo push"}: ${formatDate(project.pushedAt ?? project.updatedAt, locale)}`,
-          ].slice(0, getCardSize(index) === "large" ? 6 : 4)}
+          ]}
           tags={getTags(project)}
           demoLink={project.productionUrl}
           repoLink={project.repoUrl}
