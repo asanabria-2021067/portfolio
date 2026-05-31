@@ -1,8 +1,9 @@
+import Image from "next/image";
 import BentoCard from "./BentoCard";
 
 const certifications = [
   { name: "TypeScript Monorepos", org: "Frontend Masters", badge: "FM", logo: "https://frontendmasters.com/static-assets/core/m-transparent.webp" },
-  { name: "VMware Cloud Foundation", org: "Broadcom", badge: "VCF", logo: "https://images.seeklogo.com/logo-png/44/2/broadcom-logo-png_seeklogo-446069.png" },
+  { name: "VMware Cloud Foundation", org: "Broadcom", badge: "VCF", logo: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Vmware.svg" },
   { name: "CCNA: Introduction to Networks", org: "Cisco", badge: "CCNA", logo: "https://www.vectorlogo.zone/logos/cisco/cisco-icon.svg" },
   { name: "Interfaces con React JS", org: "INTECAP", badge: "INT", logo: "https://upload.wikimedia.org/wikipedia/commons/0/09/Logotipo_de_el_INTECAP.png" },
 ];
@@ -15,14 +16,20 @@ export default function CertificationsPreview() {
           <span className="w-[6px] h-[6px] rounded-full bg-blue-accent shadow-[0_0_10px_var(--blue)]" />
           Certifications
         </div>
-        <span className="text-fg-mute text-[12px] font-mono">13</span>
+        <span className="text-fg-mute text-[12px] font-mono">19</span>
       </div>
       <div className="flex flex-col gap-[10px]">
         {certifications.map((cert, index) => (
           <div key={index} className="flex items-center gap-3 p-[11px_12px] bg-white/[0.025] border border-[var(--line)] rounded-bento-sm transition-all duration-200 hover:bg-white/[0.05] hover:border-[var(--line-2)]">
             <div className="w-[38px] h-[38px] flex items-center justify-center rounded-[10px] shrink-0 overflow-hidden bg-white/5 border border-white/10">
               {cert.logo ? (
-                <img src={cert.logo} alt={cert.org} className="w-full h-full object-contain p-1.5" />
+                <Image
+                  src={cert.logo}
+                  alt={cert.org}
+                  width={38}
+                  height={38}
+                  className="w-full h-full object-contain p-1.5"
+                />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-[10px] font-bold text-white bg-grad font-mono">
                   {cert.badge}

@@ -1,3 +1,5 @@
+"use client";
+
 import Hero from "@/components/Hero";
 import ProfileCard from "@/components/ProfileCard";
 import TechStack from "@/components/TechStack";
@@ -7,8 +9,11 @@ import ProjectPreview from "@/components/ProjectPreview";
 import CertificationsPreview from "@/components/CertificationsPreview";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import { usePreferences } from "@/components/PreferencesProvider";
 
 export default function Home() {
+  const { locale } = usePreferences();
+
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[18px]">
       {/* ROW 1 */}
@@ -23,10 +28,15 @@ export default function Home() {
       <Experience />
       <ProjectPreview
         title="WaterWay+"
-        meta="Project · 2024"
-        desc="AI-powered platform for river protection using maps and environmental data. Visualizes pollution patterns and helps communities take action."
+        meta={locale === "en" ? "Project - 2024" : "Proyecto - 2024"}
+        desc={
+          locale === "en"
+            ? "Platform for river protection using maps and environmental data. Visualizes pollution patterns and helps communities take action."
+            : "Plataforma para proteccion de rios usando mapas y datos ambientales. Visualiza patrones de contaminacion y ayuda a comunidades a actuar."
+        }
         tags={["Maps", "AI", "Env. Data"]}
-        badge="🏆 Hackathon Winner"
+        badge={locale === "en" ? "Hackathon Winner" : "Ganador hackathon"}
+        repoLink="https://github.com/asanabria-2021067/waterway-backend"
         art={
           <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" className="block w-full h-full">
             <defs>
@@ -69,15 +79,24 @@ export default function Home() {
       <ProjectPreview
         title="SeaSOS"
         meta="Feb. 2024 - May. 2024"
-        desc="Proyecto Full Stack enfocado en el cuidado de la vida marina y una solución tecnológica al ODS 14."
+        desc={
+          locale === "en"
+            ? "Full-stack project focused on marine life care and a technology solution for SDG 14."
+            : "Proyecto full stack enfocado en el cuidado de la vida marina y una solucion tecnologica al ODS 14."
+        }
         tags={["React", "Python", "Flask"]}
-        badge="🌊 ODS 14"
+        badge={locale === "en" ? "SDG 14" : "ODS 14"}
         badgeStyle={{
           color: "#a78bfa",
           background: "rgba(167,139,250,0.12)",
           borderColor: "rgba(167,139,250,0.30)",
         }}
-        bullets={["Stack: Python Flask, React, MongoDB", "Pandas & Matplotlib data viz"]}
+        bullets={
+          locale === "en"
+            ? ["Stack: Python Flask, React, MongoDB", "Pandas & Matplotlib data viz"]
+            : ["Stack: Python Flask, React, MongoDB", "Visualizacion con Pandas y Matplotlib"]
+        }
+        repoLink="https://github.com/asanabria-2021067/seasos-front"
         art={
           <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" className="block w-full h-full">
             <defs>

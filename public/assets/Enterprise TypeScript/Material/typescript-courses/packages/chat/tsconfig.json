@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "allowJs": true,
+    "module": "commonjs",
+    "noEmit": true,
+    "outDir": "dist",
+    "declaration": true,
+    "jsx": "react",
+    "moduleResolution": "Node",
+    "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "rootDir": "."
+  },
+  "include": ["src", "tests", "types", ".eslintrc.js", "jest.config.js"],
+}

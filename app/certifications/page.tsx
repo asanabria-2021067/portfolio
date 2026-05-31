@@ -1,11 +1,11 @@
-import Link from "next/link";
 import Footer from "@/components/Footer";
 import CertificationCard from "@/components/CertificationCard";
 import BentoCard from "@/components/BentoCard";
 
 const LOGOS = {
   FM: "https://frontendmasters.com/static-assets/core/m-transparent.webp",
-  BROADCOM: "https://images.seeklogo.com/logo-png/44/2/broadcom-logo-png_seeklogo-446069.png",
+  BROADCOM: "https://upload.wikimedia.org/wikipedia/commons/2/2a/Broadcom_logo_%282016-present%29.svg",
+  VMWARE: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Vmware.svg",
   INTECAP: "https://upload.wikimedia.org/wikipedia/commons/0/09/Logotipo_de_el_INTECAP.png",
   PLATZI: "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/platzi.png",
   CISCO: "https://www.vectorlogo.zone/logos/cisco/cisco-icon.svg"
@@ -41,24 +41,27 @@ export default function CertificationsPage() {
               name="VMware Cloud Foundation Introduction"
               org="Broadcom"
               date="2025"
-              logo={LOGOS.BROADCOM}
+              logo={LOGOS.VMWARE}
               desc="Cloud Infrastructure, VMware Cloud Foundation, vSphere, vSAN, and SDDC."
+              link="/assets/certificaciones/VCFI9.pdf"
             />
             <CertificationCard
               badge="TNZ"
               name="vSphere with Tanzu: Deploy & Manage"
               org="Broadcom"
               date="2025"
-              logo={LOGOS.BROADCOM}
+              logo={LOGOS.VMWARE}
               desc="Vmware Tanzu, Kubernetes, Supervisor Cluster, and Container Orchestration."
+              link="/assets/certificaciones/Vmware Vsphere with Tanzu.pdf"
             />
             <CertificationCard
               badge="VMW"
               name="VMware vSphere: Install & Configure"
               org="Broadcom"
               date="2025"
-              logo={LOGOS.BROADCOM}
+              logo={LOGOS.VMWARE}
               desc="Virtualization, vCenter, and Data Center Management."
+              link="/assets/certificaciones/VMware Vsphere Install.pdf"
             />
           </div>
         </section>
@@ -72,11 +75,66 @@ export default function CertificationsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[18px]">
             <CertificationCard
               badge="FM"
+              name="Enterprise TypeScript"
+              org="Frontend Masters"
+              date="2026"
+              logo={LOGOS.FM}
+              desc="Architecting, testing, and scaling large TypeScript systems for enterprise production."
+              link="/assets/certificaciones/enterprise-typescript-dark.pdf"
+            />
+            <CertificationCard
+              badge="FM"
+              name="Full Stack TypeScript, Node & GraphQL"
+              org="Frontend Masters"
+              date="2026"
+              logo={LOGOS.FM}
+              desc="Building enterprise full-stack applications with Node.js, GraphQL, and TypeScript."
+              link="/assets/certificaciones/fullstack-typescript-dark.pdf"
+            />
+            <CertificationCard
+              badge="FM"
+              name="Complete Intro to Containers"
+              org="Frontend Masters"
+              date="2026"
+              logo={LOGOS.FM}
+              desc="Comprehensive introduction to Docker, podman, and container architectures."
+              link="/assets/certificaciones/complete-intro-containers-dark.pdf"
+            />
+            <CertificationCard
+              badge="FM"
+              name="Complete Go"
+              org="Frontend Masters"
+              date="2026"
+              logo={LOGOS.FM}
+              desc="Full course on Google Go language fundamentals, concurrency, and web services."
+              link="/assets/certificaciones/complete-go-dark.pdf"
+            />
+            <CertificationCard
+              badge="FM"
+              name="Vue Fundamentals"
+              org="Frontend Masters"
+              date="2026"
+              logo={LOGOS.FM}
+              desc="Vue.js core principles, component hierarchy, reactivity, and state management."
+              link="/assets/certificaciones/vue-fundamentals-dark.pdf"
+            />
+            <CertificationCard
+              badge="FM"
+              name="Intro to Vue 3 Workshop"
+              org="Frontend Masters"
+              date="2026"
+              logo={LOGOS.FM}
+              desc="Workshop covering composition API, reactivity, routing, and deployment in Vue 3."
+              link="/assets/certificaciones/Complete Intro to Vue 3 Workshop (FEM).pdf"
+            />
+            <CertificationCard
+              badge="FM"
               name="TypeScript Monorepos"
               org="Frontend Masters"
               date="2026"
               logo={LOGOS.FM}
               desc="Architecting large-scale TypeScript applications using monorepo patterns."
+              link="/assets/certificaciones/monorepos-v2.pdf"
             />
             <CertificationCard
               badge="FM"
@@ -85,6 +143,7 @@ export default function CertificationsPage() {
               date="2026"
               logo={LOGOS.FM}
               desc="Advanced TypeScript features and patterns for scalable applications."
+              link="/assets/certificaciones/intermediate-typescript-v2.pdf"
             />
             <CertificationCard
               badge="FM"
@@ -93,6 +152,7 @@ export default function CertificationsPage() {
               date="2026"
               logo={LOGOS.FM}
               desc="Deep dive into the core concepts of TypeScript 5 and its ecosystem."
+              link="/assets/certificaciones/typescript-v4.pdf"
             />
             <CertificationCard
               badge="INT"
@@ -101,6 +161,7 @@ export default function CertificationsPage() {
               date="2023"
               logo={LOGOS.INTECAP}
               desc="Frontend development with React.js, Hooks, and modern CSS frameworks."
+              link="/assets/certificaciones/Diseño de interfaces Intecap.pdf"
             />
             <CertificationCard
               badge="PZ"

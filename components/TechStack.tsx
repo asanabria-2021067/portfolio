@@ -1,5 +1,8 @@
+"use client";
+
 import BentoCard from "./BentoCard";
 import Chip from "./Chip";
+import { usePreferences } from "./PreferencesProvider";
 
 const stack = [
   {
@@ -48,15 +51,25 @@ const stack = [
       { label: "Java", color: "#ed8b00" },
     ],
   },
+  {
+    category: "Design & UI/UX",
+    items: [
+      { label: "UI/UX Pro Max", color: "#ff5e62" },
+      { label: "Responsive Design", color: "#38bdf8" },
+      { label: "Figma", color: "#f24e1e" },
+    ],
+  },
 ];
 
 export default function TechStack() {
+  const { locale } = usePreferences();
+
   return (
     <BentoCard>
       <div className="flex items-center justify-between mb-[18px] gap-[10px]">
         <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-fg-mute font-mono">
           <span className="w-1.5 h-1.5 rounded-full bg-blue-accent shadow-[0_0_10px_var(--color-blue-accent)]" />
-          Tech Stack
+          {locale === "en" ? "Tech Stack" : "Stack Tecnico"}
         </div>
         <span className="text-fg-mute text-[12px] font-mono">22+</span>
       </div>
@@ -88,12 +101,18 @@ export default function TechStack() {
                 <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
               </svg>
             </span>
-            <span className="text-[11px] font-semibold text-fg uppercase tracking-[0.12em] font-mono">Currently learning</span>
+            <span className="text-[11px] font-semibold text-fg uppercase tracking-[0.12em] font-mono">
+              {locale === "en" ? "Currently learning" : "Aprendiendo ahora"}
+            </span>
           </div>
           <ul className="list-none p-0 m-0 flex flex-col gap-1.5">
             <li className="flex items-center gap-2 text-[12.5px] text-fg-dim before:content-[''] before:w-1 before:h-1 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:shrink-0">Vue.js</li>
-            <li className="flex items-center gap-2 text-[12.5px] text-fg-dim before:content-[''] before:w-1 before:h-1 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:shrink-0">Advanced cloud-native architectures</li>
-            <li className="flex items-center gap-2 text-[12.5px] text-fg-dim before:content-[''] before:w-1 before:h-1 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:shrink-0">Scalable system design</li>
+            <li className="flex items-center gap-2 text-[12.5px] text-fg-dim before:content-[''] before:w-1 before:h-1 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:shrink-0">
+              {locale === "en" ? "Advanced cloud-native architectures" : "Arquitecturas cloud-native avanzadas"}
+            </li>
+            <li className="flex items-center gap-2 text-[12.5px] text-fg-dim before:content-[''] before:w-1 before:h-1 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:shrink-0">
+              {locale === "en" ? "Scalable system design" : "Diseno de sistemas escalables"}
+            </li>
           </ul>
         </div>
       </div>

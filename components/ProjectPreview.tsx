@@ -1,5 +1,8 @@
+"use client";
+
 import BentoCard from "./BentoCard";
 import Chip from "./Chip";
+import { usePreferences } from "./PreferencesProvider";
 
 interface ProjectPreviewProps {
   title: string;
@@ -26,6 +29,8 @@ export default function ProjectPreview({
   demoLink,
   repoLink,
 }: ProjectPreviewProps) {
+  const { locale } = usePreferences();
+
   return (
     <BentoCard className="flex flex-col">
       <div className="relative rounded-bento-sm overflow-hidden border border-[var(--line)] aspect-video mb-4">
@@ -65,7 +70,7 @@ export default function ProjectPreview({
               rel="noopener noreferrer"
               className="inline-flex items-center gap-[8px] text-fg-dim text-[10px] font-mono py-[7px] px-3 bg-white/4 border border-[var(--line)] rounded-full transition-all duration-200 hover:text-white hover:bg-grad hover:border-transparent group"
             >
-              Launch App
+              {locale === "en" ? "Launch App" : "Abrir App"}
               <svg width="10" height="10" viewBox="0 0 16 16" className="transition-transform duration-250 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]">
                 <path
                   d="M3 13 L13 3 M6 3 H13 V10"
@@ -85,7 +90,7 @@ export default function ProjectPreview({
               rel="noopener noreferrer"
               className="inline-flex items-center gap-[8px] text-fg-dim text-[10px] font-mono py-[7px] px-3 bg-white/4 border border-[var(--line)] rounded-full transition-all duration-200 hover:text-white hover:bg-white/10 hover:border-white/20 group"
             >
-              Source Code
+              {locale === "en" ? "Source Code" : "Codigo"}
               <svg width="10" height="10" viewBox="0 0 16 16" className="opacity-70 group-hover:opacity-100">
                 <path
                   d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.1 0-.71-.24-1.17-.51-1.41 1.67-.18 3.43-.82 3.43-3.72 0-.82-.29-1.49-.77-2.02.08-.19.33-.96-.07-1.99 0 0-.63-.2-2.07.77A7.114 7.114 0 0 0 8 4.74c-.68 0-1.36.09-2 .27-1.44-.97-2.07-.77-2.07-.77-.4 1.03-.15 1.8-.07 1.99-.48.53-.78 1.2-.78 2.02 0 2.89 1.75 3.54 3.42 3.72-.21.19-.4.52-.47.99-.42.19-1.48.51-2.13-.61 0 0-.39-.71-.13-1.07 0 0-.46-.01-.32.28 0 0 .31.14.52.68 0 0 .28.85 1.63.58.01.62.01 1.11.01 1.27 0 .21-.16.47-.56.38A8.013 8.013 0 0 1 0 8c0-4.42 3.58-8 8-8z"

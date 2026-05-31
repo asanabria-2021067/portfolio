@@ -3,6 +3,8 @@ import { Inter_Tight, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import PageTransition from "@/components/PageTransition";
+import FileTreeNav from "@/components/FileTreeNav";
+import { PreferencesProvider } from "@/components/PreferencesProvider";
 
 const interTight = Inter_Tight({
   variable: "--font-inter",
@@ -27,13 +29,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${interTight.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`${interTight.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <body className="antialiased">
-        <div className="ambient" />
-        <div className="shell">
-          <Navbar />
-          <PageTransition>{children}</PageTransition>
-        </div>
+        <PreferencesProvider>
+          <div className="ambient" />
+          <div className="shell">
+            <Navbar />
+            <div className="ide-layout">
+              <aside className="ft-sidebar">
+                <FileTreeNav />
+              </aside>
+              <div className="ide-main">
+                <PageTransition>{children}</PageTransition>
+              </div>
+            </div>
+          </div>
+        </PreferencesProvider>
       </body>
     </html>
   );

@@ -1,0 +1,214 @@
+1.5:
+curl -X POST http://localhost:8080/workouts \
+     -H "Content-Type: application/json" \
+     -d '{
+           "title": "Morning Strength Training",
+           "description": "Full body strength training session",
+           "duration_minutes": 60,
+           "calories_burned": 500,
+           "entries": [
+             {
+               "exercise_name": "Squats",
+               "sets": 3,
+               "reps": 12,
+               "weight": 100.5,
+               "notes": "Felt strong today",
+               "order_index": 1
+             },
+             {
+               "exercise_name": "Bench Press",
+               "sets": 4,
+               "reps": 10,
+               "weight": 80.0,
+               "notes": "Increase weight next session",
+               "order_index": 2
+             }
+           ]
+         }'
+
+
+1.6:
+curl -X PUT http://localhost:8080/workouts/1 \
+     -H "Content-Type: application/json" \
+     -d '{
+           "title": "Updated Full Body Strength Training",
+           "description": "A more intense strength training session",
+           "duration_minutes": 75,
+           "calories_burned": 600,
+           "entries": [
+             {
+               "exercise_name": "Deadlifts",
+               "sets": 4,
+               "reps": 8,
+               "weight": 120.0,
+               "notes": "Increase weight gradually",
+               "order_index": 1
+             },
+             {
+               "exercise_name": "Pull-Ups",
+               "sets": 3,
+               "reps": 10,
+               "notes": "Focus on form",
+               "order_index": 2
+             },
+             {
+               "exercise_name": "Plank",
+               "sets": 3,
+               "duration_seconds": 90,
+               "notes": "Increase duration",
+               "order_index": 3
+             }
+           ]
+         }'
+
+
+1.8:
+curl -X POST http://localhost:8080/workouts \
+     -H "Content-Type: application/json" \
+     -d '{
+           "title": "Leg Day Workout",
+           "description": "A focused workout for building leg strength",
+           "duration_minutes": 60,
+           "calories_burned": 450,
+           "entries": [
+             {
+               "exercise_name": "Squats",
+               "sets": 4,
+               "reps": 12,
+               "weight": 90.0,
+               "notes": "Increase weight next time",
+               "order_index": 1
+             },
+             {
+               "exercise_name": "Lunges",
+               "sets": 3,
+               "reps": 10,
+               "weight": 50.0,
+               "notes": "Good balance",
+               "order_index": 2
+             }
+           ]
+         }'
+
+
+curl -X GET http://localhost:8080/workouts/2
+
+curl -X PUT http://localhost:8080/workouts/2 \
+     -H "Content-Type: application/json" \
+     -d '{
+           "title": "Updated Leg Day Workout",
+           "description": "More intensity added",
+           "duration_minutes": 75,
+           "calories_burned": 500,
+           "entries": [
+             {
+               "exercise_name": "Squats",
+               "sets": 5,
+               "reps": 10,
+               "weight": 100.0,
+               "notes": "Pushed harder",
+               "order_index": 1
+             },
+             {
+               "exercise_name": "Lunges",
+               "sets": 4,
+               "reps": 12,
+               "weight": 55.0,
+               "notes": "Legs were shaking",
+               "order_index": 2
+             }
+           ]
+         }'
+
+
+
+3.1:
+curl -X POST http://localhost:8080/users \
+     -H "Content-Type: application/json" \
+     -d '{
+           "username": "john_doe",
+           "email": "john.doe@example.com",
+           "password": "securepassword123",
+           "bio": "Fitness enthusiast and software developer"
+         }'
+
+
+3.2:
+curl -X POST http://localhost:8080/users \
+     -H "Content-Type: application/json" \
+     -d '{
+           "username": "jack_doe",
+           "email": "jack.doe@example.com",
+           "password": "securepassword123",
+           "bio": "Fitness enthusiast and software developer"
+         }'
+
+
+curl -X POST http://localhost:8080/tokens/authentication \
+     -H "Content-Type: application/json" \
+     -d '{
+    "username": "jack_doe",
+    "password": "securepassword123"
+}'
+
+
+
+3.5:
+curl -X POST "http://localhost:8080/users" \
+     -H "Content-Type: application/json" \
+     -d '{
+          "username": "melkey",
+          "email": "melkey@example.com",
+          "password": "SecureP@ssword123",
+          "bio": "Fitness enthusiast and software developer"
+        }'
+
+curl -X POST "http://localhost:8080/tokens/authentication" \
+     -H "Content-Type: application/json" \
+     -d '{
+          "username": "johndoe",
+          "password": "SecureP@ssword123"
+        }'
+
+curl -X POST "http://localhost:8080/workouts" \
+     -H "Authorization: Bearer 3VGSV7LBT4IVASURIKUOUWOF5WGHOWRXUZA6OLKK7U4ABNCLPVSA" \
+     -H "Content-Type: application/json" \
+     -d '{
+          "title": "Morning Cardio",
+          "description": "A light 30-minute jog to start the day.",
+          "duration_minutes": 30,
+          "calories_burned": 300,
+          "entries": [
+              {
+                  "exercise_name": "Jogging",
+                  "sets": 1,
+                  "duration_seconds": 1800,
+                  "weight": 0,
+                  "notes": "Maintain a steady pace",
+                  "order_index": 1
+              }
+          ]
+        }'
+
+
+curl -X PUT "http://localhost:8080/workouts/6" \
+     -H "Authorization: Bearer M6BOKTWSQJL74GJJO5OIOMOG3V63MYRIKLUBZ6ILEUQUPCN7472Q" \
+     -H "Content-Type: application/json" \
+     -d '{
+          "title": "Updated Cardio",
+          "description": "A relaxed 45-minute walk after dinner.",
+          "duration_minutes": 45,
+          "calories_burned": 250,
+          "entries": [
+              {
+                  "exercise_name": "Walking",
+                  "sets": 1,
+                  "duration_seconds": 2700,
+                  "weight": 0,
+                  "notes": "Keep a steady pace",
+                  "order_index": 1
+              }
+          ]
+        }'
+
+

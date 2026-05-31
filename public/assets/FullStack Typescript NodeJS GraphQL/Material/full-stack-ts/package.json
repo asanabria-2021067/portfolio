@@ -1,0 +1,53 @@
+{
+  "name": "full-stack-ts",
+  "version": "0.0.0",
+  "description": "Mike North's Full Stack TypeScript course",
+  "repository": "https://github.com/mike-north/full-stack-ts",
+  "author": "Mike North <michael.l.north@gmail.com> (https://mike.works)",
+  "license": "NOLICENSE",
+  "private": true,
+  "scripts": {
+    "postinstall": "yarn build",
+    "lint": "yarn eslint . --ext .ts,.js,.tsx,.jsx",
+    "build-client": "cd client && yarn build",
+    "build-server": "cd server && yarn build",
+    "build-shared": "cd shared && yarn build",
+    "test-client": "cd client && yarn test",
+    "test-server": "cd server && yarn test",
+    "test-shared": "cd shared && yarn test",
+    "clean-client": "cd client && yarn clean",
+    "clean-server": "cd server && yarn clean",
+    "clean-shared": "cd shared && yarn clean",
+    "codegen-client": "cd client && yarn codegen",
+    "codegen-server": "cd server && yarn codegen",
+    "codegen": "concurrently yarn:codegen-* -c cyan,magenta",
+    "build": "yarn build-shared && yarn build-server && yarn build-client",
+    "test": "concurrently yarn:test-* -c cyan,magenta,yellow",
+    "clean": "concurrently yarn:clean-* -c cyan,magenta,yellow",
+    "dev": "cd server && yarn dev"
+  },
+  "workspaces": [
+    "client",
+    "server",
+    "shared"
+  ],
+  "devDependencies": {
+    "@parcel/core": "^2.3.2",
+    "@parcel/transformer-sass": "2.3.2",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "concurrently": "^7.0.0",
+    "eslint": "^8.11.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-react": "^7.29.4",
+    "prettier": "^2.6.0",
+    "process": "^0.11.10"
+  },
+  "engines": {
+    "node": "^14.19.1 || >= ^16.0 || >= ^17.0.0"
+  },
+  "volta": {
+    "node": "14.19.1",
+    "yarn": "1.22.18"
+  }
+}

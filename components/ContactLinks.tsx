@@ -1,4 +1,10 @@
+"use client";
+
+import { usePreferences } from "./PreferencesProvider";
+
 export default function ContactLinks() {
+  const { locale } = usePreferences();
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[10px] mt-1">
       <a href="mailto:as1945228@gmail.com" className="flex items-center gap-3 py-3 px-[14px] text-fg-dim bg-white/[0.025] border border-[var(--line)] rounded-bento-sm transition-all duration-200 hover:text-fg hover:border-[var(--line-2)] hover:bg-white/[0.05] hover:-translate-y-[2px]">
@@ -31,7 +37,9 @@ export default function ContactLinks() {
         </span>
         <div className="flex flex-col gap-[2px] min-w-0">
           <span className="text-[10px] text-fg-mute uppercase tracking-[0.12em] font-mono">GitHub</span>
-          <span className="text-[12.5px] text-fg font-medium overflow-hidden text-ellipsis whitespace-nowrap">asanabria-2021067</span>
+          <span className="text-[12.5px] text-fg font-medium overflow-hidden text-ellipsis whitespace-nowrap">
+            {locale === "en" ? "GitHub profile" : "Perfil de GitHub"}
+          </span>
         </div>
       </a>
       <a href="https://www.linkedin.com/in/angel-sanabria-desarrollador/" target="_blank" className="flex items-center gap-3 py-3 px-[14px] text-fg-dim bg-white/[0.025] border border-[var(--line)] rounded-bento-sm transition-all duration-200 hover:text-fg hover:border-[var(--line-2)] hover:bg-white/[0.05] hover:-translate-y-[2px]">
