@@ -95,6 +95,24 @@ function getCardSize(index: number): "small" | "medium" | "large" {
 }
 
 function RepoArt({ project, index }: { project: PortfolioProject; index: number }) {
+  const repoName = project.fullName.toLowerCase();
+
+  if (repoName.includes("proyecto-ingenieria-software")) {
+    return <img src="/assets/images/uvgenius.png" alt="UVGenius" className="w-full h-full object-cover" />;
+  }
+  if (repoName.includes("waterway-backend")) {
+    return <img src="/assets/images/waterway.png" alt="WaterWay+" className="w-full h-full object-cover" />;
+  }
+  if (repoName.includes("proyecto2-db")) {
+    return <img src="/assets/images/libromanga.png" alt="LibroManga" className="w-full h-full object-cover" />;
+  }
+  if (repoName.includes("frontend-quimica") || repoName.includes("chemiq-backend")) {
+    return <img src="/assets/images/quimica.png" alt="ChemIQ Portal" className="w-full h-full object-cover" />;
+  }
+  if (repoName.includes("seasos-front") || repoName.includes("api-rest-python")) {
+    return <img src="/assets/images/seasos.png" alt="SeaSOS" className="w-full h-full object-cover" />;
+  }
+
   const color = getLanguageColor(project.language);
   const gradientId = `repo-art-${project.id}`;
   const shortName =

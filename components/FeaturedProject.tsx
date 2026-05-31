@@ -20,74 +20,12 @@ export default function FeaturedProject() {
         <span className="text-fg-mute text-[12px] font-mono">2024</span>
       </div>
 
-      <div className="relative rounded-[var(--radius-sm)] overflow-hidden border border-[var(--line)] bg-[linear-gradient(135deg,#0e3a5f,#1a1147)] mb-[22px] aspect-[16/7]">
-        <svg viewBox="0 0 700 300" preserveAspectRatio="xMidYMid slice" className="block w-full h-full">
-          <defs>
-            <linearGradient id="featured-water" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#0e3a5f" />
-              <stop offset="48%" stopColor="#1e6091" />
-              <stop offset="100%" stopColor="#3b1f6b" />
-            </linearGradient>
-            <radialGradient id="featured-pulse" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#a78bfa" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-          <rect width="700" height="300" fill="url(#featured-water)" />
-          
-          {/* Background grid representation */}
-          <g stroke="rgba(255,255,255,0.04)" strokeWidth="1" fill="none">
-            <line x1="100" y1="0" x2="100" y2="300" />
-            <line x1="200" y1="0" x2="200" y2="300" />
-            <line x1="300" y1="0" x2="300" y2="300" />
-            <line x1="400" y1="0" x2="400" y2="300" />
-            <line x1="500" y1="0" x2="500" y2="300" />
-            <line x1="600" y1="0" x2="600" y2="300" />
-            <line x1="0" y1="75" x2="700" y2="75" />
-            <line x1="0" y1="150" x2="700" y2="150" />
-            <line x1="0" y1="225" x2="700" y2="225" />
-          </g>
-
-          <path d="M0 174 Q 120 138 240 172 T 520 170 T 700 156 L700 300 L0 300 Z" fill="rgba(106,166,255,0.15)" />
-          <path d="M0 210 Q 120 188 250 214 T 510 206 T 700 192 L700 300 L0 300 Z" fill="rgba(255,255,255,0.05)" />
-
-          {/* Centered Board representing UVGenius Monorepo App */}
-          <g transform="translate(190 50)">
-            {/* Main outer card */}
-            <rect width="320" height="180" rx="16" fill="rgba(7,8,13,0.72)" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" />
-            
-            {/* Header bar decoration */}
-            <path d="M 0 16 A 16 16 0 0 1 16 0 L 304 0 A 16 16 0 0 1 320 16 L 320 36 L 0 36 Z" fill="rgba(255,255,255,0.03)" />
-            <circle cx="20" cy="18" r="4" fill="#ef4444" />
-            <circle cx="34" cy="18" r="4" fill="#fbbf24" />
-            <circle cx="48" cy="18" r="4" fill="#10b981" />
-            
-            <text x="76" y="22" fill="rgba(255,255,255,0.58)" fontFamily="var(--font-mono)" fontSize="10" letterSpacing="0.08em">
-              EXPLORER &gt; UVGENIUS-MONOREPO
-            </text>
-
-            {/* Simulated UI code editor block on left */}
-            <rect x="20" y="52" width="130" height="110" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" />
-            <text x="32" y="72" fill="#a78bfa" fontFamily="var(--font-mono)" fontSize="9">package.json</text>
-            <text x="32" y="90" fill="rgba(255,255,255,0.4)" fontFamily="var(--font-mono)" fontSize="8">apps/</text>
-            <text x="44" y="104" fill="#61dafb" fontFamily="var(--font-mono)" fontSize="8">└─ web-frontend</text>
-            <text x="44" y="118" fill="#e0234e" fontFamily="var(--font-mono)" fontSize="8">└─ api-backend</text>
-            <text x="32" y="136" fill="rgba(255,255,255,0.4)" fontFamily="var(--font-mono)" fontSize="8">docker-compose.yml</text>
-
-            {/* Simulated system graph on the right */}
-            <circle cx="235" cy="100" r="32" fill="url(#featured-pulse)" />
-            <circle cx="235" cy="100" r="16" stroke="rgba(255,255,255,0.25)" fill="none" strokeWidth="1.5" />
-            <circle cx="235" cy="100" r="4" fill="#a78bfa" />
-            
-            {/* Connecting lines to nodes */}
-            <line x1="170" y1="100" x2="200" y2="100" stroke="#a78bfa" strokeWidth="1.5" opacity="0.7" />
-            <line x1="235" y1="52" x2="235" y2="80" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" strokeDasharray="3 3" />
-            <line x1="235" y1="120" x2="235" y2="148" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" strokeDasharray="3 3" />
-            
-            <circle cx="235" cy="46" r="6" fill="#61dafb" />
-            <circle cx="235" cy="154" r="6" fill="#e0234e" />
-          </g>
-        </svg>
+      <div className="relative rounded-[var(--radius-sm)] overflow-hidden border border-[var(--line)] mb-[22px] aspect-[16/7]">
+        <img
+          src="/assets/images/uvgenius.png"
+          alt="UVGenius"
+          className="w-full h-full object-cover"
+        />
       </div>
 
       <div className="flex items-center gap-2.5 text-[12px] text-fg-mute mb-2.5 font-mono flex-wrap">
