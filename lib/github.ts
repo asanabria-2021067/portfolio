@@ -164,6 +164,8 @@ const PROJECT_OVERRIDES: Record<string, ProjectOverride> = {
   },
   "asanabria-2021067/Smart-Agriculture-FRONTEND-Node.js-OpenAI-Google-Sheets": {
     displayName: "Smart Agriculture Frontend",
+    badgeEn: "none",
+    badgeEs: "none",
     categoryEn: "IoT smart farming interface",
     categoryEs: "Interfaz IoT para agricultura",
     descriptionEn:
@@ -176,6 +178,8 @@ const PROJECT_OVERRIDES: Record<string, ProjectOverride> = {
   },
   "asanabria-2021067/Smart-Agriculture-Backend": {
     displayName: "Smart Agriculture Backend",
+    badgeEn: "none",
+    badgeEs: "none",
     categoryEn: "AI-powered smart farming API",
     categoryEs: "API de agricultura inteligente",
     descriptionEn:
