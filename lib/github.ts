@@ -13,8 +13,8 @@ const CURATED_REPOS = [
   "asanabria-2021067/Smart-Agriculture-FRONTEND-Node.js-OpenAI-Google-Sheets",
   "asanabria-2021067/Smart-Agriculture-Backend",
   "PabloVS044/TripWise",
-  "asanabria-2021067/carpool-app-front",
-  "asanabria-2021067/carpool-backend-poo",
+  "asanabria-2021067/seasos-front",
+  "asanabria-2021067/api-rest-python",
 ];
 
 const DENYLIST_REPOS = [
