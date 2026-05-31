@@ -26,17 +26,20 @@ export default function Home() {
 
       {/* ROW 3 */}
       <Experience />
+      
+      {/* WaterWay+ Project Preview */}
       <ProjectPreview
         title="WaterWay+"
         meta={locale === "en" ? "Project - 2024" : "Proyecto - 2024"}
         desc={
           locale === "en"
-            ? "Platform for river protection using maps and environmental data. Visualizes pollution patterns and helps communities take action."
-            : "Plataforma para proteccion de rios usando mapas y datos ambientales. Visualiza patrones de contaminacion y ayuda a comunidades a actuar."
+            ? "Platform for river protection using maps and environmental data. Visualizes pollution patterns and helps communities coordinate conservation efforts."
+            : "Plataforma para protección de ríos usando mapas y datos ambientales. Visualiza patrones de contaminación y ayuda a comunidades a actuar."
         }
-        tags={["Maps", "AI", "Env. Data"]}
+        tags={["Maps", "React Leaflet", "Environmental API"]}
         badge={locale === "en" ? "Hackathon Winner" : "Ganador hackathon"}
         repoLink="https://github.com/asanabria-2021067/waterway-backend"
+        demoLink="https://water-way.netlify.app/"
         art={
           <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" className="block w-full h-full">
             <defs>
@@ -76,70 +79,80 @@ export default function Home() {
           </svg>
         }
       />
+
+      {/* LibroManga Inventory Project Preview */}
       <ProjectPreview
-        title="SeaSOS"
-        meta="Feb. 2024 - May. 2024"
+        title="LibroManga Inventory"
+        meta={locale === "en" ? "SPA - 2024" : "SPA - 2024"}
         desc={
           locale === "en"
-            ? "Full-stack project focused on marine life care and a technology solution for SDG 14."
-            : "Proyecto full stack enfocado en el cuidado de la vida marina y una solucion tecnologica al ODS 14."
+            ? "Full-stack inventory and sales manager designed for a bookstore and manga shop. Built with Vue and Dockerized for clean deployment."
+            : "Gestor full stack de inventario y ventas diseñado para una tienda de libros y mangas. Construido con Vue y dockerizado para su fácil despliegue."
         }
-        tags={["React", "Python", "Flask"]}
-        badge={locale === "en" ? "SDG 14" : "ODS 14"}
+        tags={["Vue", "Docker", "PostgreSQL"]}
+        badge={locale === "en" ? "Dockerized SPA" : "SPA Dockerizada"}
         badgeStyle={{
-          color: "#a78bfa",
-          background: "rgba(167,139,250,0.12)",
-          borderColor: "rgba(167,139,250,0.30)",
+          color: "#10b981",
+          background: "rgba(16,185,129,0.12)",
+          borderColor: "rgba(16,185,129,0.30)",
         }}
         bullets={
           locale === "en"
-            ? ["Stack: Python Flask, React, MongoDB", "Pandas & Matplotlib data viz"]
-            : ["Stack: Python Flask, React, MongoDB", "Visualizacion con Pandas y Matplotlib"]
+            ? ["Full-stack inventory & sales management", "Vue SPA frontend deployed on Netlify", "Docker setup included in repository"]
+            : ["Gestión full stack de inventario y ventas", "Frontend SPA de Vue desplegada en Netlify", "Docker incluido en el repositorio"]
         }
-        repoLink="https://github.com/asanabria-2021067/seasos-front"
+        repoLink="https://github.com/asanabria-2021067/proyecto2-db"
+        demoLink="https://hilarious-sundae-6374bd.netlify.app/"
         art={
           <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" className="block w-full h-full">
             <defs>
-              <linearGradient id="ss1" x1="0" y1="0" x2="1" y2="1">
+              <linearGradient id="lm1" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stopColor="#1a1147" />
-                <stop offset="100%" stopColor="#3b1f6b" />
+                <stop offset="100%" stopColor="#2e1065" />
               </linearGradient>
-              <radialGradient id="ss-pulse" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#a78bfa" stopOpacity="0" />
-              </radialGradient>
             </defs>
-            <rect width="400" height="225" fill="url(#ss1)" />
-            <g stroke="rgba(255,255,255,0.06)" strokeWidth="1" fill="none">
-              <circle cx="200" cy="125" r="40" />
-              <circle cx="200" cy="125" r="70" />
-              <circle cx="200" cy="125" r="100" />
-              <line x1="60" y1="125" x2="340" y2="125" />
-              <line x1="200" y1="20" x2="200" y2="220" />
+            <rect width="400" height="225" fill="url(#lm1)" />
+            
+            {/* Draw simulation of bookshelf */}
+            <g stroke="rgba(255,255,255,0.06)" strokeWidth="2" fill="none">
+              {/* Shelves */}
+              <line x1="40" y1="80" x2="360" y2="80" />
+              <line x1="40" y1="150" x2="360" y2="150" />
+              
+              {/* Verticals */}
+              <line x1="40" y1="20" x2="40" y2="200" />
+              <line x1="360" y1="20" x2="360" y2="200" />
             </g>
-            <circle cx="200" cy="125" r="55" fill="url(#ss-pulse)">
-              <animate attributeName="r" values="20;90;20" dur="3s" repeatCount="indefinite" />
-              <animate
-                attributeName="opacity"
-                values="0.8;0;0.8"
-                dur="3s"
-                repeatCount="indefinite"
-              />
-            </circle>
-            <g transform="translate(200 125)">
-              <circle r="10" fill="#a78bfa" />
-              <circle r="14" fill="none" stroke="#a78bfa" strokeWidth="1.5" opacity="0.7" />
+
+            {/* Books on top shelf */}
+            <g fill="#a78bfa" opacity="0.85">
+              <rect x="60" y="30" width="18" height="48" rx="2" />
+              <rect x="80" y="35" width="16" height="43" rx="2" fill="#61dafb" />
+              <rect x="98" y="28" width="20" height="50" rx="2" fill="#3ecf8e" />
+              
+              {/* Leaning books */}
+              <g transform="translate(130 50) rotate(15)">
+                <rect x="0" y="-20" width="18" height="48" rx="2" fill="#f59e0b" />
+              </g>
             </g>
-            <text
-              x="200"
-              y="200"
-              textAnchor="middle"
-              fill="rgba(255,255,255,0.4)"
-              fontFamily="var(--font-mono)"
-              fontSize="9"
-            >
-              MARINE SIGNAL
-            </text>
+
+            {/* Books on bottom shelf */}
+            <g fill="#10b981" opacity="0.85">
+              <rect x="60" y="100" width="22" height="48" rx="2" fill="#ec4899" />
+              <rect x="84" y="105" width="18" height="43" rx="2" />
+              <rect x="104" y="96" width="20" height="52" rx="2" fill="#61dafb" />
+              <rect x="126" y="102" width="16" height="46" rx="2" fill="#f59e0b" />
+            </g>
+
+            {/* Database cylinders representing inventory sales on the right */}
+            <g transform="translate(260 80)" fill="rgba(7,8,13,0.5)" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5">
+              {/* Base cylinders */}
+              <path d="M 0 0 C 0 -10 60 -10 60 0 L 60 40 C 60 50 0 50 0 40 Z" />
+              <ellipse cx="30" cy="0" rx="30" ry="10" fill="#336791" stroke="rgba(255,255,255,0.2)" />
+              
+              <path d="M 15 50 C 15 42 75 42 75 50 L 75 90 C 75 98 15 98 15 90 Z" />
+              <ellipse cx="45" cy="50" rx="30" ry="10" fill="#10b981" stroke="rgba(255,255,255,0.2)" />
+            </g>
           </svg>
         }
       />
