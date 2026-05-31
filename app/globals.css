@@ -83,13 +83,13 @@
     z-index: 1;
     max-width: 1320px;
     margin: 0 auto;
-    padding: 32px 28px 80px;
+    padding: 32px 16px 90px;
   }
 
   .ide-layout {
     display: flex;
     align-items: flex-start;
-    gap: 18px;
+    gap: 28px;
   }
 
   .ide-main {
@@ -375,6 +375,64 @@
     animation: pulse 2s ease-out infinite;
   }
 
+  /* Mobile Bottom Nav styles */
+  .bottom-nav-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    max-width: 480px;
+    z-index: 100;
+  }
+
+  .bottom-nav-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg-2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+  
+  :root[data-theme="light"] .bottom-nav-container {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--fg-mute);
+    text-decoration: none;
+    font-size: 10px;
+    font-family: var(--font-mono);
+    padding: 6px 12px;
+    transition: color 0.15s ease;
+  }
+
+  .bottom-nav-item--active {
+    color: var(--blue);
+  }
+
+  .bottom-nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bottom-nav-text {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
   @keyframes pulse {
     0%   { box-shadow: 0 0 0 0 rgba(74,222,128,0.7); }
     70%  { box-shadow: 0 0 0 7px rgba(74,222,128,0); }
@@ -393,7 +451,7 @@
     }
 
     .shell {
-      padding: 18px;
+      padding: 18px 12px 100px;
     }
 
     .ide-layout {
@@ -401,9 +459,7 @@
     }
 
     .ft-sidebar {
-      position: static;
-      width: 100%;
-      margin-bottom: 18px;
+      display: none;
     }
 
     .ft-panel {

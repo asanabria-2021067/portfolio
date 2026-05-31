@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import PageTransition from "@/components/PageTransition";
 import FileTreeNav from "@/components/FileTreeNav";
 import { PreferencesProvider } from "@/components/PreferencesProvider";
+import BottomNav from "@/components/BottomNav";
 
 const interTight = Inter_Tight({
   variable: "--font-inter",
@@ -44,6 +45,7 @@ export default function RootLayout({
               </div>
             </div>
           </div>
+          <BottomNav />
         </PreferencesProvider>
       </body>
     </html>
