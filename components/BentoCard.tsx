@@ -31,51 +31,22 @@ export default function BentoCard({ children, className, span = 1 }: BentoCardPr
     return () => ctx.revert();
   }, []);
 
-  const onMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+  const onMouseEnter = () => {
     if (!cardRef.current) return;
-    const card = cardRef.current;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const rotateX = -((y - rect.height / 2) / (rect.height / 2)) * 6;
-    const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 6;
-
-    gsap.to(card, {
+    gsap.to(cardRef.current, {
       y: -5,
       scale: 1.015,
-      rotateX: rotateX,
-      rotateY: rotateY,
-      transformPerspective: 1000,
       duration: 0.4,
       ease: "power2.out",
       boxShadow: "0 30px 70px -25px rgba(0,0,0,0.7), 0 0 20px rgba(106,166,255,0.12)",
     });
   };
 
-  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const card = cardRef.current;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const rotateX = -((y - rect.height / 2) / (rect.height / 2)) * 6;
-    const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 6;
-
-    gsap.to(card, {
-      rotateX: rotateX,
-      rotateY: rotateY,
-      transformPerspective: 1000,
-      duration: 0.25,
-      ease: "power2.out",
-    });
-  };
-
   const onMouseLeave = () => {
+    if (!cardRef.current) return;
     gsap.to(cardRef.current, {
       y: 0,
       scale: 1,
-      rotateX: 0,
-      rotateY: 0,
       duration: 0.5,
       ease: "power2.out",
       boxShadow: "0 20px 50px -25px rgba(0,0,0,0.5)",
@@ -86,7 +57,6 @@ export default function BentoCard({ children, className, span = 1 }: BentoCardPr
     <section
       ref={cardRef}
       onMouseEnter={onMouseEnter}
-      onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       className={clsx(
         "relative rounded-[var(--radius)] bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015)_40%,rgba(255,255,255,0.01))] border border-[var(--line)] backdrop-blur-[14px] p-[var(--pad)] transition-colors duration-250 overflow-hidden w-full shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_20px_50px_-25px_rgba(0,0,0,0.5)] will-change-[transform,opacity,box-shadow] hover:border-[var(--line-2)]",

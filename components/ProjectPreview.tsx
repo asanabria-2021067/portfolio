@@ -88,7 +88,7 @@ export default function ProjectPreview({
               href={repoLink} 
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-[8px] text-fg-dim text-[10px] font-mono py-[7px] px-3 bg-white/4 border border-[var(--line)] rounded-full transition-all duration-200 hover:text-white hover:bg-white/10 hover:border-white/20 group"
+              className="inline-flex items-center gap-[8px] text-fg-dim text-[10px] font-mono py-[7px] px-3 bg-white/4 border border-[var(--line)] rounded-full transition-all duration-200 hover:text-white hover:bg-white/10 hover:border-white/30 hover:scale-[1.03] active:scale-[0.97] group shadow-[0_0_0_0_rgba(255,255,255,0)] hover:shadow-[0_0_12px_rgba(255,255,255,0.05)]"
             >
               {locale === "en" ? "Source Code" : "Codigo"}
               <svg width="10" height="10" viewBox="0 0 16 16" className="opacity-70 group-hover:opacity-100">

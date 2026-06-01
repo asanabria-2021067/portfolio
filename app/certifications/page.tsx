@@ -21,26 +21,9 @@ export default function CertificationsPage() {
   const { locale } = usePreferences();
   const [activePdf, setActivePdf] = useState<{ link: string; name: string } | null>(null);
 
-  useEffect(() => {
-    const handleDocumentClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const anchor = target.closest("a");
-      if (anchor && anchor.getAttribute("href")?.toLowerCase().endsWith(".pdf")) {
-        const href = anchor.getAttribute("href");
-        const card = anchor.closest(".flex-col");
-        const titleElement = card?.querySelector("h3");
-        const title = titleElement?.textContent || (locale === "en" ? "Certificate" : "Certificación");
-        
-        if (href) {
-          e.preventDefault();
-          setActivePdf({ link: href, name: title });
-        }
-      }
-    };
-
-    document.addEventListener("click", handleDocumentClick);
-    return () => document.removeEventListener("click", handleDocumentClick);
-  }, [locale]);
+  const handleViewPdf = (link: string, name: string) => {
+    setActivePdf({ link, name });
+  };
 
   return (
     <div className="flex flex-col gap-[28px]">
@@ -51,9 +34,9 @@ export default function CertificationsPage() {
         </div>
         <h1 className="text-[clamp(38px,4.4vw,56px)] font-semibold tracking-[-0.035em] leading-none m-0">
           {locale === "en" ? (
-            <>Skills & <span className="grad-text text-3d cursor-default">Certifications.</span></>
+            <>Skills & <span className="grad-text">Certifications.</span></>
           ) : (
-            <>Habilidades y <span className="grad-text text-3d cursor-default">Certificaciones.</span></>
+            <>Habilidades y <span className="grad-text">Certificaciones.</span></>
           )}
         </h1>
         <p className="text-fg-dim text-[15px] leading-[1.55] max-w-[560px] m-0">
@@ -73,7 +56,7 @@ export default function CertificationsPage() {
             <div className="h-[1px] flex-1 bg-white/5" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px]">
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="VCF"
               name="VMware Cloud Foundation Introduction"
               org="Broadcom"
@@ -84,7 +67,7 @@ export default function CertificationsPage() {
                 : "Infraestructura cloud, VMware Cloud Foundation, vSphere, vSAN y SDDC."}
               link="/assets/certificaciones/VCFI9.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="VCF"
               name="VMware Cloud Foundation: Build, Manage & Secure"
               org="Broadcom"
@@ -95,7 +78,7 @@ export default function CertificationsPage() {
                 : "Despliegue de nube híbrida empresarial, gestión, configuración de políticas de seguridad y aprovisionamiento de recursos virtuales."}
               link="/assets/certificaciones/Vmware Cloud Foundation Build Manage and Secure.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="TNZ"
               name="vSphere with Tanzu: Deploy & Manage"
               org="Broadcom"
@@ -106,7 +89,7 @@ export default function CertificationsPage() {
                 : "Vmware Tanzu, Kubernetes, Supervisor Cluster y orquestación de contenedores."}
               link="/assets/certificaciones/Vmware Vsphere with Tanzu.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="VMW"
               name="VMware vSphere: Install & Configure"
               org="Broadcom"
@@ -129,7 +112,7 @@ export default function CertificationsPage() {
             <div className="h-[1px] flex-1 bg-white/5" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px]">
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="ANT"
               name={locale === "en" ? "Claude Code Practitioner" : "Especialista en Claude Code"}
               org="Anthropic"
@@ -140,7 +123,7 @@ export default function CertificationsPage() {
                 : "Credencial para automatización de software, ingeniería de prompts avanzada para CLI y flujos de trabajo agéntica con Claude Code."}
               link="/assets/certificaciones/certificate claude code.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="FM"
               name="Enterprise TypeScript"
               org="Frontend Masters"
@@ -151,7 +134,7 @@ export default function CertificationsPage() {
                 : "Arquitectura, pruebas y escalado de grandes sistemas TypeScript para producción empresarial."}
               link="/assets/certificaciones/enterprise-typescript-dark.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="FM"
               name="Full Stack TypeScript, Node & GraphQL"
               org="Frontend Masters"
@@ -162,7 +145,7 @@ export default function CertificationsPage() {
                 : "Desarrollo de aplicaciones empresariales full-stack con Node.js, GraphQL y TypeScript."}
               link="/assets/certificaciones/fullstack-typescript-dark.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="FM"
               name="Complete Intro to Containers"
               org="Frontend Masters"
@@ -173,7 +156,7 @@ export default function CertificationsPage() {
                 : "Introducción completa a Docker, podman y arquitecturas de contenedores."}
               link="/assets/certificaciones/complete-intro-containers-dark.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="FM"
               name="Complete Go"
               org="Frontend Masters"
@@ -184,7 +167,7 @@ export default function CertificationsPage() {
                 : "Curso completo sobre fundamentos del lenguaje Google Go, concurrencia y servicios web."}
               link="/assets/certificaciones/complete-go-dark.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="FM"
               name="Vue Fundamentals"
               org="Frontend Masters"
@@ -195,7 +178,7 @@ export default function CertificationsPage() {
                 : "Principios fundamentales de Vue.js, jerarquía de componentes, reactividad y gestión de estado."}
               link="/assets/certificaciones/vue-fundamentals-dark.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="FM"
               name="Intro to Vue 3 Workshop"
               org="Frontend Masters"
@@ -206,7 +189,7 @@ export default function CertificationsPage() {
                 : "Taller que cubre la Composition API, reactividad, enrutamiento y despliegue en Vue 3."}
               link="/assets/certificaciones/Complete Intro to Vue 3 Workshop (FEM).pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="FM"
               name="TypeScript Monorepos"
               org="Frontend Masters"
@@ -217,7 +200,7 @@ export default function CertificationsPage() {
                 : "Arquitectura de aplicaciones TypeScript a gran escala utilizando patrones de monorepo."}
               link="/assets/certificaciones/monorepos-v2.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="FM"
               name="Intermediate TypeScript, v2"
               org="Frontend Masters"
@@ -228,7 +211,7 @@ export default function CertificationsPage() {
                 : "Características y patrones avanzados de TypeScript para aplicaciones escalables."}
               link="/assets/certificaciones/intermediate-typescript-v2.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="FM"
               name="TypeScript 5 Fundamentals, v4"
               org="Frontend Masters"
@@ -239,7 +222,7 @@ export default function CertificationsPage() {
                 : "Profundización en los conceptos fundamentales de TypeScript 5 y su ecosistema."}
               link="/assets/certificaciones/typescript-v4.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="INT"
               name="Diseño de Interfaces con React JS"
               org="INTECAP"
@@ -250,7 +233,7 @@ export default function CertificationsPage() {
                 : "Desarrollo frontend con React.js, Hooks y frameworks de CSS modernos."}
               link="/assets/certificaciones/Diseño de interfaces Intecap.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="PZ"
               name={locale === "en" ? "Git & GitHub Professional" : "Profesional de Git y GitHub"}
               org="Platzi"
@@ -261,7 +244,7 @@ export default function CertificationsPage() {
                 : "Control de versiones avanzado, estrategias de ramificación y flujos de trabajo colaborativos."}
               link="/assets/certificaciones/diploma-git-github.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="PZ"
               name={locale === "en" ? "Ultimate HTML & CSS Course" : "Curso Definitivo de HTML y CSS"}
               org="Platzi"
@@ -272,7 +255,7 @@ export default function CertificationsPage() {
                 : "HTML semántico, arquitectura de CSS moderna y diseño responsivo."}
               link="/assets/certificaciones/diploma-html-css-2020.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="PZ"
               name={locale === "en" ? "Frontend Developer Practical Course" : "Práctico de Frontend Developer"}
               org="Platzi"
@@ -283,7 +266,7 @@ export default function CertificationsPage() {
                 : "Aplicación de principios de desarrollo frontend en proyectos del mundo real."}
               link="/assets/certificaciones/diploma-frontend-developer-practico.pdf"
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="PZ"
               name={locale === "en" ? "Python Foundations" : "Fundamentos de Python"}
               org="Platzi"
@@ -306,7 +289,7 @@ export default function CertificationsPage() {
             <div className="h-[1px] flex-1 bg-white/5" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px]">
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="CS"
               name={locale === "en" ? "Cybersecurity Essentials" : "Fundamentos de Ciberseguridad"}
               org="Cisco"
@@ -316,7 +299,7 @@ export default function CertificationsPage() {
                 ? "Foundational knowledge of cybersecurity threats and protection strategies."
                 : "Conocimiento fundamental de amenazas de ciberseguridad y estrategias de protección."}
             />
-            <CertificationCard
+            <CertificationCard onViewPdf={handleViewPdf}
               badge="CCNA"
               name={locale === "en" ? "CCNA: Introduction to Networks" : "CCNA: Introducción a Redes"}
               org="Cisco"

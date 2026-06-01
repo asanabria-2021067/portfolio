@@ -36,6 +36,7 @@ const TREE: TreeNode[] = [
         children: [
           { type: "file", name: "page.tsx", ext: "tsx", href: "/" },
           { type: "file", name: "projects.tsx", ext: "tsx", href: "/projects" },
+          { type: "file", name: "stack.tsx", ext: "tsx", href: "/stack" },
           { type: "file", name: "certifications.tsx", ext: "tsx", href: "/certifications" },
           { type: "file", name: "contact.tsx", ext: "tsx", href: "/contact" },
         ],
@@ -236,6 +237,7 @@ export default function FileTreeNav() {
   const pathname = usePathname();
   const { locale } = usePreferences();
   const [showGuide, setShowGuide] = useState(false);
+  const [layoutState, setLayoutState] = useState<"normal" | "collapsed" | "minimized" | "expanded">("normal");
 
   useEffect(() => {
     const guideHidden = localStorage.getItem("portfolio-nav-guide") === "hidden";
@@ -249,37 +251,83 @@ export default function FileTreeNav() {
     localStorage.setItem("portfolio-nav-guide", "hidden");
   };
 
+  if (layoutState === "collapsed") {
+    return (
+      <div 
+        onClick={() => setLayoutState("normal")}
+        className="ft-panel !w-[54px] min-h-[360px] flex flex-col items-center py-4 cursor-pointer hover:bg-white/[0.02] border border-[var(--line)] rounded-[var(--radius)] transition-all duration-300 select-none group"
+        title={locale === "en" ? "Expand Explorer" : "Expandir Explorador"}
+      >
+        <div className="flex flex-col gap-1.5 mb-6">
+          <span className="w-2 h-2 rounded-full bg-blue-accent opacity-50 group-hover:opacity-100 transition-opacity animate-pulse" />
+        </div>
+        <div className="flex-1 flex flex-col items-center justify-center gap-6">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="text-fg-mute group-hover:text-fg transition-colors">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+          </svg>
+          <span className="font-mono text-[9px] text-fg-mute group-hover:text-fg transition-colors uppercase tracking-[0.2em] [writing-mode:vertical-lr] select-none">
+            {locale === "en" ? "EXPLORER" : "EXPLORADOR"}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <nav className="ft-panel" aria-label="Portfolio file tree">
+    <nav 
+      className={clsx(
+        "ft-panel transition-all duration-300",
+        layoutState === "minimized" && "!min-h-0",
+        layoutState === "expanded" && "!min-h-[calc(100vh-80px)]"
+      )}
+      aria-label="Portfolio file tree"
+    >
       <div className="ft-header">
         <div className="ft-dots" aria-hidden="true">
-          <span className="ft-dot ft-dot-red" />
-          <span className="ft-dot ft-dot-yellow" />
-          <span className="ft-dot ft-dot-green" />
+          <button 
+            type="button"
+            onClick={() => setLayoutState("collapsed")} 
+            className="ft-dot ft-dot-red" 
+            title={locale === "en" ? "Collapse" : "Colapsar"}
+          />
+          <button 
+            type="button"
+            onClick={() => setLayoutState(layoutState === "minimized" ? "normal" : "minimized")} 
+            className="ft-dot ft-dot-yellow" 
+            title={locale === "en" ? "Minimize" : "Minimizar"}
+          />
+          <button 
+            type="button"
+            onClick={() => setLayoutState(layoutState === "expanded" ? "normal" : "expanded")} 
+            className="ft-dot ft-dot-green" 
+            title={locale === "en" ? "Expand" : "Expandir"}
+          />
         </div>
         <span className="ft-label">explorer</span>
       </div>
-      <div className="ft-body">
-        {showGuide && (
-          <div className="mx-3.5 mb-3 p-3 bg-[rgba(106,166,255,0.08)] border border-[rgba(106,166,255,0.18)] rounded-lg relative flex flex-col gap-1.5 z-10">
-            <span className="text-[10px] font-mono text-blue-accent font-bold uppercase tracking-wider">
-              {locale === "en" ? "💡 Navigation Tip" : "💡 Consejo de Navegación"}
-            </span>
-            <p className="text-[11.5px] text-fg-dim leading-normal m-0 pr-4">
-              {locale === "en" 
-                ? "Click on the .tsx files (page, projects, certifications, contact) below to explore the different pages of my portfolio!" 
-                : "¡Haz clic en los archivos .tsx (page, projects, certifications, contact) de abajo para explorar las diferentes páginas de mi portafolio!"}
-            </p>
-            <button 
-              onClick={dismissGuide}
-              className="absolute top-2.5 right-2.5 text-fg-mute hover:text-fg text-[11px] font-mono cursor-pointer border-none bg-transparent p-0 leading-none"
-            >
-              ✕
-            </button>
-          </div>
-        )}
-        <TreeBranch nodes={TREE} depth={0} pathname={pathname} />
-      </div>
+      {layoutState !== "minimized" && (
+        <div className="ft-body">
+          {showGuide && (
+            <div className="mx-3.5 mb-3 p-3 bg-[rgba(106,166,255,0.08)] border border-[rgba(106,166,255,0.18)] rounded-lg relative flex flex-col gap-1.5 z-10">
+              <span className="text-[10px] font-mono text-blue-accent font-bold uppercase tracking-wider">
+                {locale === "en" ? "💡 Navigation Tip" : "💡 Consejo de Navegación"}
+              </span>
+              <p className="text-[11.5px] text-fg-dim leading-normal m-0 pr-4">
+                {locale === "en" 
+                  ? "Click on the .tsx files (page, projects, stack, certifications, contact) below to explore the different pages of my portfolio!" 
+                  : "¡Haz clic en los archivos .tsx (page, projects, stack, certifications, contact) de abajo para explorar las diferentes páginas de mi portafolio!"}
+              </p>
+              <button 
+                onClick={dismissGuide}
+                className="absolute top-2.5 right-2.5 text-fg-mute hover:text-fg text-[11px] font-mono cursor-pointer border-none bg-transparent p-0 leading-none"
+              >
+                ✕
+              </button>
+            </div>
+          )}
+          <TreeBranch nodes={TREE} depth={0} pathname={pathname} />
+        </div>
+      )}
     </nav>
   );
 }

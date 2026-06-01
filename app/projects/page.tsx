@@ -16,7 +16,7 @@ export default function ProjectsPage() {
         </div>
         <h1 className="text-[clamp(38px,4.4vw,56px)] font-semibold tracking-[-0.035em] leading-none m-0">
           {locale === "en" ? "My " : "Mis "}
-          <span className="grad-text text-3d cursor-default">{locale === "en" ? "Projects." : "proyectos."}</span>
+          <span className="grad-text">{locale === "en" ? "Projects." : "proyectos."}</span>
         </h1>
         <p className="text-fg-dim text-[15px] leading-[1.55] max-w-[600px] m-0">
           {locale === "en"
