@@ -91,7 +91,7 @@ function TechTile({ label, icon }: TechTileProps) {
       <img
         src={icon}
         alt={label}
-        className="w-7 h-7 object-contain shrink-0 transition-all duration-200 brightness-[0.85] group-hover:brightness-100 group-hover:scale-[1.06]"
+        className="w-6 h-6 object-contain shrink-0 transition-all duration-200 brightness-[0.85] group-hover:brightness-100 group-hover:scale-[1.06]"
         loading="lazy"
         onError={(e) => {
           e.currentTarget.style.display = "none";
@@ -120,7 +120,7 @@ export default function TechStack() {
       <div className="flex flex-col gap-4.5">
         {highlights.map((cat) => (
           <div key={cat.categoryEn} className="flex flex-col gap-2">
-            <div className="text-[8px] text-fg-mute uppercase tracking-[0.12em] font-mono">
+            <div className="text-[10px] text-fg-mute uppercase tracking-[0.12em] font-mono">
               {locale === "en" ? cat.categoryEn : cat.categoryEs}
             </div>
             <div className="grid grid-cols-3 gap-2.5">

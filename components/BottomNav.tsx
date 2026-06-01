@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
@@ -8,8 +9,9 @@ import { usePreferences } from "./PreferencesProvider";
 export default function BottomNav() {
   const pathname = usePathname();
   const { locale } = usePreferences();
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
 
-  const navItems = [
+  const mainItems = [
     {
       labelEn: "Home",
       labelEs: "Inicio",
@@ -41,6 +43,9 @@ export default function BottomNav() {
         </svg>
       ),
     },
+  ];
+
+  const moreItems = [
     {
       labelEn: "Certifications",
       labelEs: "Certificaciones",
@@ -67,10 +72,44 @@ export default function BottomNav() {
     },
   ];
 
+  const isMoreActive = moreItems.some((item) => pathname === item.href);
+
   return (
     <nav className="bottom-nav-bar md:hidden" aria-label="Mobile navigation">
-      <div className="bottom-nav-container">
-        {navItems.map((item) => {
+      {/* Click outside backdrop */}
+      {isMoreOpen && (
+        <div 
+          className="fixed inset-0 z-[100] bg-black/10 backdrop-blur-[2px]" 
+          onClick={() => setIsMoreOpen(false)}
+        />
+      )}
+
+      {/* Popover / Dropdown Menu */}
+      {isMoreOpen && (
+        <div className="bottom-nav-popover relative z-[101]">
+          {moreItems.map((item) => {
+            const active = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsMoreOpen(false)}
+                className={clsx(
+                  "bottom-nav-popover-item",
+                  active && "bottom-nav-popover-item--active"
+                )}
+              >
+                <span className="bottom-nav-icon">{item.icon}</span>
+                <span>{locale === "en" ? item.labelEn : item.labelEs}</span>
+              </Link>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Bottom Navigation Container */}
+      <div className="bottom-nav-container relative z-[101]">
+        {mainItems.map((item) => {
           const active = pathname === item.href;
           return (
             <Link
@@ -83,6 +122,24 @@ export default function BottomNav() {
             </Link>
           );
         })}
+
+        {/* More Button Toggle */}
+        <button
+          onClick={() => setIsMoreOpen(!isMoreOpen)}
+          className={clsx(
+            "bottom-nav-item focus:outline-none cursor-pointer border-none bg-transparent",
+            (isMoreOpen || isMoreActive) && "bottom-nav-item--active"
+          )}
+        >
+          <span className="bottom-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <circle cx="12" cy="12" r="1.5" />
+              <circle cx="19" cy="12" r="1.5" />
+              <circle cx="5" cy="12" r="1.5" />
+            </svg>
+          </span>
+          <span className="bottom-nav-text">{locale === "en" ? "More" : "Más"}</span>
+        </button>
       </div>
     </nav>
   );

@@ -156,11 +156,11 @@ export default function StackPage() {
   // Databases (spans 2), DevOps (spans 3), Tools (spans 1) (Total 6 in row 2).
   // Currently learning spans 6 columns (Total 6 in row 3).
   const spans = [
-    "col-span-1 md:col-span-3", // Languages
-    "col-span-1 md:col-span-3", // Frameworks
+    "col-span-1 md:col-span-6", // Languages
+    "col-span-1 md:col-span-4", // Frameworks
     "col-span-1 md:col-span-2", // Databases
-    "col-span-1 md:col-span-2", // DevOps
-    "col-span-1 md:col-span-2", // Tools
+    "col-span-1 md:col-span-3", // DevOps
+    "col-span-1 md:col-span-3", // Tools
   ];
 
   return (
@@ -197,10 +197,10 @@ export default function StackPage() {
               idx === 4 && "grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-2"  // Tools
             )}>
               {cat.items.map((item, itemIdx) => (
-                <TechTile 
-                  key={item.label} 
-                  label={item.label} 
-                  icon={getTechIcon(item.label)} 
+                <TechTile
+                  key={item.label}
+                  label={item.label}
+                  icon={getTechIcon(item.label)}
                   className={clsx(
                     (idx === 2 || idx === 4) && itemIdx === 4 && "col-span-2 md:col-span-2 lg:col-span-2" // Neo4j/Neovim stretches in Databases/Tools grid
                   )}
