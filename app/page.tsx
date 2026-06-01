@@ -39,6 +39,7 @@ export default function Home() {
         tags={["Maps", "React Leaflet", "Environmental API"]}
         badge={locale === "en" ? "Hackathon Winner" : "Ganador hackathon"}
         repoLink="https://github.com/asanabria-2021067/waterway-backend"
+        frontendRepoLink="https://github.com/kinalitos/waterway-frontend"
         demoLink="https://water-way.netlify.app/"
         className="col-span-1 md:col-span-3 lg:col-span-4"
         art={

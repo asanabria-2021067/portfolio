@@ -40,6 +40,7 @@ interface ProjectOverride {
   roleEs?: string;
   tags?: string[];
   private?: boolean;
+  frontendRepoLink?: string;
 }
 
 const PROJECT_OVERRIDES: Record<string, ProjectOverride> = {
@@ -58,6 +59,7 @@ const PROJECT_OVERRIDES: Record<string, ProjectOverride> = {
     bulletsEn: ["Hackathon-winning project", "REST API layer for environmental data", "Public repository"],
     bulletsEs: ["Proyecto ganador de hackathon", "Capa API REST para datos ambientales", "Repositorio publico"],
     tags: ["REST API", "Environment", "Hackathon"],
+    frontendRepoLink: "https://github.com/kinalitos/waterway-frontend",
   },
   "asanabria-2021067/proyecto-ingenieria-software": {
     displayName: "UVGenius (en desarrollo)",
@@ -300,6 +302,7 @@ export interface PortfolioProject {
   roleEn?: string;
   roleEs?: string;
   repoUrl?: string;
+  frontendRepoLink?: string;
   productionUrl?: string;
   private: boolean;
   language: string | null;
@@ -575,6 +578,7 @@ function toProject(repo: GithubRepo, commitCount: number, productionUrl?: string
     roleEn: override?.roleEn,
     roleEs: override?.roleEs,
     repoUrl: isPrivate ? undefined : repo.html_url,
+    frontendRepoLink: override?.frontendRepoLink,
     productionUrl: resolvedProductionUrl,
     private: isPrivate,
     language: repo.language,

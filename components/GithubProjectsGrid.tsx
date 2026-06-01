@@ -23,6 +23,7 @@ interface PortfolioProject {
   roleEn?: string;
   roleEs?: string;
   repoUrl?: string;
+  frontendRepoLink?: string;
   productionUrl?: string;
   private: boolean;
   language: string | null;
@@ -294,6 +295,7 @@ export default function GithubProjectsGrid() {
           tags={getTags(project)}
           demoLink={project.productionUrl}
           repoLink={project.repoUrl}
+          frontendRepoLink={project.frontendRepoLink}
           art={<RepoArt project={project} index={index} />}
         />
       ))}
