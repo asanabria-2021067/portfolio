@@ -1,42 +1,106 @@
-# 🚀 My Portfolio
+# 🚀 Interactive Software Engineer Portfolio
 
-**Live Demo / Deployment:** [https://portfolio-taupe-eight-ne7xtliknm.vercel.app/](https://portfolio-taupe-eight-ne7xtliknm.vercel.app/)
+<div align="center">
+  <a href="https://portfolio-taupe-eight-ne7xtliknm.vercel.app/" target="_blank">
+    <img src="https://img.shields.io/badge/Live%20Demo-Vercel-blue?style=for-the-badge&logo=vercel" alt="Live Demo Vercel" />
+  </a>
+</div>
 
 ---
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Un portafolio de ingeniería de software moderno y premium, inspirado en la estética visual de un Entorno de Desarrollo Integrado (IDE). Diseñado bajo una estructura de **Bento Grid** con animaciones fluidas, consumo en tiempo real de la API de GitHub, soporte multilingüe y un índice detallado del stack tecnológico.
 
-## Getting Started
+## ✨ Características Principales
 
-First, run the development server:
+*   🌌 **Aesthetic Dark IDE Theme:** Interfaz oscura construida con efectos de vidrio esmerilado (*glassmorphism*), bordes suaves y micro-animaciones interactivas al hacer hover.
+*   📊 **Integración Dinámica con GitHub API:** Los proyectos se alimentan en tiempo real consumiendo la API REST de GitHub (mostrando cantidad de commits, estrellas, forks y tags de lenguajes).
+*   🔧 **Soporte Multi-Repositorio:** Las tarjetas de proyectos detectan proyectos divididos y renderizan de forma inteligente botones independientes para **Código Frontend** y **Código Backend**.
+*   💻 **Stack Técnico Detallado (`/stack`):** Un mapa interactivo que organiza más de 35 tecnologías entre lenguajes, frameworks, bases de datos y herramientas de desarrollo con sus logos oficiales de marca.
+*   📱 **Bottom Nav Responsive:** En dispositivos móviles, la barra de navegación lateral se condensa en una barra inferior fija que agrupa las secciones secundarias (*Certificaciones* y *Contacto*) bajo un menú flotante de "Más" (MÁS) con desenfoque de fondo y cierre automático al hacer clic fuera.
+*   🗣️ **Localización Bilingüe (EN/ES):** Sistema integrado de traducción mediante un context provider que permite alternar todo el contenido entre inglés y español al instante.
+*   📬 **Bento de Contacto:** Incluye tarjetas interactivas con funciones rápidas como copiar correo al portapapeles con un clic y descarga directa del CV.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🛠️ Stack Tecnológico
+
+*   **Framework:** [Next.js 16 (App Router)](https://nextjs.org/)
+*   **Compilador:** Next.js Turbopack (compilación y recarga ultrarrápida)
+*   **Librería UI:** [React](https://react.dev/)
+*   **Estilos:** [Tailwind CSS](https://tailwindcss.com/) & CSS3 Vanilla
+*   **Animaciones:** [Framer Motion](https://www.framer.com/motion/) (para transiciones y efectos de entrada)
+*   **Iconos:** [Lucide React](https://lucide.dev/) & [Simple Icons](https://simpleicons.org/)
+*   **API Proxy:** Next.js Route Handlers para peticiones seguras a GitHub en el lado del servidor.
+
+---
+
+## ⚙️ Configuración e Instalación
+
+### Requisitos Previos
+
+Asegúrate de tener instalado [Node.js](https://nodejs.org/) (versión 18 o superior) en tu sistema.
+
+### Pasos para iniciar el proyecto
+
+1. **Clona el repositorio:**
+   ```bash
+   git clone https://github.com/asanabria-2021067/my-portfolio.git
+   cd my-portfolio
+   ```
+
+2. **Instala las dependencias:**
+   ```bash
+   npm install
+   ```
+
+3. **Configura el token de GitHub:**
+   Crea un archivo `.env.local` en la raíz del proyecto para habilitar las peticiones a la API de GitHub:
+   ```env
+   GITHUB_TOKEN="tu_personal_access_token_de_github"
+   ```
+   *Nota: Si no se configura un token, el portafolio funcionará pero puede verse limitado por la tasa de peticiones públicas de GitHub.*
+
+4. **Inicia el servidor de desarrollo:**
+   ```bash
+   npm run dev
+   ```
+   Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
+
+5. **Compila la aplicación para producción:**
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 📂 Estructura del Proyecto
+
+```text
+├── app/                  # Enrutamiento de Next.js (App Router)
+│   ├── api/              # Handlers de la API Serverless (GitHub proxy)
+│   ├── certifications/   # Vista de Certificaciones y Diplomas
+│   ├── contact/          # Vista de Contacto bento-style
+│   ├── projects/         # Detalle y grid interactivo de repositorios
+│   ├── stack/            # Detalle y desglose de tecnologías
+│   ├── globals.css       # Estilos globales y variables de tema (claro/oscuro)
+│   ├── layout.tsx        # Layout principal y configuración de metadatos/iconos
+│   └── page.tsx          # Homepage bento grid
+├── components/           # Componentes reutilizables de React
+│   ├── BentoCard.tsx     # Tarjetas contenedor con efecto hover premium
+│   ├── BottomNav.tsx     # Barra de navegación inferior móvil con Popover
+│   ├── TechStack.tsx     # Preview lateral de tecnologías
+│   ├── FileTreeNav.tsx   # Menú de navegación lateral simulando un árbol de archivos
+│   └── PreferencesProvider.tsx # Manejo de idioma (EN/ES)
+├── lib/                  # Funciones de utilidad y consultas de API
+│   └── github.ts         # Peticiones y overrides locales para repositorios
+└── public/               # Recursos estáticos (imágenes, PDF de CV, logo.svg)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔗 Enlaces de Interés
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+*   **Despliegue de Producción (Vercel):** [Ver Portafolio Online](https://portfolio-taupe-eight-ne7xtliknm.vercel.app/)
+*   **Creado por:** Angel Sanabria
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
