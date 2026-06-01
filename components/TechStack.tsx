@@ -35,6 +35,49 @@ const highlights = [
   },
 ];
 
+function getTechIcon(label: string): string {
+  const mapping: { [key: string]: string } = {
+    "TypeScript": "typescript",
+    "JavaScript": "javascript",
+    "Python": "python",
+    "Go": "go",
+    "Java": "java",
+    "HTML5": "html5",
+    "CSS3": "css3",
+    "Next.js": "nextdotjs",
+    "React": "react",
+    "NestJS": "nestjs",
+    "Django": "django",
+    "Node.js": "nodedotjs",
+    "Express.js": "express",
+    "Flask": "flask",
+    "Tailwind CSS": "tailwindcss",
+    "Prisma": "prisma",
+    "PostgreSQL": "postgresql",
+    "MongoDB": "mongodb",
+    "MySQL": "mysql",
+    "Redis": "redis",
+    "Neo4j": "neo4j",
+    "Docker": "docker",
+    "Kubernetes": "kubernetes",
+    "Azure": "microsoftazure",
+    "GitHub Actions": "githubactions",
+    "VMware": "vmware",
+    "Vercel": "vercel",
+    "Supabase": "supabase",
+    "AWS (CI/CD)": "amazonwebservices",
+    "GHCR (CI/CD)": "github",
+    "Firebase": "firebase",
+    "Git": "git",
+    "Postman": "postman",
+    "Figma": "figma",
+    "Notion": "notion",
+    "Neovim": "neovim"
+  };
+  const slug = mapping[label] || label.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return `https://cdn.simpleicons.org/${slug}`;
+}
+
 export default function TechStack() {
   const { locale } = usePreferences();
 
@@ -56,7 +99,7 @@ export default function TechStack() {
             </div>
             <div className="flex flex-wrap gap-1.5">
               {cat.items.map((item) => (
-                <Chip key={item.label} label={item.label} dotColor={item.color} />
+                <Chip key={item.label} label={item.label} icon={getTechIcon(item.label)} />
               ))}
             </div>
           </div>
