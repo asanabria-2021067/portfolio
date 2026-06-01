@@ -12,7 +12,7 @@ const LOGOS = {
   INTECAP: "https://upload.wikimedia.org/wikipedia/commons/0/09/Logotipo_de_el_INTECAP.png",
   PLATZI: "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/platzi.png",
   CISCO: "https://www.vectorlogo.zone/logos/cisco/cisco-icon.svg",
-  ANTHROPIC: "https://upload.wikimedia.org/wikipedia/commons/5/52/Anthropic_logo.svg",
+  ANTHROPIC: "https://cdn.jsdelivr.net/gh/callback-io/allogo@main/public/logos/anthropic/icon.svg",
 };
 
 export default function CertificationsPage() {
@@ -59,6 +59,17 @@ export default function CertificationsPage() {
                 ? "Cloud Infrastructure, VMware Cloud Foundation, vSphere, vSAN, and SDDC."
                 : "Infraestructura cloud, VMware Cloud Foundation, vSphere, vSAN y SDDC."}
               link="/assets/certificaciones/VCFI9.pdf"
+            />
+            <CertificationCard
+              badge="VCF"
+              name="VMware Cloud Foundation: Build, Manage & Secure"
+              org="Broadcom"
+              date="2025"
+              logo={LOGOS.VMWARE}
+              desc={locale === "en" 
+                ? "Enterprise hybrid cloud deployment, management, security policy configuration, and virtual resource provisioning."
+                : "Despliegue de nube híbrida empresarial, gestión, configuración de políticas de seguridad y aprovisionamiento de recursos virtuales."}
+              link="/assets/certificaciones/Vmware Cloud Foundation Build Manage and Secure.pdf"
             />
             <CertificationCard
               badge="TNZ"

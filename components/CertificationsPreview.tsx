@@ -21,7 +21,7 @@ export default function CertificationsPreview() {
           <span className="w-[6px] h-[6px] rounded-full bg-blue-accent shadow-[0_0_10px_var(--blue)]" />
           {locale === "en" ? "Certifications" : "Certificaciones"}
         </div>
-        <span className="text-fg-mute text-[12px] font-mono">20</span>
+        <span className="text-fg-mute text-[12px] font-mono">21</span>
       </div>
       <div className="flex flex-col gap-[10px]">
         {certifications.map((cert, index) => (
