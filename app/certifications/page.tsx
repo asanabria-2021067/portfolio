@@ -1,9 +1,11 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
 import CertificationCard from "@/components/CertificationCard";
 import BentoCard from "@/components/BentoCard";
 import { usePreferences } from "@/components/PreferencesProvider";
+import PdfModal from "@/components/PdfModal";
 
 const LOGOS = {
   FM: "https://frontendmasters.com/static-assets/core/m-transparent.webp",
@@ -17,6 +19,28 @@ const LOGOS = {
 
 export default function CertificationsPage() {
   const { locale } = usePreferences();
+  const [activePdf, setActivePdf] = useState<{ link: string; name: string } | null>(null);
+
+  useEffect(() => {
+    const handleDocumentClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest("a");
+      if (anchor && anchor.getAttribute("href")?.toLowerCase().endsWith(".pdf")) {
+        const href = anchor.getAttribute("href");
+        const card = anchor.closest(".flex-col");
+        const titleElement = card?.querySelector("h3");
+        const title = titleElement?.textContent || (locale === "en" ? "Certificate" : "Certificación");
+        
+        if (href) {
+          e.preventDefault();
+          setActivePdf({ link: href, name: title });
+        }
+      }
+    };
+
+    document.addEventListener("click", handleDocumentClick);
+    return () => document.removeEventListener("click", handleDocumentClick);
+  }, [locale]);
 
   return (
     <div className="flex flex-col gap-[28px]">
@@ -359,6 +383,13 @@ export default function CertificationsPage() {
         leftText="© 2026 — Angel Sanabria"
         midText={locale === "en" ? "Constant learning · Continuous improvement" : "Aprendizaje constante · Mejora continua"}
         rightText={locale === "en" ? "Updated May 2026" : "Actualizado Mayo 2026"}
+      />
+
+      <PdfModal
+        isOpen={!!activePdf}
+        link={activePdf?.link ?? ""}
+        name={activePdf?.name ?? ""}
+        onClose={() => setActivePdf(null)}
       />
     </div>
   );

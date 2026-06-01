@@ -9,6 +9,7 @@ interface CertificationCardProps {
   desc?: string;
   link?: string;
   logo?: string;
+  onViewPdf?: (link: string, name: string) => void;
 }
 
 export default function CertificationCard({
@@ -19,6 +20,7 @@ export default function CertificationCard({
   desc,
   link,
   logo,
+  onViewPdf,
 }: CertificationCardProps) {
   return (
     <BentoCard className="flex flex-col">
@@ -40,7 +42,17 @@ export default function CertificationCard({
       </div>
       {desc && <p className="text-[13px] text-fg-dim leading-[1.5] mb-4">{desc}</p>}
       {link && (
-        <a href={link} target="_blank" className="inline-flex items-center gap-[6px] text-[11px] font-mono text-fg-mute no-underline transition-all duration-200 hover:text-fg mt-auto">
+        <a 
+          href={link} 
+          onClick={(e) => {
+            if (onViewPdf) {
+              e.preventDefault();
+              onViewPdf(link, name);
+            }
+          }}
+          target="_blank" 
+          className="inline-flex items-center gap-[6px] text-[11px] font-mono text-fg-mute no-underline transition-all duration-200 hover:text-fg mt-auto cursor-pointer"
+        >
           View Certificate
           <svg width="12" height="12" viewBox="0 0 16 16">
             <path
