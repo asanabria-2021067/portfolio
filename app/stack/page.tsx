@@ -3,6 +3,7 @@
 import BentoCard from "@/components/BentoCard";
 import Footer from "@/components/Footer";
 import { usePreferences } from "@/components/PreferencesProvider";
+import { clsx } from "clsx";
 
 const categories = [
   {
@@ -122,11 +123,15 @@ function getTechIcon(label: string): string {
 interface TechTileProps {
   label: string;
   icon: string;
+  className?: string;
 }
 
-function TechTile({ label, icon }: TechTileProps) {
+function TechTile({ label, icon, className }: TechTileProps) {
   return (
-    <div className="flex flex-col items-center justify-center p-3 rounded-xl border border-[var(--line)] bg-white/[0.015] hover:border-white/20 hover:bg-white/[0.05] hover:scale-[1.04] hover:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.5)] transition-all duration-200 gap-2 min-h-[90px] w-full group">
+    <div className={clsx(
+      "flex flex-col items-center justify-center p-3 rounded-xl border border-[var(--line)] bg-white/[0.015] hover:border-white/20 hover:bg-white/[0.05] hover:scale-[1.04] hover:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.5)] transition-all duration-200 gap-2 min-h-[90px] w-full group",
+      className
+    )}>
       <img
         src={icon}
         alt={label}
@@ -148,14 +153,14 @@ export default function StackPage() {
 
   // Grid spans: 
   // Programming Languages & Frameworks span 3 columns each (Total 6 in row 1).
-  // Databases, DevOps, Tools span 2 columns each (Total 6 in row 2).
+  // Databases (spans 2), DevOps (spans 3), Tools (spans 1) (Total 6 in row 2).
   // Currently learning spans 6 columns (Total 6 in row 3).
   const spans = [
     "col-span-1 md:col-span-3", // Languages
     "col-span-1 md:col-span-3", // Frameworks
     "col-span-1 md:col-span-2", // Databases
-    "col-span-1 md:col-span-2", // DevOps
-    "col-span-1 md:col-span-2", // Tools
+    "col-span-1 md:col-span-3", // DevOps
+    "col-span-1 md:col-span-1", // Tools
   ];
 
   return (
@@ -183,9 +188,23 @@ export default function StackPage() {
             <div className="text-[12px] font-semibold text-fg uppercase tracking-[0.12em] font-mono border-b border-white/5 pb-2">
               {locale === "en" ? cat.titleEn : cat.titleEs}
             </div>
-            <div className="grid grid-cols-3 xs:grid-cols-4 gap-2.5 my-auto">
-              {cat.items.map((item) => (
-                <TechTile key={item.label} label={item.label} icon={getTechIcon(item.label)} />
+            <div className={clsx(
+              "grid gap-2.5 my-auto",
+              idx === 0 && "grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5", // Languages
+              idx === 1 && "grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5", // Frameworks
+              idx === 2 && "grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-2", // Databases
+              idx === 3 && "grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4", // DevOps
+              idx === 4 && "grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-2"  // Tools
+            )}>
+              {cat.items.map((item, itemIdx) => (
+                <TechTile 
+                  key={item.label} 
+                  label={item.label} 
+                  icon={getTechIcon(item.label)} 
+                  className={clsx(
+                    idx === 2 && itemIdx === 4 && "col-span-2 md:col-span-2 lg:col-span-2" // Neo4j stretches in Databases grid
+                  )}
+                />
               ))}
             </div>
           </BentoCard>
