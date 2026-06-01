@@ -73,7 +73,7 @@ function getTechIcon(label: string): string {
     "Notion": "notion/white",
     "Neovim": "neovim",
     "Cloudflare": "cloudflare",
-    "VS Code": "visualstudiocode"
+    "VS Code": "/assets/images/vscode.png"
   };
   const slug = mapping[label] || label.toLowerCase().replace(/[^a-z0-9]/g, "");
   if (slug.startsWith("/")) {
