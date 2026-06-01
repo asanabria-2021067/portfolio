@@ -3,7 +3,7 @@ import BentoCard from "./BentoCard";
 
 export default function ProfileCard() {
   return (
-    <BentoCard className="!p-0 min-h-[380px]">
+    <BentoCard className="col-span-1 md:col-span-2 lg:col-span-4 !p-0 min-h-[380px]">
       <div className="relative w-full h-full rounded-[var(--radius)] overflow-hidden min-h-[380px]">
         <div className="bg-gradient-to-br from-[#1a2553] via-[#2a1a4a] to-[#0e1020] absolute inset-0" />
         <Image

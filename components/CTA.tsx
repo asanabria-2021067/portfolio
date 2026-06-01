@@ -4,11 +4,13 @@ import BentoCard from "./BentoCard";
 import ContactLinks from "./ContactLinks";
 import { usePreferences } from "./PreferencesProvider";
 
-export default function CTA() {
+import { clsx } from "clsx";
+
+export default function CTA({ className }: { className?: string }) {
   const { locale } = usePreferences();
 
   return (
-    <BentoCard span={2} className="relative flex flex-col">
+    <BentoCard className={clsx("relative flex flex-col", className)}>
       <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(167,139,250,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(106,166,255,0.06)_1px,transparent_1px)] bg-[length:32px_32px] [mask-image:radial-gradient(ellipse_at_80%_20%,#000,transparent_70%)]" />
       <div className="relative flex flex-col gap-5 h-full">
         <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-fg-mute font-mono">

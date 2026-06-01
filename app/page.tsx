@@ -15,7 +15,7 @@ export default function Home() {
   const { locale } = usePreferences();
 
   return (
-    <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[18px]">
+    <main className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-[18px]">
       {/* ROW 1 */}
       <Hero />
       <ProfileCard />
@@ -40,6 +40,7 @@ export default function Home() {
         badge={locale === "en" ? "Hackathon Winner" : "Ganador hackathon"}
         repoLink="https://github.com/asanabria-2021067/waterway-backend"
         demoLink="https://water-way.netlify.app/"
+        className="col-span-1 md:col-span-3 lg:col-span-4"
         art={
           <img
             src="/assets/images/waterway.png"
@@ -72,6 +73,7 @@ export default function Home() {
         }
         repoLink="https://github.com/asanabria-2021067/proyecto2-db"
         demoLink="https://hilarious-sundae-6374bd.netlify.app/"
+        className="col-span-1 md:col-span-6 lg:col-span-4"
         art={
           <img
             src="/assets/images/libromanga.png"
@@ -82,10 +84,10 @@ export default function Home() {
       />
 
       {/* ROW 4 */}
-      <CertificationsPreview />
-      <CTA />
+      <CertificationsPreview className="col-span-1 md:col-span-3 lg:col-span-4" />
+      <CTA className="col-span-1 md:col-span-3 lg:col-span-8" />
 
-      <div className="col-span-1 md:col-span-2 lg:col-span-3 mt-7">
+      <div className="col-span-1 md:col-span-6 lg:col-span-12 mt-7">
         <Footer />
       </div>
     </main>

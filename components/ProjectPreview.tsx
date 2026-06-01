@@ -3,6 +3,7 @@
 import BentoCard from "./BentoCard";
 import Chip from "./Chip";
 import { usePreferences } from "./PreferencesProvider";
+import { clsx } from "clsx";
 
 interface ProjectPreviewProps {
   title: string;
@@ -15,6 +16,7 @@ interface ProjectPreviewProps {
   bullets?: string[];
   demoLink?: string;
   repoLink?: string;
+  className?: string;
 }
 
 export default function ProjectPreview({
@@ -28,11 +30,12 @@ export default function ProjectPreview({
   bullets,
   demoLink,
   repoLink,
+  className,
 }: ProjectPreviewProps) {
   const { locale } = usePreferences();
 
   return (
-    <BentoCard className="flex flex-col">
+    <BentoCard className={clsx("flex flex-col", className)}>
       <div className="relative rounded-bento-sm overflow-hidden border border-[var(--line)] aspect-video mb-4">
         {badge && (
           <span 

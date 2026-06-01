@@ -59,12 +59,12 @@ function getTechIcon(label: string): string {
     "Neo4j": "neo4j",
     "Docker": "docker",
     "Kubernetes": "kubernetes",
-    "Azure": "microsoftazure",
+    "Azure": "/assets/images/azure.png",
     "GitHub Actions": "githubactions",
     "VMware": "vmware/white",
     "Vercel": "vercel/white",
     "Supabase": "supabase",
-    "AWS": "amazonaws",
+    "AWS": "/assets/images/aws.png",
     "GHCR (CI/CD)": "github/white",
     "Firebase": "firebase",
     "Git": "git",
@@ -74,6 +74,9 @@ function getTechIcon(label: string): string {
     "Neovim": "neovim"
   };
   const slug = mapping[label] || label.toLowerCase().replace(/[^a-z0-9]/g, "");
+  if (slug.startsWith("/")) {
+    return slug;
+  }
   return `https://cdn.simpleicons.org/${slug}`;
 }
 
@@ -105,7 +108,7 @@ export default function TechStack() {
   const { locale } = usePreferences();
 
   return (
-    <BentoCard className="!p-[22px] sm:!p-[28px] flex flex-col gap-4">
+    <BentoCard className="col-span-1 md:col-span-3 lg:col-span-5 !p-[22px] sm:!p-[28px] flex flex-col gap-4">
       <div className="flex items-center justify-between mb-2 gap-[10px]">
         <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-fg-mute font-mono">
           <span className="w-1.5 h-1.5 rounded-full bg-blue-accent shadow-[0_0_10px_var(--color-blue-accent)]" />

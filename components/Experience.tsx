@@ -34,7 +34,7 @@ export default function Experience() {
       : ["Lider tecnico del portal estudiantil", "Defini tareas, stack y comunicacion con interesados", "Prueba piloto pendiente"];
 
   return (
-    <BentoCard>
+    <BentoCard className="col-span-1 md:col-span-3 lg:col-span-4">
       <div className="flex items-center justify-between mb-[18px] gap-[10px]">
         <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-fg-mute font-mono">
           <span className="w-1.5 h-1.5 rounded-full bg-blue-accent shadow-[0_0_10px_var(--color-blue-accent)]" />

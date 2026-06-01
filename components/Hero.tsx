@@ -7,7 +7,7 @@ export default function Hero() {
   const { locale } = usePreferences();
 
   return (
-    <BentoCard span={2} className="flex flex-col min-h-[380px]">
+    <BentoCard className="col-span-1 md:col-span-4 lg:col-span-8 flex flex-col min-h-[380px]">
       <div className="mb-[22px] inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-fg-mute font-mono">
         <span className="w-1.5 h-1.5 rounded-full bg-blue-accent shadow-[0_0_10px_var(--color-blue-accent)]" />
         {locale === "en" ? "Portfolio - 2026" : "Portafolio - 2026"}

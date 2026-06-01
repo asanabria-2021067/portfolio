@@ -98,12 +98,12 @@ function getTechIcon(label: string): string {
     "Neo4j": "neo4j",
     "Docker": "docker",
     "Kubernetes": "kubernetes",
-    "Azure": "microsoftazure",
+    "Azure": "/assets/images/azure.png",
     "GitHub Actions": "githubactions",
     "VMware": "vmware/white",
     "Vercel": "vercel/white",
     "Supabase": "supabase",
-    "AWS": "amazonaws",
+    "AWS": "/assets/images/aws.png",
     "GHCR (CI/CD)": "github/white",
     "Firebase": "firebase",
     "Git": "git",
@@ -113,6 +113,9 @@ function getTechIcon(label: string): string {
     "Neovim": "neovim"
   };
   const slug = mapping[label] || label.toLowerCase().replace(/[^a-z0-9]/g, "");
+  if (slug.startsWith("/")) {
+    return slug;
+  }
   return `https://cdn.simpleicons.org/${slug}`;
 }
 
@@ -143,6 +146,18 @@ function TechTile({ label, icon }: TechTileProps) {
 export default function StackPage() {
   const { locale } = usePreferences();
 
+  // Grid spans: 
+  // Programming Languages & Frameworks span 3 columns each (Total 6 in row 1).
+  // Databases, DevOps, Tools span 2 columns each (Total 6 in row 2).
+  // Currently learning spans 6 columns (Total 6 in row 3).
+  const spans = [
+    "col-span-1 md:col-span-3", // Languages
+    "col-span-1 md:col-span-3", // Frameworks
+    "col-span-1 md:col-span-2", // Databases
+    "col-span-1 md:col-span-2", // DevOps
+    "col-span-1 md:col-span-2", // Tools
+  ];
+
   return (
     <div className="flex flex-col gap-8">
       <header className="flex flex-col gap-[14px] mb-4 py-1 px-2">
@@ -161,10 +176,10 @@ export default function StackPage() {
         </p>
       </header>
 
-      {/* Categories Grid - Symmetrical 3x2 Grid */}
-      <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Categories Grid - Symmetrical 3-Row Sized Grid */}
+      <main className="grid grid-cols-1 md:grid-cols-6 gap-6">
         {categories.map((cat, idx) => (
-          <BentoCard key={idx} className="!p-[22px] sm:!p-[28px] flex flex-col gap-4">
+          <BentoCard key={idx} className={`${spans[idx]} !p-[22px] sm:!p-[28px] flex flex-col gap-4`}>
             <div className="text-[12px] font-semibold text-fg uppercase tracking-[0.12em] font-mono border-b border-white/5 pb-2">
               {locale === "en" ? cat.titleEn : cat.titleEs}
             </div>
@@ -176,8 +191,8 @@ export default function StackPage() {
           </BentoCard>
         ))}
 
-        {/* Currently Learning Card */}
-        <BentoCard className="!p-[22px] sm:!p-[28px] flex flex-col gap-4 bg-[var(--grad-soft)] border border-[rgba(167,139,250,0.2)]">
+        {/* Currently Learning Card - Stretching full width */}
+        <BentoCard className="col-span-1 md:col-span-6 !p-[22px] sm:!p-[28px] flex flex-col gap-4 bg-[var(--grad-soft)] border border-[rgba(167,139,250,0.2)]">
           <div className="flex items-center gap-2 mb-1">
             <span className="w-[24px] h-[24px] inline-flex items-center justify-center bg-[var(--grad)] rounded-[6px] text-white">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -188,7 +203,7 @@ export default function StackPage() {
               {locale === "en" ? "Currently learning & focusing" : "Aprendiendo y enfocándome ahora"}
             </span>
           </div>
-          <ul className="list-none p-0 m-0 flex flex-col gap-3.5 mt-2">
+          <ul className="list-none p-0 m-0 flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-2">
             <li className="flex items-start gap-2.5 text-[13.5px] text-fg-dim before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:mt-[7px] before:shrink-0">
               <span>Vue.js & ecosystem</span>
             </li>

@@ -11,11 +11,13 @@ const certifications = [
   { nameEn: "UI Design with React JS", nameEs: "Diseño de Interfaces con React JS", org: "INTECAP", badge: "INT", logo: "https://upload.wikimedia.org/wikipedia/commons/0/09/Logotipo_de_el_INTECAP.png" },
 ];
 
-export default function CertificationsPreview() {
+import { clsx } from "clsx";
+
+export default function CertificationsPreview({ className }: { className?: string }) {
   const { locale } = usePreferences();
 
   return (
-    <BentoCard>
+    <BentoCard className={clsx(className)}>
       <div className="flex items-center justify-between mb-[18px] gap-[10px]">
         <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-fg-mute font-mono">
           <span className="w-[6px] h-[6px] rounded-full bg-blue-accent shadow-[0_0_10px_var(--blue)]" />
