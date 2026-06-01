@@ -42,7 +42,7 @@ function getTechIcon(label: string): string {
     "Go": "go",
     "Java": "openjdk",
     "HTML5": "html5",
-    "CSS3": "css3",
+    "CSS3": "/assets/images/css.png",
     "Next.js": "nextdotjs/white",
     "React": "react",
     "NestJS": "nestjs",
@@ -116,11 +116,11 @@ export default function TechStack() {
         </div>
         <span className="text-fg-mute text-[12px] font-mono">Highlights</span>
       </div>
-      
+
       <div className="flex flex-col gap-4.5">
         {highlights.map((cat) => (
           <div key={cat.categoryEn} className="flex flex-col gap-2">
-            <div className="text-[10px] text-fg-mute uppercase tracking-[0.12em] font-mono">
+            <div className="text-[8px] text-fg-mute uppercase tracking-[0.12em] font-mono">
               {locale === "en" ? cat.categoryEn : cat.categoryEs}
             </div>
             <div className="grid grid-cols-3 gap-2.5">
@@ -132,7 +132,7 @@ export default function TechStack() {
         ))}
 
         <div className="mt-2 pt-3 border-t border-[var(--line)]">
-          <Link 
+          <Link
             href="/stack"
             className="w-full inline-flex items-center justify-center gap-1.5 py-3 px-4 rounded-xl border border-[var(--line-2)] bg-white/[0.03] text-fg text-[12.5px] font-mono font-semibold transition-all duration-200 hover:text-white hover:bg-white/[0.08] hover:border-white/30 hover:scale-[1.01] active:scale-[0.99] group shadow-[0_0_12px_rgba(255,255,255,0)] hover:shadow-[0_0_15px_rgba(255,255,255,0.03)]"
           >

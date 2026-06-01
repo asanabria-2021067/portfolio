@@ -82,7 +82,7 @@ function getTechIcon(label: string): string {
     "Go": "go",
     "Java": "openjdk",
     "HTML5": "html5",
-    "CSS3": "css3",
+    "CSS3": "/assets/images/css.png",
     "Next.js": "nextdotjs/white",
     "React": "react",
     "NestJS": "nestjs",
@@ -159,8 +159,8 @@ export default function StackPage() {
     "col-span-1 md:col-span-3", // Languages
     "col-span-1 md:col-span-3", // Frameworks
     "col-span-1 md:col-span-2", // Databases
-    "col-span-1 md:col-span-3", // DevOps
-    "col-span-1 md:col-span-1", // Tools
+    "col-span-1 md:col-span-2", // DevOps
+    "col-span-1 md:col-span-2", // Tools
   ];
 
   return (
@@ -193,8 +193,8 @@ export default function StackPage() {
               idx === 0 && "grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5", // Languages
               idx === 1 && "grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5", // Frameworks
               idx === 2 && "grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-2", // Databases
-              idx === 3 && "grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4", // DevOps
-              idx === 4 && "grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-2"  // Tools
+              idx === 3 && "grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-3", // DevOps
+              idx === 4 && "grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-2"  // Tools
             )}>
               {cat.items.map((item, itemIdx) => (
                 <TechTile 
@@ -202,7 +202,7 @@ export default function StackPage() {
                   label={item.label} 
                   icon={getTechIcon(item.label)} 
                   className={clsx(
-                    idx === 2 && itemIdx === 4 && "col-span-2 md:col-span-2 lg:col-span-2" // Neo4j stretches in Databases grid
+                    (idx === 2 || idx === 4) && itemIdx === 4 && "col-span-2 md:col-span-2 lg:col-span-2" // Neo4j/Neovim stretches in Databases/Tools grid
                   )}
                 />
               ))}
