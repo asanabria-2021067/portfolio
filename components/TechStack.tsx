@@ -71,7 +71,9 @@ function getTechIcon(label: string): string {
     "Postman": "postman",
     "Figma": "figma",
     "Notion": "notion/white",
-    "Neovim": "neovim"
+    "Neovim": "neovim",
+    "Cloudflare": "cloudflare",
+    "VS Code": "visualstudiocode"
   };
   const slug = mapping[label] || label.toLowerCase().replace(/[^a-z0-9]/g, "");
   if (slug.startsWith("/")) {

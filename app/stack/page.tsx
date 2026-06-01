@@ -55,7 +55,6 @@ const categories = [
       { label: "GitHub Actions", color: "#2088ff" },
       { label: "VMware", color: "#717074" },
       { label: "Vercel", color: "#ffffff" },
-      { label: "Supabase", color: "#3ecf8e" },
       { label: "AWS", color: "#ff9900" },
       { label: "GHCR (CI/CD)", color: "#2088ff" },
       { label: "Firebase", color: "#ffca28" },
@@ -70,6 +69,9 @@ const categories = [
       { label: "Figma", color: "#f24e1e" },
       { label: "Notion", color: "#ffffff" },
       { label: "Neovim", color: "#57a143" },
+      { label: "Supabase", color: "#3ecf8e" },
+      { label: "Cloudflare", color: "#f38020" },
+      { label: "VS Code", color: "#007acc" },
     ],
   },
 ];
@@ -111,7 +113,9 @@ function getTechIcon(label: string): string {
     "Postman": "postman",
     "Figma": "figma",
     "Notion": "notion/white",
-    "Neovim": "neovim"
+    "Neovim": "neovim",
+    "Cloudflare": "cloudflare",
+    "VS Code": "visualstudiocode"
   };
   const slug = mapping[label] || label.toLowerCase().replace(/[^a-z0-9]/g, "");
   if (slug.startsWith("/")) {
@@ -202,7 +206,7 @@ export default function StackPage() {
                   label={item.label}
                   icon={getTechIcon(item.label)}
                   className={clsx(
-                    (idx === 2 || idx === 4) && itemIdx === 4 && "col-span-2 md:col-span-2 lg:col-span-2" // Neo4j/Neovim stretches in Databases/Tools grid
+                    idx === 2 && itemIdx === 4 && "col-span-2 md:col-span-2 lg:col-span-2" // Neo4j stretches in Databases grid
                   )}
                 />
               ))}
