@@ -167,6 +167,62 @@ export default function StackPage() {
     "col-span-1 md:col-span-3", // Tools
   ];
 
+  const whyStackItems = locale === "en"
+    ? [
+        {
+          label: "Next.js over Vite + React",
+          detail:
+            "Chose Next.js for its App Router, server-side Route Handlers (used as a GitHub API proxy with caching), and Vercel-native deployment. For a portfolio that fetches real data, SSR and route handlers matter.",
+        },
+        {
+          label: "NestJS for back-end projects",
+          detail:
+            "When building UVGenius (a monorepo platform), NestJS gave me dependency injection, decorators, and a modular architecture that scaled across 34+ database entities without becoming a spaghetti Express app.",
+        },
+        {
+          label: "PostgreSQL over MongoDB",
+          detail:
+            "Relational data with clear schemas (users, projects, associations) benefits from foreign keys, constraints, and transactions. Used MongoDB in earlier projects and found schema flexibility a liability at scale.",
+        },
+        {
+          label: "Docker Compose for local and production parity",
+          detail:
+            "UVGenius runs 4 services (PostgreSQL, Redis, NestJS backend, reverse proxy) under a single docker-compose.yml. This means the app behaves the same on my machine and on a VPS.",
+        },
+        {
+          label: "TypeScript strict mode throughout",
+          detail:
+            "Caught real bugs during development. Combined with Prisma's generated types, the entire UVGenius data layer is type-safe end to end.",
+        },
+      ]
+    : [
+        {
+          label: "Next.js sobre Vite + React",
+          detail:
+            "Elegí Next.js por su App Router, los Route Handlers del lado del servidor (usados como proxy para la API de GitHub con caché) y el despliegue nativo en Vercel. Para un portafolio que obtiene datos reales, SSR y los manejadores de rutas son determinantes.",
+        },
+        {
+          label: "NestJS para proyectos de back-end",
+          detail:
+            "Al construir UVGenius (plataforma monorepo), NestJS me dio inyección de dependencias, decoradores y una arquitectura modular que escaló a través de 34+ entidades de base de datos sin convertirse en un Express espagueti.",
+        },
+        {
+          label: "PostgreSQL sobre MongoDB",
+          detail:
+            "Los datos relacionales con esquemas definidos (usuarios, proyectos, asociaciones) se benefician de claves foráneas, restricciones y transacciones. Usé MongoDB en proyectos anteriores y encontré que la flexibilidad de esquema se convierte en un pasivo a escala.",
+        },
+        {
+          label: "Docker Compose para paridad local y producción",
+          detail:
+            "UVGenius corre 4 servicios (PostgreSQL, Redis, backend NestJS, proxy inverso) bajo un único docker-compose.yml. Esto significa que la app se comporta igual en mi máquina y en un VPS.",
+        },
+        {
+          label: "TypeScript en modo estricto en todo el stack",
+          detail:
+            "Detectó errores reales durante el desarrollo. Combinado con los tipos generados por Prisma, toda la capa de datos de UVGenius es type-safe de extremo a extremo.",
+        },
+      ];
+
   return (
     <div className="flex flex-col gap-8">
       <header className="flex flex-col gap-[14px] mb-4 py-1 px-2">
@@ -184,6 +240,25 @@ export default function StackPage() {
             : "Una vista detallada de los lenguajes de programación, frameworks, bases de datos y herramientas de DevOps y nube que utilizo para construir soluciones robustas."}
         </p>
       </header>
+
+      {/* Why this stack reasoning card */}
+      <BentoCard className="col-span-1 !p-[22px] sm:!p-[28px] flex flex-col gap-4">
+        <div className="text-[12px] font-semibold text-fg uppercase tracking-[0.12em] font-mono border-b border-white/5 pb-2">
+          {locale === "en" ? "Why this stack" : "Por qué este stack"}
+        </div>
+        <ol className="list-none p-0 m-0 flex flex-col gap-4">
+          {whyStackItems.map((item, i) => (
+            <li key={i} className="flex flex-col gap-[3px]">
+              <span className="text-[12px] font-mono font-semibold text-fg tracking-tight">
+                {item.label}
+              </span>
+              <span className="text-[13.5px] text-fg-dim leading-[1.55]">
+                {item.detail}
+              </span>
+            </li>
+          ))}
+        </ol>
+      </BentoCard>
 
       {/* Categories Grid - Symmetrical 3-Row Sized Grid */}
       <main className="grid grid-cols-1 md:grid-cols-6 gap-6">

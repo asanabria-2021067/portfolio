@@ -41,6 +41,10 @@ export default function Hero() {
           <span className="text-[10px] uppercase tracking-[0.12em] text-fg-mute font-mono">Status</span>
           <span className="text-[14px] text-fg font-medium">{locale === "en" ? "Available now" : "Disponible ahora"}</span>
         </div>
+        <div className="flex flex-col gap-1">
+          <span className="text-[10px] uppercase tracking-[0.12em] text-fg-mute font-mono">{locale === "en" ? "Education" : "Formación"}</span>
+          <span className="text-[14px] text-fg font-medium">{locale === "en" ? "CS & IT Engineering · UVG" : "CS e Ing. IT · UVG"}</span>
+        </div>
       </div>
     </BentoCard>
   );

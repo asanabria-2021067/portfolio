@@ -1,102 +1,116 @@
-# 🌐 [VER EN PRODUCCIÓN / LIVE DEMO](https://portfolio-taupe-eight-ne7xtliknm.vercel.app/)
+# Angel Sanabria — Developer Portfolio
+
+Personal portfolio for Angel Sanabria, VMware Engineer Jr. & Full Stack Developer and Computer Science student at Universidad del Valle de Guatemala (UVG). Built with an IDE-inspired aesthetic: dark glassmorphism panels, a file-tree sidebar, and real-time data from the GitHub API.
+
+**Live:** https://portfolio-taupe-eight-ne7xtliknm.vercel.app
 
 ---
 
-# 🚀 Interactive Software Engineer Portfolio
+## Features
 
-Un portafolio de ingeniería de software moderno y premium, inspirado en la estética visual de un Entorno de Desarrollo Integrado (IDE). Diseñado bajo una estructura de **Bento Grid** con animaciones fluidas, consumo en tiempo real de la API de GitHub, soporte multilingüe y un índice detallado del stack tecnológico.
-
-## ✨ Características Principales
-
-*   🌌 **Aesthetic Dark IDE Theme:** Interfaz oscura construida con efectos de vidrio esmerilado (*glassmorphism*), bordes suaves y micro-animaciones interactivas al hacer hover.
-*   📊 **Integración Dinámica con GitHub API:** Los proyectos se alimentan en tiempo real consumiendo la API REST de GitHub (mostrando cantidad de commits, estrellas, forks y tags de lenguajes).
-*   🔧 **Soporte Multi-Repositorio:** Las tarjetas de proyectos detectan proyectos divididos y renderizan de forma inteligente botones independientes para **Código Frontend** y **Código Backend**.
-*   💻 **Stack Técnico Detallado (`/stack`):** Un mapa interactivo que organiza más de 35 tecnologías entre lenguajes, frameworks, bases de datos y herramientas de desarrollo con sus logos oficiales de marca.
-*   📱 **Bottom Nav Responsive:** En dispositivos móviles, la barra de navegación lateral se condensa en una barra inferior fija que agrupa las secciones secundarias (*Certificaciones* y *Contacto*) bajo un menú flotante de "Más" (MÁS) con desenfoque de fondo y cierre automático al hacer clic fuera.
-*   🗣️ **Localización Bilingüe (EN/ES):** Sistema integrado de traducción mediante un context provider que permite alternar todo el contenido entre inglés y español al instante.
-*   📬 **Bento de Contacto:** Incluye tarjetas interactivas con funciones rápidas como copiar correo al portapapeles con un clic y descarga directa del CV.
+- **Dark / Light mode** — system-aware with manual toggle
+- **EN / ES i18n** — full bilingual support via a context-based locale provider; no external i18n library
+- **IDE-style file tree navigation** — sidebar that mirrors VS Code's explorer panel
+- **GitHub API integration** — server-side proxy route fetches repos, commit counts, stars, forks, and language tags with pagination and rate-limit handling
+- **PDF viewer modal** — CV opens in an in-page modal without leaving the portfolio
+- **GSAP animations** — entrance, hover, and scroll-triggered motion on all Bento cards
+- **Mobile responsive** — bottom navigation bar replaces the sidebar on small screens, with a popover "More" menu for secondary routes
 
 ---
 
-## 🛠️ Stack Tecnológico
+## Tech Stack
 
-*   **Framework:** [Next.js 16 (App Router)](https://nextjs.org/)
-*   **Compilador:** Next.js Turbopack (compilación y recarga ultrarrápida)
-*   **Librería UI:** [React](https://react.dev/)
-*   **Estilos:** [Tailwind CSS](https://tailwindcss.com/) & CSS3 Vanilla
-*   **Animaciones:** [Framer Motion](https://www.framer.com/motion/) (para transiciones y efectos de entrada)
-*   **Iconos:** [Lucide React](https://lucide.dev/) & [Simple Icons](https://simpleicons.org/)
-*   **API Proxy:** Next.js Route Handlers para peticiones seguras a GitHub en el lado del servidor.
-
----
-
-## ⚙️ Configuración e Instalación
-
-### Requisitos Previos
-
-Asegúrate de tener instalado [Node.js](https://nodejs.org/) (versión 18 o superior) en tu sistema.
-
-### Pasos para iniciar el proyecto
-
-1. **Clona el repositorio:**
-   ```bash
-   git clone https://github.com/asanabria-2021067/my-portfolio.git
-   cd my-portfolio
-   ```
-
-2. **Instala las dependencias:**
-   ```bash
-   npm install
-   ```
-
-3. **Configura el token de GitHub:**
-   Crea un archivo `.env.local` en la raíz del proyecto para habilitar las peticiones a la API de GitHub:
-   ```env
-   GITHUB_TOKEN="tu_personal_access_token_de_github"
-   ```
-   *Nota: Si no se configura un token, el portafolio funcionará pero puede verse limitado por la tasa de peticiones públicas de GitHub.*
-
-4. **Inicia el servidor de desarrollo:**
-   ```bash
-   npm run dev
-   ```
-   Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
-
-5. **Compila la aplicación para producción:**
-   ```bash
-   npm run build
-   ```
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| UI Library | React 19 |
+| Language | TypeScript (strict mode) |
+| Styling | Tailwind CSS + custom CSS variables |
+| Animations | Framer Motion, GSAP |
+| Icons | Lucide React, Simple Icons CDN |
+| API proxy | Next.js Route Handlers (server-side) |
+| Deployment | Vercel |
 
 ---
 
-## 📂 Estructura del Proyecto
+## Getting Started
 
-```text
-├── app/                  # Enrutamiento de Next.js (App Router)
-│   ├── api/              # Handlers de la API Serverless (GitHub proxy)
-│   ├── certifications/   # Vista de Certificaciones y Diplomas
-│   ├── contact/          # Vista de Contacto bento-style
-│   ├── projects/         # Detalle y grid interactivo de repositorios
-│   ├── stack/            # Detalle y desglose de tecnologías
-│   ├── globals.css       # Estilos globales y variables de tema (claro/oscuro)
-│   ├── layout.tsx        # Layout principal y configuración de metadatos/iconos
-│   └── page.tsx          # Homepage bento grid
-├── components/           # Componentes reutilizables de React
-│   ├── BentoCard.tsx     # Tarjetas contenedor con efecto hover premium
-│   ├── BottomNav.tsx     # Barra de navegación inferior móvil con Popover
-│   ├── TechStack.tsx     # Preview lateral de tecnologías
-│   ├── FileTreeNav.tsx   # Menú de navegación lateral simulando un árbol de archivos
-│   └── PreferencesProvider.tsx # Manejo de idioma (EN/ES)
-├── lib/                  # Funciones de utilidad y consultas de API
-│   └── github.ts         # Peticiones y overrides locales para repositorios
-└── public/               # Recursos estáticos (imágenes, PDF de CV, logo.svg)
+### Prerequisites
+
+- Node.js 18 or later
+- npm, yarn, or pnpm
+
+### Installation
+
+```bash
+git clone https://github.com/asanabria-2021067/my-portfolio.git
+cd my-portfolio
+npm install
+```
+
+### Environment Variables
+
+Create a `.env.local` file in the project root:
+
+```env
+GITHUB_TOKEN=your_personal_access_token
+```
+
+**How to generate a GitHub Personal Access Token (PAT):**
+
+1. Go to **GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)**
+2. Click **Generate new token (classic)**
+3. Set a descriptive name, e.g. `portfolio-api-read`
+4. Select scopes: `read:user` and `public_repo`
+5. Click **Generate token** and copy the value immediately
+
+Without a token the app still runs, but GitHub's unauthenticated rate limit (60 req/hr) may cause API calls to fail under repeated reloads.
+
+### Run Locally
+
+```bash
+npm run dev
+```
+
+Open http://localhost:3000 in your browser.
+
+---
+
+## Project Structure
+
+```
+├── app/                    # Next.js App Router
+│   ├── api/                # Route Handlers — GitHub API proxy with caching
+│   ├── certifications/     # Certifications & diplomas page
+│   ├── contact/            # Contact bento page
+│   ├── projects/           # Repository grid with GitHub data
+│   ├── stack/              # Tech stack breakdown
+│   ├── globals.css         # Design tokens (colors, radius, spacing)
+│   ├── layout.tsx          # Root layout, metadata, font loading
+│   └── page.tsx            # Home — Bento grid entry point
+├── components/             # Shared React components
+│   ├── BentoCard.tsx       # Card container with GSAP hover effects
+│   ├── FileTreeNav.tsx     # IDE-style sidebar navigation
+│   ├── BottomNav.tsx       # Mobile bottom bar with popover
+│   ├── FeaturedProject.tsx # UVGenius highlight card
+│   ├── Hero.tsx            # Name, title, and metadata strip
+│   └── PreferencesProvider.tsx  # Locale and theme context
+├── lib/
+│   └── github.ts           # GitHub fetch utilities and local overrides
+└── public/
+    └── assets/             # Static images, CV PDF, logo SVG
 ```
 
 ---
 
-## 🔗 Enlaces de Interés
+## Deployment
 
-*   **Despliegue de Producción (Vercel):** [Ver Portafolio Online](https://portfolio-taupe-eight-ne7xtliknm.vercel.app/)
-*   **Creado por:** Angel Sanabria
+The portfolio is deployed on **Vercel** with automatic deploys on push to `main`. No build configuration is required beyond adding `GITHUB_TOKEN` to the Vercel project's environment variables.
+
+Live URL: https://portfolio-taupe-eight-ne7xtliknm.vercel.app
 
 ---
+
+## License
+
+MIT

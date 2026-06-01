@@ -4,11 +4,30 @@ import BentoCard from "./BentoCard";
 import Chip from "./Chip";
 import { usePreferences } from "./PreferencesProvider";
 
+/**
+ * Returns true only if the URL uses HTTPS and is not a bare IP address.
+ * A bare IPv4 address looks like digits-dot-digits; we reject those even
+ * under HTTPS because they are not stable public endpoints.
+ */
+function isPublicUrl(url: string): boolean {
+  try {
+    const { protocol, hostname } = new URL(url);
+    if (protocol !== "https:") return false;
+    // Reject bare IPv4 (e.g. 158.23.57.118)
+    const ipv4Pattern = /^(\d{1,3}\.){3}\d{1,3}$/;
+    return !ipv4Pattern.test(hostname);
+  } catch {
+    return false;
+  }
+}
+
 export default function FeaturedProject() {
   const { locale } = usePreferences();
 
   const demoLink = "http://158.23.57.118/";
   const repoLink = "https://github.com/asanabria-2021067/proyecto-ingenieria-software";
+
+  const showDemoButton = isPublicUrl(demoLink);
 
   return (
     <BentoCard className="col-span-1 md:col-span-3 lg:col-span-7 flex flex-col">
@@ -86,19 +105,29 @@ export default function FeaturedProject() {
               <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.1 0-.71-.24-1.17-.51-1.41 1.67-.18 3.43-.82 3.43-3.72 0-.82-.29-1.49-.77-2.02.08-.19.33-.96-.07-1.99 0 0-.63-.2-2.07.77A7.114 7.114 0 0 0 8 4.74c-.68 0-1.36.09-2 .27-1.44-.97-2.07-.77-2.07-.77-.4 1.03-.15 1.8-.07 1.99-.48.53-.78 1.2-.78 2.02 0 2.89 1.75 3.54 3.42 3.72-.21.19-.4.52-.47.99-.42.19-1.48.51-2.13-.61 0 0-.39-.71-.13-1.07 0 0-.46-.01-.32.28 0 0 .31.14.52.68 0 0 .28.85 1.63.58.01.62.01 1.11.01 1.27 0 .21-.16.47-.56.38A8.013 8.013 0 0 1 0 8c0-4.42 3.58-8 8-8z" fill="currentColor" />
             </svg>
           </a>
-          <a
-            href={demoLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-[8px] text-fg-dim text-[11px] font-mono py-[9px] px-4 bg-white/4 border border-[var(--line)] rounded-full transition-all duration-200 hover:text-white hover:bg-grad hover:border-transparent group"
-          >
-            {locale === "en" ? "Launch App" : "Abrir App"}
-            <svg width="12" height="12" viewBox="0 0 16 16" className="transition-transform duration-250 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]">
-              <path d="M3 13 L13 3 M6 3 H13 V10" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
+
+          {showDemoButton ? (
+            <a
+              href={demoLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-[8px] text-fg-dim text-[11px] font-mono py-[9px] px-4 bg-white/4 border border-[var(--line)] rounded-full transition-all duration-200 hover:text-white hover:bg-grad hover:border-transparent group"
+            >
+              {locale === "en" ? "Launch App" : "Abrir App"}
+              <svg width="12" height="12" viewBox="0 0 16 16" className="transition-transform duration-250 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]">
+                <path d="M3 13 L13 3 M6 3 H13 V10" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+          ) : (
+            <span className="inline-flex items-center gap-[8px] text-fg-mute text-[11px] font-mono py-[9px] px-4 border border-[var(--line)] rounded-full cursor-default select-none">
+              {locale === "en"
+                ? "Live on private VPS · IP available on request"
+                : "Corriendo en VPS privado · IP disponible al solicitarla"}
+            </span>
+          )}
         </div>
       </div>
     </BentoCard>
   );
 }
+
