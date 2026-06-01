@@ -29,7 +29,7 @@ const highlights = [
     items: [
       { label: "Docker" },
       { label: "Kubernetes" },
-      { label: "AWS (CI/CD)" },
+      { label: "AWS" },
     ],
   },
 ];
@@ -64,7 +64,7 @@ function getTechIcon(label: string): string {
     "VMware": "vmware/white",
     "Vercel": "vercel/white",
     "Supabase": "supabase",
-    "AWS (CI/CD)": "amazonwebservices",
+    "AWS": "amazonaws",
     "GHCR (CI/CD)": "github/white",
     "Firebase": "firebase",
     "Git": "git",
@@ -84,17 +84,17 @@ interface TechTileProps {
 
 function TechTile({ label, icon }: TechTileProps) {
   return (
-    <div className="flex flex-col items-center justify-center p-2.5 rounded-xl border border-[var(--line)] bg-white/[0.015] hover:border-white/20 hover:bg-white/[0.05] hover:scale-[1.04] hover:shadow-[0_8px_15px_-8px_rgba(0,0,0,0.5)] transition-all duration-200 aspect-square gap-1.5 min-h-[80px] group">
+    <div className="flex flex-col items-center justify-center p-2.5 rounded-xl border border-[var(--line)] bg-white/[0.015] hover:border-white/20 hover:bg-white/[0.05] hover:scale-[1.04] hover:shadow-[0_8px_15px_-8px_rgba(0,0,0,0.5)] transition-all duration-200 gap-2 min-h-[85px] w-full group">
       <img
         src={icon}
         alt={label}
-        className="w-6.5 h-6.5 object-contain shrink-0 transition-all duration-200 brightness-[0.85] group-hover:brightness-100 group-hover:scale-[1.06]"
+        className="w-7 h-7 object-contain shrink-0 transition-all duration-200 brightness-[0.85] group-hover:brightness-100 group-hover:scale-[1.06]"
         loading="lazy"
         onError={(e) => {
           e.currentTarget.style.display = "none";
         }}
       />
-      <span className="text-[10.5px] text-fg-dim font-mono font-medium tracking-tight text-center max-w-full truncate px-0.5 group-hover:text-fg">
+      <span className="text-[11px] text-fg-dim font-mono font-medium tracking-tight text-center leading-snug max-w-full px-0.5 group-hover:text-fg break-words whitespace-normal">
         {label}
       </span>
     </div>
@@ -105,8 +105,8 @@ export default function TechStack() {
   const { locale } = usePreferences();
 
   return (
-    <BentoCard>
-      <div className="flex items-center justify-between mb-5 gap-[10px]">
+    <BentoCard className="!p-[22px] sm:!p-[28px] flex flex-col gap-4">
+      <div className="flex items-center justify-between mb-2 gap-[10px]">
         <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-fg-mute font-mono">
           <span className="w-1.5 h-1.5 rounded-full bg-blue-accent shadow-[0_0_10px_var(--color-blue-accent)]" />
           {locale === "en" ? "Tech Highlights" : "Tecnologías Clave"}
@@ -128,7 +128,7 @@ export default function TechStack() {
           </div>
         ))}
 
-        <div className="mt-4 pt-3 border-t border-[var(--line)]">
+        <div className="mt-2 pt-3 border-t border-[var(--line)]">
           <Link 
             href="/stack"
             className="w-full inline-flex items-center justify-center gap-1.5 py-3 px-4 rounded-xl border border-[var(--line-2)] bg-white/[0.03] text-fg text-[12.5px] font-mono font-semibold transition-all duration-200 hover:text-white hover:bg-white/[0.08] hover:border-white/30 hover:scale-[1.01] active:scale-[0.99] group shadow-[0_0_12px_rgba(255,255,255,0)] hover:shadow-[0_0_15px_rgba(255,255,255,0.03)]"

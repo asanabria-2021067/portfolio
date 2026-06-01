@@ -55,7 +55,7 @@ const categories = [
       { label: "VMware", color: "#717074" },
       { label: "Vercel", color: "#ffffff" },
       { label: "Supabase", color: "#3ecf8e" },
-      { label: "AWS (CI/CD)", color: "#ff9900" },
+      { label: "AWS", color: "#ff9900" },
       { label: "GHCR (CI/CD)", color: "#2088ff" },
       { label: "Firebase", color: "#ffca28" },
     ],
@@ -103,7 +103,7 @@ function getTechIcon(label: string): string {
     "VMware": "vmware/white",
     "Vercel": "vercel/white",
     "Supabase": "supabase",
-    "AWS (CI/CD)": "amazonwebservices",
+    "AWS": "amazonaws",
     "GHCR (CI/CD)": "github/white",
     "Firebase": "firebase",
     "Git": "git",
@@ -123,17 +123,17 @@ interface TechTileProps {
 
 function TechTile({ label, icon }: TechTileProps) {
   return (
-    <div className="flex flex-col items-center justify-center p-3 rounded-xl border border-[var(--line)] bg-white/[0.015] hover:border-white/20 hover:bg-white/[0.05] hover:scale-[1.04] hover:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.5)] transition-all duration-200 aspect-square gap-2 min-h-[85px] group">
+    <div className="flex flex-col items-center justify-center p-3 rounded-xl border border-[var(--line)] bg-white/[0.015] hover:border-white/20 hover:bg-white/[0.05] hover:scale-[1.04] hover:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.5)] transition-all duration-200 gap-2 min-h-[90px] w-full group">
       <img
         src={icon}
         alt={label}
-        className="w-7 h-7 object-contain shrink-0 transition-all duration-200 brightness-[0.85] group-hover:brightness-100 group-hover:scale-[1.06]"
+        className="w-7.5 h-7.5 object-contain shrink-0 transition-all duration-200 brightness-[0.85] group-hover:brightness-100 group-hover:scale-[1.06]"
         loading="lazy"
         onError={(e) => {
           e.currentTarget.style.display = "none";
         }}
       />
-      <span className="text-[11px] text-fg-dim font-mono font-medium tracking-tight text-center max-w-full truncate px-0.5 group-hover:text-fg">
+      <span className="text-[11px] sm:text-[11.5px] text-fg-dim font-mono font-medium tracking-tight text-center leading-snug max-w-full px-0.5 group-hover:text-fg break-words whitespace-normal">
         {label}
       </span>
     </div>
@@ -164,7 +164,7 @@ export default function StackPage() {
       {/* Categories Grid - Symmetrical 3x2 Grid */}
       <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {categories.map((cat, idx) => (
-          <BentoCard key={idx} className="flex flex-col gap-4">
+          <BentoCard key={idx} className="!p-[22px] sm:!p-[28px] flex flex-col gap-4">
             <div className="text-[12px] font-semibold text-fg uppercase tracking-[0.12em] font-mono border-b border-white/5 pb-2">
               {locale === "en" ? cat.titleEn : cat.titleEs}
             </div>
@@ -177,7 +177,7 @@ export default function StackPage() {
         ))}
 
         {/* Currently Learning Card */}
-        <BentoCard className="flex flex-col gap-4 bg-[var(--grad-soft)] border border-[rgba(167,139,250,0.2)]">
+        <BentoCard className="!p-[22px] sm:!p-[28px] flex flex-col gap-4 bg-[var(--grad-soft)] border border-[rgba(167,139,250,0.2)]">
           <div className="flex items-center gap-2 mb-1">
             <span className="w-[24px] h-[24px] inline-flex items-center justify-center bg-[var(--grad)] rounded-[6px] text-white">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
