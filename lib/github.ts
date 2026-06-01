@@ -87,6 +87,9 @@ const PROJECT_OVERRIDES: Record<string, ProjectOverride> = {
   },
   "asanabria-2021067/seasos-front": {
     displayName: "SeaSOS Frontend",
+    badgeEn: "React + Leaflet",
+    badgeEs: "React + Leaflet",
+    badgeColor: "blue",
     categoryEn: "Marine conservation frontend",
     categoryEs: "Frontend de conservacion marina",
     descriptionEn:
@@ -99,6 +102,9 @@ const PROJECT_OVERRIDES: Record<string, ProjectOverride> = {
   },
   "asanabria-2021067/api-rest-python": {
     displayName: "SeaSOS Backend",
+    badgeEn: "Flask API",
+    badgeEs: "API Flask",
+    badgeColor: "violet",
     categoryEn: "Marine conservation API",
     categoryEs: "API de conservacion marina",
     descriptionEn:
@@ -164,8 +170,9 @@ const PROJECT_OVERRIDES: Record<string, ProjectOverride> = {
   },
   "asanabria-2021067/Smart-Agriculture-FRONTEND-Node.js-OpenAI-Google-Sheets": {
     displayName: "Smart Agriculture Frontend",
-    badgeEn: "none",
-    badgeEs: "none",
+    badgeEn: "IoT",
+    badgeEs: "IoT",
+    badgeColor: "blue",
     categoryEn: "IoT smart farming interface",
     categoryEs: "Interfaz IoT para agricultura",
     descriptionEn:
@@ -178,8 +185,9 @@ const PROJECT_OVERRIDES: Record<string, ProjectOverride> = {
   },
   "asanabria-2021067/Smart-Agriculture-Backend": {
     displayName: "Smart Agriculture Backend",
-    badgeEn: "none",
-    badgeEs: "none",
+    badgeEn: "IoT",
+    badgeEs: "IoT",
+    badgeColor: "blue",
     categoryEn: "AI-powered smart farming API",
     categoryEs: "API de agricultura inteligente",
     descriptionEn:
@@ -192,6 +200,9 @@ const PROJECT_OVERRIDES: Record<string, ProjectOverride> = {
   },
   "PabloVS044/TripWise": {
     displayName: "TripWise",
+    badgeEn: "Kotlin",
+    badgeEs: "Kotlin",
+    badgeColor: "violet",
     categoryEn: "AI Travel Planner",
     categoryEs: "Planificador de viajes con IA",
     descriptionEn:

@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePreferences } from "./PreferencesProvider";
 
 type TreeNode = TreeFolder | TreeFile;
 
@@ -233,6 +234,20 @@ function TreeFileNode({
 
 export default function FileTreeNav() {
   const pathname = usePathname();
+  const { locale } = usePreferences();
+  const [showGuide, setShowGuide] = useState(false);
+
+  useEffect(() => {
+    const guideHidden = localStorage.getItem("portfolio-nav-guide") === "hidden";
+    if (!guideHidden) {
+      setShowGuide(true);
+    }
+  }, []);
+
+  const dismissGuide = () => {
+    setShowGuide(false);
+    localStorage.setItem("portfolio-nav-guide", "hidden");
+  };
 
   return (
     <nav className="ft-panel" aria-label="Portfolio file tree">
@@ -245,6 +260,24 @@ export default function FileTreeNav() {
         <span className="ft-label">explorer</span>
       </div>
       <div className="ft-body">
+        {showGuide && (
+          <div className="mx-3.5 mb-3 p-3 bg-[rgba(106,166,255,0.08)] border border-[rgba(106,166,255,0.18)] rounded-lg relative flex flex-col gap-1.5 z-10">
+            <span className="text-[10px] font-mono text-blue-accent font-bold uppercase tracking-wider">
+              {locale === "en" ? "💡 Navigation Tip" : "💡 Consejo de Navegación"}
+            </span>
+            <p className="text-[11.5px] text-fg-dim leading-normal m-0 pr-4">
+              {locale === "en" 
+                ? "Click on the .tsx files (page, projects, certifications, contact) below to explore the different pages of my portfolio!" 
+                : "¡Haz clic en los archivos .tsx (page, projects, certifications, contact) de abajo para explorar las diferentes páginas de mi portafolio!"}
+            </p>
+            <button 
+              onClick={dismissGuide}
+              className="absolute top-2.5 right-2.5 text-fg-mute hover:text-fg text-[11px] font-mono cursor-pointer border-none bg-transparent p-0 leading-none"
+            >
+              ✕
+            </button>
+          </div>
+        )}
         <TreeBranch nodes={TREE} depth={0} pathname={pathname} />
       </div>
     </nav>

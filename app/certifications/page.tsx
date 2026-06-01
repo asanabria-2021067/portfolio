@@ -51,9 +51,9 @@ export default function CertificationsPage() {
         </div>
         <h1 className="text-[clamp(38px,4.4vw,56px)] font-semibold tracking-[-0.035em] leading-none m-0">
           {locale === "en" ? (
-            <>Skills & <span className="grad-text">Certifications.</span></>
+            <>Skills & <span className="grad-text text-3d cursor-default">Certifications.</span></>
           ) : (
-            <>Habilidades y <span className="grad-text">Certificaciones.</span></>
+            <>Habilidades y <span className="grad-text text-3d cursor-default">Certificaciones.</span></>
           )}
         </h1>
         <p className="text-fg-dim text-[15px] leading-[1.55] max-w-[560px] m-0">
@@ -88,7 +88,7 @@ export default function CertificationsPage() {
               badge="VCF"
               name="VMware Cloud Foundation: Build, Manage & Secure"
               org="Broadcom"
-              date="2025"
+              date="2026"
               logo={LOGOS.VMWARE}
               desc={locale === "en" 
                 ? "Enterprise hybrid cloud deployment, management, security policy configuration, and virtual resource provisioning."

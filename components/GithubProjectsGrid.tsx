@@ -290,10 +290,7 @@ export default function GithubProjectsGrid() {
           meta={`${locale === "en" ? project.categoryEn : project.categoryEs} / ${project.language ?? "Stack"}`}
           title={project.displayName}
           desc={locale === "en" ? project.descriptionEn : project.descriptionEs}
-          bullets={[
-            ...(locale === "en" ? project.bulletsEn : project.bulletsEs),
-            `${locale === "en" ? "Last push" : "Ultimo push"}: ${formatDate(project.pushedAt ?? project.updatedAt, locale)}`,
-          ]}
+          bullets={locale === "en" ? project.bulletsEn : project.bulletsEs}
           tags={getTags(project)}
           demoLink={project.productionUrl}
           repoLink={project.repoUrl}

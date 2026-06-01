@@ -17,7 +17,7 @@ export default function FeaturedProject() {
           <span className="w-1.5 h-1.5 rounded-full bg-blue-accent shadow-[0_0_10px_var(--color-blue-accent)]" />
           {locale === "en" ? "Featured Project" : "Proyecto destacado"}
         </div>
-        <span className="text-fg-mute text-[12px] font-mono">2024</span>
+        <span className="text-fg-mute text-[12px] font-mono">2026</span>
       </div>
 
       <div className="relative rounded-[var(--radius-sm)] overflow-hidden border border-[var(--line)] mb-[22px] aspect-[16/7]">

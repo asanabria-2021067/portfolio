@@ -14,7 +14,7 @@ export default function Hero() {
       </div>
       <h1 className="text-[clamp(40px,4.6vw,60px)] font-semibold leading-[1.0] tracking-[-0.035em] mb-4">
         {locale === "en" ? "Hi, I'm " : "Hola, soy "}
-        <span className="grad-text">Angel Sanabria.</span>
+        <span className="grad-text text-3d cursor-default">Angel Sanabria.</span>
       </h1>
       <p className="text-[19px] text-fg-dim mb-[18px] font-normal">
         <strong className="text-fg font-semibold">VMware Engineer Jr.</strong> & <strong className="text-fg font-semibold">Full Stack Developer</strong>
