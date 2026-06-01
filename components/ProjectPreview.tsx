@@ -41,7 +41,7 @@ export default function ProjectPreview({
       <div className="relative rounded-bento-sm overflow-hidden border border-[var(--line)] aspect-video mb-4">
         {badge && (
           <span 
-            className="absolute top-[10px] left-[10px] inline-flex items-center gap-[6px] font-mono text-[10px] font-semibold text-[#fbbf24] px-[10px] py-[5px] rounded-full backdrop-blur-[10px] bg-[rgba(251,191,36,0.12)] border border-[rgba(251,191,36,0.3)] z-10"
+            className="absolute top-[10px] left-[10px] inline-flex items-center gap-[6px] font-mono text-[10px] font-semibold text-[#fbbf24] px-[10px] py-[5px] rounded-full backdrop-blur-[10px] bg-[rgba(7,8,13,0.85)] border border-[rgba(251,191,36,0.3)] z-10"
             style={badgeStyle}
           >
             {badge}

@@ -53,10 +53,10 @@ export default function ProjectCard({
         {badge && (
           <span className={clsx(
             "absolute top-[10px] left-[10px] inline-flex items-center gap-[6px] font-mono text-[10px] font-semibold p-[5px_10px] rounded-full backdrop-blur-[10px] z-10 border",
-            badgeColor === "gold" && "text-[#fbbf24] bg-[rgba(251,191,36,0.12)] border-[rgba(251,191,36,0.30)]",
-            badgeColor === "violet" && "text-[#a78bfa] bg-[rgba(167,139,250,0.14)] border-[rgba(167,139,250,0.30)]",
-            badgeColor === "blue" && "text-[#6aa6ff] bg-[rgba(106,166,255,0.14)] border-[rgba(106,166,255,0.30)]",
-            badgeColor === "green" && "text-[#4ade80] bg-[rgba(74,222,128,0.14)] border-[rgba(74,222,128,0.30)]"
+            badgeColor === "gold" && "text-[#fbbf24] bg-[rgba(7,8,13,0.85)] border-[rgba(251,191,36,0.30)]",
+            badgeColor === "violet" && "text-[#a78bfa] bg-[rgba(7,8,13,0.85)] border-[rgba(167,139,250,0.30)]",
+            badgeColor === "blue" && "text-[#6aa6ff] bg-[rgba(7,8,13,0.85)] border-[rgba(106,166,255,0.30)]",
+            badgeColor === "green" && "text-[#4ade80] bg-[rgba(7,8,13,0.85)] border-[rgba(74,222,128,0.30)]"
           )}>
             {badge}
           </span>

@@ -63,9 +63,9 @@ export default function Home() {
         tags={["Vue", "Docker", "PostgreSQL"]}
         badge={locale === "en" ? "Dockerized SPA" : "SPA Dockerizada"}
         badgeStyle={{
-          color: "#10b981",
-          background: "rgba(16,185,129,0.12)",
-          borderColor: "rgba(16,185,129,0.30)",
+          color: "#4ade80",
+          backgroundColor: "rgba(7, 8, 13, 0.85)",
+          borderColor: "rgba(74, 222, 128, 0.3)",
         }}
         bullets={
           locale === "en"
