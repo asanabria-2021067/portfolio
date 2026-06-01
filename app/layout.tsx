@@ -22,6 +22,9 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Angel Sanabria — VMware Engineer & Full Stack Developer",
   description: "Portfolio of Angel Sanabria, VMware Engineer and Full Stack Developer.",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({

@@ -44,3 +44,6 @@ next-env.d.ts
 /CLAUDE.md
 /AGENTS.md
 /.skills/
+/.skill/
+.skills
+.skill
