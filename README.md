@@ -1,12 +1,8 @@
-# 🚀 Interactive Software Engineer Portfolio
-
-<div align="center">
-  <a href="https://portfolio-taupe-eight-ne7xtliknm.vercel.app/" target="_blank">
-    <img src="https://img.shields.io/badge/Live%20Demo-Vercel-blue?style=for-the-badge&logo=vercel" alt="Live Demo Vercel" />
-  </a>
-</div>
+# 🌐 [VER EN PRODUCCIÓN / LIVE DEMO](https://portfolio-taupe-eight-ne7xtliknm.vercel.app/)
 
 ---
+
+# 🚀 Interactive Software Engineer Portfolio
 
 Un portafolio de ingeniería de software moderno y premium, inspirado en la estética visual de un Entorno de Desarrollo Integrado (IDE). Diseñado bajo una estructura de **Bento Grid** con animaciones fluidas, consumo en tiempo real de la API de GitHub, soporte multilingüe y un índice detallado del stack tecnológico.
 
