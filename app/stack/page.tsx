@@ -1,52 +1,8 @@
 "use client";
 
 import BentoCard from "@/components/BentoCard";
-import Chip from "@/components/Chip";
 import Footer from "@/components/Footer";
 import { usePreferences } from "@/components/PreferencesProvider";
-
-function getTechIcon(label: string): string {
-  const mapping: { [key: string]: string } = {
-    "TypeScript": "typescript",
-    "JavaScript": "javascript",
-    "Python": "python",
-    "Go": "go",
-    "Java": "java",
-    "HTML5": "html5",
-    "CSS3": "css3",
-    "Next.js": "nextdotjs",
-    "React": "react",
-    "NestJS": "nestjs",
-    "Django": "django",
-    "Node.js": "nodedotjs",
-    "Express.js": "express",
-    "Flask": "flask",
-    "Tailwind CSS": "tailwindcss",
-    "Prisma": "prisma",
-    "PostgreSQL": "postgresql",
-    "MongoDB": "mongodb",
-    "MySQL": "mysql",
-    "Redis": "redis",
-    "Neo4j": "neo4j",
-    "Docker": "docker",
-    "Kubernetes": "kubernetes",
-    "Azure": "microsoftazure",
-    "GitHub Actions": "githubactions",
-    "VMware": "vmware",
-    "Vercel": "vercel",
-    "Supabase": "supabase",
-    "AWS (CI/CD)": "amazonwebservices",
-    "GHCR (CI/CD)": "github",
-    "Firebase": "firebase",
-    "Git": "git",
-    "Postman": "postman",
-    "Figma": "figma",
-    "Notion": "notion",
-    "Neovim": "neovim"
-  };
-  const slug = mapping[label] || label.toLowerCase().replace(/[^a-z0-9]/g, "");
-  return `https://cdn.simpleicons.org/${slug}`;
-}
 
 const categories = [
   {
@@ -57,7 +13,7 @@ const categories = [
       { label: "JavaScript", color: "#f7df1e" },
       { label: "Python", color: "#3776ab" },
       { label: "Go", color: "#00add8" },
-      { label: "Java", color: "#ed8b00" },
+      { label: "Java", color: "#openjdk" },
       { label: "HTML5", color: "#e34f26" },
       { label: "CSS3", color: "#1572b6" },
     ],
@@ -117,12 +73,79 @@ const categories = [
   },
 ];
 
+function getTechIcon(label: string): string {
+  const mapping: { [key: string]: string } = {
+    "TypeScript": "typescript",
+    "JavaScript": "javascript",
+    "Python": "python",
+    "Go": "go",
+    "Java": "openjdk",
+    "HTML5": "html5",
+    "CSS3": "css3",
+    "Next.js": "nextdotjs/white",
+    "React": "react",
+    "NestJS": "nestjs",
+    "Django": "django",
+    "Node.js": "nodedotjs",
+    "Express.js": "express/white",
+    "Flask": "flask/white",
+    "Tailwind CSS": "tailwindcss",
+    "Prisma": "prisma/white",
+    "PostgreSQL": "postgresql",
+    "MongoDB": "mongodb",
+    "MySQL": "mysql",
+    "Redis": "redis",
+    "Neo4j": "neo4j",
+    "Docker": "docker",
+    "Kubernetes": "kubernetes",
+    "Azure": "microsoftazure",
+    "GitHub Actions": "githubactions",
+    "VMware": "vmware/white",
+    "Vercel": "vercel/white",
+    "Supabase": "supabase",
+    "AWS (CI/CD)": "amazonwebservices",
+    "GHCR (CI/CD)": "github/white",
+    "Firebase": "firebase",
+    "Git": "git",
+    "Postman": "postman",
+    "Figma": "figma",
+    "Notion": "notion/white",
+    "Neovim": "neovim"
+  };
+  const slug = mapping[label] || label.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return `https://cdn.simpleicons.org/${slug}`;
+}
+
+interface TechTileProps {
+  label: string;
+  icon: string;
+}
+
+function TechTile({ label, icon }: TechTileProps) {
+  return (
+    <div className="flex flex-col items-center justify-center p-3 rounded-xl border border-[var(--line)] bg-white/[0.015] hover:border-white/20 hover:bg-white/[0.05] hover:scale-[1.04] hover:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.5)] transition-all duration-200 aspect-square gap-2 min-h-[85px] group">
+      <img
+        src={icon}
+        alt={label}
+        className="w-7 h-7 object-contain shrink-0 transition-all duration-200 brightness-[0.85] group-hover:brightness-100 group-hover:scale-[1.06]"
+        loading="lazy"
+        onError={(e) => {
+          e.currentTarget.style.display = "none";
+        }}
+      />
+      <span className="text-[11px] text-fg-dim font-mono font-medium tracking-tight text-center max-w-full truncate px-0.5 group-hover:text-fg">
+        {label}
+      </span>
+    </div>
+  );
+}
+
 export default function StackPage() {
   const { locale } = usePreferences();
 
   return (
     <div className="flex flex-col gap-8">
-      <header className="flex flex-col gap-[14px] mb-7 py-1 px-2">
+      <header className="flex flex-col gap-[14px] mb-4 py-1 px-2">
         <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-fg-mute font-mono">
           <span className="w-[6px] h-[6px] rounded-full bg-blue-accent shadow-[0_0_10px_var(--blue)]" />
           {locale === "en" ? "Tech Stack · Tools of the Trade" : "Stack Técnico · Mis Herramientas"}
@@ -138,23 +161,23 @@ export default function StackPage() {
         </p>
       </header>
 
-      {/* Categories Grid */}
+      {/* Categories Grid - Symmetrical 3x2 Grid */}
       <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {categories.map((cat, idx) => (
           <BentoCard key={idx} className="flex flex-col gap-4">
             <div className="text-[12px] font-semibold text-fg uppercase tracking-[0.12em] font-mono border-b border-white/5 pb-2">
               {locale === "en" ? cat.titleEn : cat.titleEs}
             </div>
-            <div className="flex flex-wrap gap-2.5 my-auto">
+            <div className="grid grid-cols-3 xs:grid-cols-4 gap-2.5 my-auto">
               {cat.items.map((item) => (
-                <Chip key={item.label} label={item.label} icon={getTechIcon(item.label)} />
+                <TechTile key={item.label} label={item.label} icon={getTechIcon(item.label)} />
               ))}
             </div>
           </BentoCard>
         ))}
 
         {/* Currently Learning Card */}
-        <BentoCard className="flex flex-col gap-4 lg:col-span-2 bg-[var(--grad-soft)] border border-[rgba(167,139,250,0.2)]">
+        <BentoCard className="flex flex-col gap-4 bg-[var(--grad-soft)] border border-[rgba(167,139,250,0.2)]">
           <div className="flex items-center gap-2 mb-1">
             <span className="w-[24px] h-[24px] inline-flex items-center justify-center bg-[var(--grad)] rounded-[6px] text-white">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -165,18 +188,18 @@ export default function StackPage() {
               {locale === "en" ? "Currently learning & focusing" : "Aprendiendo y enfocándome ahora"}
             </span>
           </div>
-          <ul className="list-none p-0 m-0 flex flex-col md:grid md:grid-cols-2 gap-x-6 gap-y-3 mt-1">
-            <li className="flex items-center gap-2.5 text-[13.5px] text-fg-dim before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:shrink-0">
-              Vue.js & ecosystem
+          <ul className="list-none p-0 m-0 flex flex-col gap-3.5 mt-2">
+            <li className="flex items-start gap-2.5 text-[13.5px] text-fg-dim before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:mt-[7px] before:shrink-0">
+              <span>Vue.js & ecosystem</span>
             </li>
-            <li className="flex items-center gap-2.5 text-[13.5px] text-fg-dim before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:shrink-0">
-              {locale === "en" ? "Advanced cloud-native architectures" : "Arquitecturas cloud-native avanzadas"}
+            <li className="flex items-start gap-2.5 text-[13.5px] text-fg-dim before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:mt-[7px] before:shrink-0">
+              <span>{locale === "en" ? "Advanced cloud-native architectures" : "Arquitecturas cloud-native avanzadas"}</span>
             </li>
-            <li className="flex items-center gap-2.5 text-[13.5px] text-fg-dim before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:shrink-0">
-              {locale === "en" ? "Scalable system design patterns" : "Patrones de diseño de sistemas escalables"}
+            <li className="flex items-start gap-2.5 text-[13.5px] text-fg-dim before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:mt-[7px] before:shrink-0">
+              <span>{locale === "en" ? "Scalable system design patterns" : "Patrones de diseño de sistemas escalables"}</span>
             </li>
-            <li className="flex items-center gap-2.5 text-[13.5px] text-fg-dim before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:shrink-0">
-              {locale === "en" ? "Kubernetes operator development" : "Desarrollo de operadores de Kubernetes"}
+            <li className="flex items-start gap-2.5 text-[13.5px] text-fg-dim before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:mt-[7px] before:shrink-0">
+              <span>{locale === "en" ? "Kubernetes operator development" : "Desarrollo de operadores de Kubernetes"}</span>
             </li>
           </ul>
         </BentoCard>

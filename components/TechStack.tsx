@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import BentoCard from "./BentoCard";
-import Chip from "./Chip";
 import { usePreferences } from "./PreferencesProvider";
 
 const highlights = [
@@ -10,27 +9,27 @@ const highlights = [
     categoryEn: "Languages",
     categoryEs: "Lenguajes",
     items: [
-      { label: "TypeScript", color: "#3178c6" },
-      { label: "Go", color: "#00add8" },
-      { label: "Python", color: "#3776ab" },
+      { label: "TypeScript" },
+      { label: "Go" },
+      { label: "Python" },
     ],
   },
   {
     categoryEn: "Frameworks & Libraries",
     categoryEs: "Frameworks & Librerías",
     items: [
-      { label: "Next.js", color: "#ffffff" },
-      { label: "NestJS", color: "#e0234e" },
-      { label: "React", color: "#61dafb" },
+      { label: "Next.js" },
+      { label: "NestJS" },
+      { label: "React" },
     ],
   },
   {
     categoryEn: "DevOps & Cloud",
     categoryEs: "DevOps & Cloud",
     items: [
-      { label: "Docker", color: "#2496ed" },
-      { label: "Kubernetes", color: "#326ce5" },
-      { label: "AWS (CI/CD)", color: "#ff9900" },
+      { label: "Docker" },
+      { label: "Kubernetes" },
+      { label: "AWS (CI/CD)" },
     ],
   },
 ];
@@ -41,18 +40,18 @@ function getTechIcon(label: string): string {
     "JavaScript": "javascript",
     "Python": "python",
     "Go": "go",
-    "Java": "java",
+    "Java": "openjdk",
     "HTML5": "html5",
     "CSS3": "css3",
-    "Next.js": "nextdotjs",
+    "Next.js": "nextdotjs/white",
     "React": "react",
     "NestJS": "nestjs",
     "Django": "django",
     "Node.js": "nodedotjs",
-    "Express.js": "express",
-    "Flask": "flask",
+    "Express.js": "express/white",
+    "Flask": "flask/white",
     "Tailwind CSS": "tailwindcss",
-    "Prisma": "prisma",
+    "Prisma": "prisma/white",
     "PostgreSQL": "postgresql",
     "MongoDB": "mongodb",
     "MySQL": "mysql",
@@ -62,20 +61,44 @@ function getTechIcon(label: string): string {
     "Kubernetes": "kubernetes",
     "Azure": "microsoftazure",
     "GitHub Actions": "githubactions",
-    "VMware": "vmware",
-    "Vercel": "vercel",
+    "VMware": "vmware/white",
+    "Vercel": "vercel/white",
     "Supabase": "supabase",
     "AWS (CI/CD)": "amazonwebservices",
-    "GHCR (CI/CD)": "github",
+    "GHCR (CI/CD)": "github/white",
     "Firebase": "firebase",
     "Git": "git",
     "Postman": "postman",
     "Figma": "figma",
-    "Notion": "notion",
+    "Notion": "notion/white",
     "Neovim": "neovim"
   };
   const slug = mapping[label] || label.toLowerCase().replace(/[^a-z0-9]/g, "");
   return `https://cdn.simpleicons.org/${slug}`;
+}
+
+interface TechTileProps {
+  label: string;
+  icon: string;
+}
+
+function TechTile({ label, icon }: TechTileProps) {
+  return (
+    <div className="flex flex-col items-center justify-center p-2.5 rounded-xl border border-[var(--line)] bg-white/[0.015] hover:border-white/20 hover:bg-white/[0.05] hover:scale-[1.04] hover:shadow-[0_8px_15px_-8px_rgba(0,0,0,0.5)] transition-all duration-200 aspect-square gap-1.5 min-h-[80px] group">
+      <img
+        src={icon}
+        alt={label}
+        className="w-6.5 h-6.5 object-contain shrink-0 transition-all duration-200 brightness-[0.85] group-hover:brightness-100 group-hover:scale-[1.06]"
+        loading="lazy"
+        onError={(e) => {
+          e.currentTarget.style.display = "none";
+        }}
+      />
+      <span className="text-[10.5px] text-fg-dim font-mono font-medium tracking-tight text-center max-w-full truncate px-0.5 group-hover:text-fg">
+        {label}
+      </span>
+    </div>
+  );
 }
 
 export default function TechStack() {
@@ -91,21 +114,21 @@ export default function TechStack() {
         <span className="text-fg-mute text-[12px] font-mono">Highlights</span>
       </div>
       
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4.5">
         {highlights.map((cat) => (
           <div key={cat.categoryEn} className="flex flex-col gap-2">
             <div className="text-[10px] text-fg-mute uppercase tracking-[0.12em] font-mono">
               {locale === "en" ? cat.categoryEn : cat.categoryEs}
             </div>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="grid grid-cols-3 gap-2.5">
               {cat.items.map((item) => (
-                <Chip key={item.label} label={item.label} icon={getTechIcon(item.label)} />
+                <TechTile key={item.label} label={item.label} icon={getTechIcon(item.label)} />
               ))}
             </div>
           </div>
         ))}
 
-        <div className="mt-4 pt-2 border-t border-[var(--line)]">
+        <div className="mt-4 pt-3 border-t border-[var(--line)]">
           <Link 
             href="/stack"
             className="w-full inline-flex items-center justify-center gap-1.5 py-3 px-4 rounded-xl border border-[var(--line-2)] bg-white/[0.03] text-fg text-[12.5px] font-mono font-semibold transition-all duration-200 hover:text-white hover:bg-white/[0.08] hover:border-white/30 hover:scale-[1.01] active:scale-[0.99] group shadow-[0_0_12px_rgba(255,255,255,0)] hover:shadow-[0_0_15px_rgba(255,255,255,0.03)]"
