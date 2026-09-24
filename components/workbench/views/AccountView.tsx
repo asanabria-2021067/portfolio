@@ -25,7 +25,7 @@ export default function AccountView() {
         </div>
         <div className="wb-account-id">
           <strong>Angel Sanabria</strong>
-          <span>VMware Engineer Jr. · Full Stack Developer</span>
+          <span>VMware Engineer (VKS) · Full Stack Developer</span>
           <span className="wb-account-loc">Guatemala · GMT−6</span>
         </div>
       </div>

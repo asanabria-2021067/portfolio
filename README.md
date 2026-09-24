@@ -1,6 +1,6 @@
 # Angel Sanabria — Developer Portfolio
 
-Personal portfolio for Angel Sanabria, VMware Engineer Jr. & Full Stack Developer and Computer Science student at Universidad del Valle de Guatemala (UVG). Built with an IDE-inspired aesthetic: dark glassmorphism panels, a file-tree sidebar, and real-time data from the GitHub API.
+Personal portfolio for Angel Sanabria, VMware Engineer (VKS) & Full Stack Developer and Computer Science student at Universidad del Valle de Guatemala (UVG). Built with an IDE-inspired aesthetic: dark glassmorphism panels, a file-tree sidebar, and real-time data from the GitHub API.
 
 **Live:** https://portfolio-taupe-eight-ne7xtliknm.vercel.app
 
@@ -8,12 +8,12 @@ Personal portfolio for Angel Sanabria, VMware Engineer Jr. & Full Stack Develope
 
 ## Features
 
-- **VS Code–style workbench** — title bar with menus and command center, activity bar, resizable side bar, editor tabs with breadcrumbs, status bar and an empty-editor watermark
-- **Explorer** — file tree of the portfolio; `.tsx` files open pages as tabs, PDFs open in a viewer, source files open on GitHub, `README.md` / `package.json` print in the terminal
+- **VS Code–style workbench** — full-screen title bar with menus and command center, activity bar, resizable side bar, editor tabs, status bar and an empty-editor watermark
+- **Explorer** — file tree with VS Code file icons (Iconify API); `.tsx` files open pages as tabs, PDFs and images open as editor tabs in a built-in viewer (pdf.js), source files open on GitHub, `README.md` / `package.json` print in the terminal
 - **Search** — full-text search across every page (indexes the server-rendered HTML plus GitHub projects) with in-page highlighting, or search by file name
 - **Source Control** — live GitHub contribution graph, streaks and most active public repos (GraphQL API), plus a "commit" box that emails Angel
-- **Extensions** — installable extensions that change the workspace: Daylight (light) theme, Aurora theme, Zen Mode, Pixel Pet and Local Clock (saved in `localStorage`)
-- **Command palette & terminal** — `Ctrl+P` / `Ctrl+Shift+P` and an integrated terminal (`Ctrl+\``) with `help`, `ls`, `cat`, `contact`, `theme`, `ext install …`
+- **Extensions** — installable extensions that change the workspace (saved in `localStorage`): Pixel Pets (up to 4: blob, cat, ghost, chick), Daylight / Aurora / Dusk Rose themes, Zen Mode, Minimap, Sparkle Cursor, Let It Snow, Confetti, Reading Time and Local Clock
+- **Command palette & terminal** — `Ctrl+P` / `Ctrl+Shift+P` and an integrated terminal (`Ctrl+\``) with `help`, `ls`, `cat`, `contact`, `theme`, `ext install …`, `pet add cat`, `hire`
 - **EN / ES i18n** — full bilingual support via a context-based locale provider; no external i18n library
 - **GitHub API integration** — server-side proxy route fetches repos, commit counts, stars, forks, and language tags with pagination and rate-limit handling
 - **PDF viewer modal** — CV opens in an in-page modal without leaving the portfolio
@@ -31,7 +31,8 @@ Personal portfolio for Angel Sanabria, VMware Engineer Jr. & Full Stack Develope
 | Language | TypeScript (strict mode) |
 | Styling | Tailwind CSS + custom CSS variables |
 | Animations | Framer Motion, GSAP |
-| Icons | Lucide React, Simple Icons CDN |
+| Icons | Iconify API (vscode-icons, logos, fluent-emoji) |
+| PDF viewer | pdf.js (`pdfjs-dist`, worker served from `public/pdfjs`) |
 | API proxy | Next.js Route Handlers (server-side) |
 | Deployment | Vercel |
 

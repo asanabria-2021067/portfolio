@@ -2,7 +2,8 @@
  * Virtual workspace shown in the IDE-style workbench.
  * The tree mirrors the real repo, but each file knows how it opens:
  * - route:   a page of the portfolio, opens as an editor tab
- * - pdf:     opens in the PDF modal
+ * - pdf:     opens in the PDF viewer tab
+ * - image:   opens in the image viewer tab
  * - source:  opens the real file on GitHub
  * - terminal: prints its contents in the integrated terminal (`cat`)
  */
@@ -13,7 +14,7 @@ export const LINKEDIN_URL = "https://www.linkedin.com/in/angel-sanabria-desarrol
 export const EMAIL = "as1945228@gmail.com";
 export const CV_PATH = "/assets/CV.pdf";
 
-export type FileKind = "route" | "pdf" | "source" | "terminal";
+export type FileKind = "route" | "pdf" | "image" | "source" | "terminal";
 
 export interface WorkspaceFile {
   type: "file";
@@ -37,19 +38,26 @@ export interface FlatFile extends WorkspaceFile {
 }
 
 const CERTS = [
-  "VCFI9.pdf",
-  "VMware Vsphere Install.pdf",
-  "Vmware Vsphere with Tanzu.pdf",
-  "monorepos-v2.pdf",
-  "intermediate-typescript-v2.pdf",
-  "typescript-v4.pdf",
-  "Diseño de interfaces Intecap.pdf",
+  "AngelSanabria-CCNA1 IN4BM-certificate-2.pdf",
+  "certificate claude code.pdf",
+  "Complete Intro to Vue 3 Workshop (FEM).pdf",
+  "complete-go-dark.pdf",
   "complete-intro-containers-dark.pdf",
+  "diploma-frontend-developer-practico.pdf",
+  "diploma-git-github.pdf",
+  "diploma-html-css-2020.pdf",
+  "diploma-python-fundamentos.pdf",
+  "Diseño de interfaces Intecap.pdf",
   "enterprise-typescript-dark.pdf",
   "fullstack-typescript-dark.pdf",
-  "complete-go-dark.pdf",
+  "intermediate-typescript-v2.pdf",
+  "monorepos-v2.pdf",
+  "typescript-v4.pdf",
+  "VCFI9.pdf",
+  "Vmware Cloud Foundation Build Manage and Secure.pdf",
+  "VMware Vsphere Install.pdf",
+  "Vmware Vsphere with Tanzu.pdf",
   "vue-fundamentals-dark.pdf",
-  "Complete Intro to Vue 3 Workshop (FEM).pdf",
 ];
 
 const source = (path: string): string => `${REPO_URL}/blob/main/${path}`;
@@ -104,7 +112,7 @@ export const WORKSPACE_TREE: WorkspaceNode[] = [
                   href: `/assets/certificaciones/${name}`,
                 })),
               },
-              { type: "file", name: "pic.jpeg", ext: "jpeg", kind: "source", href: "/assets/pic.jpeg" },
+              { type: "file", name: "pic.jpeg", ext: "jpeg", kind: "image", href: "/assets/pic.jpeg" },
             ],
           },
         ],
@@ -140,6 +148,8 @@ export const LANGUAGE_LABEL: Record<string, string> = {
   env: "Properties",
   pdf: "PDF",
   jpeg: "Image",
+  jpg: "Image",
+  png: "Image",
 };
 
 function flatten(nodes: WorkspaceNode[], parent: string, out: FlatFile[]) {

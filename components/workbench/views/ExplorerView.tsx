@@ -1,28 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 import { usePreferences } from "../../PreferencesProvider";
 import { useWorkbench } from "../WorkbenchProvider";
-import { ChevronIcon, CloseIcon, CollapseIcon, ExternalIcon, FolderIcon } from "../icons";
+import { ChevronIcon, CloseIcon, CollapseIcon, ExternalIcon } from "../icons";
+import { FileIcon, FolderIcon } from "../FileIcon";
 import {
-  FILE_BADGES,
   WORKSPACE_TREE,
-  fileForRoute,
   t,
   type WorkspaceFile,
   type WorkspaceFolder,
   type WorkspaceNode,
 } from "@/lib/workspace";
 
+/** kept for existing imports: renders the file-type icon */
 export function FileBadge({ ext }: { ext: string }) {
-  const badge = FILE_BADGES[ext] ?? { label: ext.toUpperCase(), color: "#9ca3af" };
-  return (
-    <span className="ft-sym" style={{ color: badge.color }}>
-      {badge.label}
-    </span>
-  );
+  return <FileIcon ext={ext} />;
 }
 
 function Branch({ nodes, depth, collapseSignal }: { nodes: WorkspaceNode[]; depth: number; collapseSignal: number }) {
@@ -57,8 +51,8 @@ function FolderRow({ node, depth, collapseSignal }: { node: WorkspaceFolder; dep
         onClick={() => setOpen((value) => !value)}
       >
         <ChevronIcon size={12} className={clsx("ft-chevron", open && "ft-open")} />
-        <span className="ft-icon ft-folder-icon">
-          <FolderIcon />
+        <span className="ft-icon">
+          <FolderIcon name={node.name} open={open} />
         </span>
         <span className="ft-name ft-name--folder">{node.name}</span>
       </button>
@@ -72,9 +66,8 @@ function FolderRow({ node, depth, collapseSignal }: { node: WorkspaceFolder; dep
 }
 
 function FileRow({ node, depth }: { node: WorkspaceFile; depth: number }) {
-  const pathname = usePathname();
-  const { openFile, editorEmpty } = useWorkbench();
-  const active = node.kind === "route" && node.href === pathname && !editorEmpty;
+  const { openFile, activeTab } = useWorkbench();
+  const active = Boolean(node.href && activeTab?.href === node.href);
 
   return (
     <button
@@ -121,8 +114,7 @@ export { Section };
 
 export default function ExplorerView() {
   const { locale } = usePreferences();
-  const { tabs, openFile, closeTab, editorEmpty } = useWorkbench();
-  const pathname = usePathname();
+  const { tabs, activateTab, closeTab, activeTab } = useWorkbench();
   const [collapseSignal, setCollapseSignal] = useState(0);
   const [showGuide, setShowGuide] = useState(false);
 
@@ -149,18 +141,16 @@ export default function ExplorerView() {
       <Section title={t(locale, "Open Editors", "Editores abiertos")} defaultOpen={false}>
         <div className="wb-open-editors">
           {tabs.length === 0 && <p className="wb-empty-note">{t(locale, "No open editors", "No hay editores abiertos")}</p>}
-          {tabs.map((href) => {
-            const file = fileForRoute(href);
-            if (!file) return null;
-            const active = href === pathname && !editorEmpty;
+          {tabs.map((tab) => {
+            const active = tab.id === activeTab?.id;
             return (
-              <div key={href} className={clsx("ft-row ft-row--file ft-clickable wb-open-editor", active && "ft-active")}>
-                <button type="button" className="wb-open-editor-main" onClick={() => openFile(file)}>
-                  <FileBadge ext={file.ext} />
-                  <span className={clsx("ft-name", active && "ft-name--active")}>{file.name}</span>
-                  <span className="wb-open-editor-path">app</span>
+              <div key={tab.id} className={clsx("ft-row ft-row--file ft-clickable wb-open-editor", active && "ft-active")}>
+                <button type="button" className="wb-open-editor-main" onClick={() => activateTab(tab)}>
+                  <FileIcon ext={tab.ext} />
+                  <span className={clsx("ft-name", active && "ft-name--active")}>{tab.name}</span>
+                  <span className="wb-open-editor-path">{tab.kind === "route" ? "app" : "public/assets"}</span>
                 </button>
-                <button type="button" className="wb-icon-btn" onClick={() => closeTab(href)} aria-label={`Close ${file.name}`}>
+                <button type="button" className="wb-icon-btn" onClick={() => closeTab(tab.id)} aria-label={`Close ${tab.name}`}>
                   <CloseIcon size={12} />
                 </button>
               </div>

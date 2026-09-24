@@ -6,6 +6,7 @@ import { useWorkbench } from "../WorkbenchProvider";
 import ContributionGraph, { useContributions } from "../ContributionGraph";
 import { Section } from "./ExplorerView";
 import { BranchIcon, CheckIcon, ExternalIcon } from "../icons";
+import { celebrate } from "../extensions";
 import { EMAIL, GITHUB_PROFILE, t } from "@/lib/workspace";
 
 export default function SourceControlView() {
@@ -16,6 +17,7 @@ export default function SourceControlView() {
 
   const commit = () => {
     if (!message.trim()) return;
+    celebrate();
     const subject = encodeURIComponent(t(locale, "Hello from your portfolio", "Hola desde tu portafolio"));
     window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${encodeURIComponent(message.trim())}`;
   };

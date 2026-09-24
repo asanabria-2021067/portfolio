@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { usePreferences, type Theme } from "../PreferencesProvider";
-import { EXTENSIONS, type ExtensionId } from "./extensions";
+import { EXTENSIONS, THEME_NAMES, celebrate, type ExtensionId } from "./extensions";
 import {
   ALL_FILES,
   CV_PATH,
@@ -17,6 +17,29 @@ import {
 
 export type ViewId = "explorer" | "search" | "scm" | "extensions" | "account" | "settings";
 export type PaletteMode = "files" | "commands";
+export type PetSpecies = "blob" | "cat" | "ghost" | "chick";
+
+export interface EditorTab {
+  id: string;
+  kind: "route" | "pdf" | "image";
+  name: string;
+  href: string;
+  ext: string;
+}
+
+function extOf(name: string) {
+  return name.split(".").pop()?.toLowerCase() ?? "";
+}
+
+export function makeTab(href: string, name?: string): EditorTab | null {
+  const route = fileForRoute(href);
+  if (route) return { id: href, kind: "route", name: route.name, href, ext: route.ext };
+  const fileName = name ?? decodeURIComponent(href.split("/").pop() ?? href);
+  const ext = extOf(href);
+  if (ext === "pdf") return { id: href, kind: "pdf", name: fileName.endsWith(".pdf") ? fileName : `${fileName}.pdf`, href, ext };
+  if (["png", "jpg", "jpeg", "webp", "gif"].includes(ext)) return { id: href, kind: "image", name: fileName, href, ext };
+  return null;
+}
 
 export interface Command {
   id: string;
@@ -44,10 +67,13 @@ interface WorkbenchContextValue {
   toggleSidebar: () => void;
   closeSidebar: () => void;
 
-  tabs: string[];
+  tabs: EditorTab[];
+  activeTab: EditorTab | null;
   editorEmpty: boolean;
   openFile: (file: WorkspaceFile | string) => void;
-  closeTab: (href: string) => void;
+  openDocument: (href: string, name?: string) => void;
+  activateTab: (tab: EditorTab) => void;
+  closeTab: (id: string) => void;
   closeAllTabs: () => void;
 
   terminalOpen: boolean;
@@ -72,8 +98,8 @@ interface WorkbenchContextValue {
   zoom: number;
   setZoom: (zoom: number) => void;
 
-  pdf: { name: string; link: string } | null;
-  closePdf: () => void;
+  pets: PetSpecies[];
+  setPets: (pets: PetSpecies[]) => void;
 
   highlightQuery: string;
   highlightLine: string;
@@ -88,7 +114,8 @@ const WorkbenchContext = createContext<WorkbenchContextValue | null>(null);
 const KEYS = {
   extensions: "wb-extensions",
   sidebarWidth: "wb-sidebar-width",
-  tabs: "wb-tabs",
+  tabs: "wb-tabs-v2",
+  pets: "wb-pets",
   zoom: "wb-zoom",
 };
 
@@ -119,8 +146,8 @@ export function WorkbenchProvider({ children }: { children: React.ReactNode }) {
   const [activeView, setActiveView] = useState<ViewId>("explorer");
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [sidebarWidth, setSidebarWidthState] = useState(264);
-  const [tabs, setTabs] = useState<string[]>([]);
-  const [editorEmpty, setEditorEmpty] = useState(false);
+  const [tabs, setTabs] = useState<EditorTab[]>([]);
+  const [activeId, setActiveId] = useState<string | null>(() => (fileForRoute(pathname) ? pathname : null));
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [terminalRequest, setTerminalRequest] = useState<TerminalRequest | null>(null);
   const [palette, setPalette] = useState<{ open: boolean; mode: PaletteMode; seed: number }>({
@@ -131,7 +158,7 @@ export function WorkbenchProvider({ children }: { children: React.ReactNode }) {
   const [installed, setInstalled] = useState<ExtensionId[]>([]);
   const [zen, setZen] = useState(false);
   const [zoom, setZoomState] = useState(1);
-  const [pdf, setPdf] = useState<{ name: string; link: string } | null>(null);
+  const [pets, setPetsState] = useState<PetSpecies[]>(["blob"]);
   const [highlight, setHighlightState] = useState({ query: "", line: "" });
   const setHighlight = useCallback((query: string, line = "") => setHighlightState({ query, line }), []);
   const requestId = useRef(0);
@@ -149,8 +176,15 @@ export function WorkbenchProvider({ children }: { children: React.ReactNode }) {
     setInstalled(readJson<ExtensionId[]>(window.localStorage, KEYS.extensions, []).filter((id) => valid.has(id)));
     setSidebarWidthState(readJson(window.localStorage, KEYS.sidebarWidth, 264));
     setZoomState(readJson(window.localStorage, KEYS.zoom, 1));
-    const routes = new Set(ROUTE_FILES.map((file) => file.href));
-    setTabs(readJson<string[]>(window.sessionStorage, KEYS.tabs, []).filter((href) => routes.has(href)));
+    setTabs(
+      readJson<EditorTab[]>(window.sessionStorage, KEYS.tabs, [])
+        .map((tab) => (tab && typeof tab.href === "string" ? makeTab(tab.href, tab.name) : null))
+        .filter((tab): tab is EditorTab => Boolean(tab))
+    );
+    const storedPets = readJson<PetSpecies[]>(window.localStorage, KEYS.pets, ["blob"]).filter((p) =>
+      ["blob", "cat", "ghost", "chick"].includes(p)
+    );
+    setPetsState(storedPets.length ? storedPets.slice(0, 4) : ["blob"]);
     setHydrated(true);
     /* eslint-enable react-hooks/set-state-in-effect */
 
@@ -159,10 +193,11 @@ export function WorkbenchProvider({ children }: { children: React.ReactNode }) {
 
   // every navigation makes sure the page has a tab
   useEffect(() => {
-    if (!hydrated || !fileForRoute(pathname)) return;
+    const tab = makeTab(pathname);
+    if (!hydrated || !tab) return;
     /* eslint-disable-next-line react-hooks/set-state-in-effect -- tab list follows the router */
-    setTabs((current) => (current.includes(pathname) ? current : [...current, pathname]));
-    setEditorEmpty(false);
+    setTabs((current) => (current.some((t) => t.id === tab.id) ? current : [...current, tab]));
+    setActiveId(tab.id);
   }, [pathname, hydrated]);
 
   useEffect(() => {
@@ -213,53 +248,83 @@ export function WorkbenchProvider({ children }: { children: React.ReactNode }) {
     setTerminalRequest({ id: requestId.current, command });
   }, []);
 
+  const addTab = useCallback((tab: EditorTab) => {
+    setTabs((current) => (current.some((t) => t.id === tab.id) ? current : [...current, tab]));
+  }, []);
+
+  const activateTab = useCallback(
+    (tab: EditorTab) => {
+      setActiveId(tab.id);
+      if (tab.kind === "route" && tab.href !== pathname) router.push(tab.href);
+    },
+    [pathname, router]
+  );
+
+  const openDocument = useCallback(
+    (href: string, name?: string) => {
+      const tab = makeTab(href, name);
+      if (!tab) {
+        window.open(href, "_blank", "noopener,noreferrer");
+        return;
+      }
+      if (isMobile) setSidebarOpen(false);
+      addTab(tab);
+      activateTab(tab);
+    },
+    [addTab, activateTab, isMobile]
+  );
+
   const openFile = useCallback(
     (target: WorkspaceFile | string) => {
       const file =
         typeof target === "string" ? ALL_FILES.find((f) => f.href === target) ?? fileForRoute(target) : target;
-      if (!file) return;
-
-      if (isMobile) setSidebarOpen(false);
+      if (!file) {
+        if (typeof target === "string") openDocument(target);
+        return;
+      }
 
       switch (file.kind) {
         case "route":
-          setTabs((current) => (current.includes(file.href!) ? current : [...current, file.href!]));
-          setEditorEmpty(false);
-          router.push(file.href!);
-          break;
         case "pdf":
-          setPdf({ name: file.name, link: file.href! });
+        case "image":
+          openDocument(file.href!, file.name);
           break;
         case "source":
           window.open(file.href, "_blank", "noopener,noreferrer");
           break;
         case "terminal":
+          if (isMobile) setSidebarOpen(false);
           runInTerminal(`cat ${file.name}`);
           break;
       }
     },
-    [router, runInTerminal, isMobile]
+    [openDocument, runInTerminal, isMobile]
   );
 
   const closeTab = useCallback(
-    (href: string) => {
-      setTabs((current) => {
-        const index = current.indexOf(href);
-        const next = current.filter((tab) => tab !== href);
-        if (href === pathname || !fileForRoute(pathname)) {
-          const neighbour = next[index] ?? next[index - 1];
-          if (neighbour) router.push(neighbour);
-          else setEditorEmpty(true);
-        }
-        return next;
-      });
+    (id: string) => {
+      const index = tabs.findIndex((tab) => tab.id === id);
+      if (index === -1) return;
+      const next = tabs.filter((tab) => tab.id !== id);
+      setTabs(next);
+      if (activeId === id) {
+        const neighbour = next[index] ?? next[index - 1];
+        if (neighbour) activateTab(neighbour);
+        else setActiveId(null);
+      }
     },
-    [pathname, router]
+    [tabs, activeId, activateTab]
   );
 
   const closeAllTabs = useCallback(() => {
     setTabs([]);
-    setEditorEmpty(true);
+    setActiveId(null);
+  }, []);
+
+  const setPets = useCallback((next: PetSpecies[]) => {
+    const clean = next.slice(0, 4);
+    setPetsState(clean);
+    writeJson(window.localStorage, KEYS.pets, clean);
   }, []);
 
   const openPalette = useCallback(
@@ -273,6 +338,8 @@ export function WorkbenchProvider({ children }: { children: React.ReactNode }) {
       setInstalled((current) => (current.includes(id) ? current : [...current, id]));
       const ext = EXTENSIONS.find((e) => e.id === id);
       if (ext?.theme) setTheme(ext.theme);
+      // let the confetti extension react (including to its own install)
+      window.setTimeout(() => celebrate(), 60);
     },
     [setTheme]
   );
@@ -341,7 +408,7 @@ export function WorkbenchProvider({ children }: { children: React.ReactNode }) {
       { id: "workbench.terminal", category: "Terminal", labelEn: "Toggle Terminal", labelEs: "Mostrar/ocultar terminal", keybinding: "Ctrl+`", run: () => setTerminalOpen((open) => !open) },
       { id: "workbench.closeAll", category: "File", labelEn: "Close All Editors", labelEs: "Cerrar todos los editores", run: closeAllTabs },
       { id: "prefs.language", category: "Preferences", labelEn: "Change Language to Español", labelEs: "Cambiar idioma a English", run: toggleLocale },
-      { id: "cv.view", category: "Angel", labelEn: "View CV", labelEs: "Ver CV", run: () => setPdf({ name: "CV.pdf", link: CV_PATH }) },
+      { id: "cv.view", category: "Angel", labelEn: "View CV", labelEs: "Ver CV", run: () => openDocument(CV_PATH, "CV.pdf") },
       { id: "cv.download", category: "Angel", labelEn: "Download CV", labelEs: "Descargar CV", run: () => { const a = document.createElement("a"); a.href = CV_PATH; a.download = "Angel-Sanabria-CV.pdf"; a.click(); } },
       { id: "contact.email", category: "Angel", labelEn: "Send me an Email", labelEs: "Enviarme un correo", run: () => { window.location.href = `mailto:${EMAIL}`; } },
       { id: "contact.github", category: "Angel", labelEn: "Open GitHub Profile", labelEs: "Abrir perfil de GitHub", run: () => window.open(GITHUB_PROFILE, "_blank", "noopener") },
@@ -362,13 +429,12 @@ export function WorkbenchProvider({ children }: { children: React.ReactNode }) {
       });
     }
 
-    const themeNames: Record<Theme, string> = { dark: "Angel Dark", light: "Daylight", aurora: "Aurora" };
     for (const option of availableThemes) {
       list.push({
         id: `theme.${option}`,
         category: "Color Theme",
-        labelEn: themeNames[option],
-        labelEs: themeNames[option],
+        labelEn: THEME_NAMES[option],
+        labelEs: THEME_NAMES[option],
         run: () => setTheme(option),
       });
     }
@@ -378,7 +444,7 @@ export function WorkbenchProvider({ children }: { children: React.ReactNode }) {
     }
 
     return list;
-  }, [openFile, openPalette, showView, toggleSidebar, closeAllTabs, toggleLocale, setZoom, zoom, resetWorkspace, installed, availableThemes, install, uninstall, setTheme]);
+  }, [openFile, openDocument, openPalette, showView, toggleSidebar, closeAllTabs, toggleLocale, setZoom, zoom, resetWorkspace, installed, availableThemes, install, uninstall, setTheme]);
 
   // ---- keyboard shortcuts --------------------------------------------------------
   useEffect(() => {
@@ -438,8 +504,11 @@ export function WorkbenchProvider({ children }: { children: React.ReactNode }) {
     toggleSidebar,
     closeSidebar,
     tabs,
-    editorEmpty,
+    activeTab: tabs.find((tab) => tab.id === activeId) ?? (activeId ? makeTab(activeId) : null),
+    editorEmpty: activeId === null,
     openFile,
+    openDocument,
+    activateTab,
     closeTab,
     closeAllTabs,
     terminalOpen,
@@ -459,8 +528,8 @@ export function WorkbenchProvider({ children }: { children: React.ReactNode }) {
     setZen,
     zoom,
     setZoom,
-    pdf,
-    closePdf: () => setPdf(null),
+    pets,
+    setPets,
     highlightQuery: highlight.query,
     highlightLine: highlight.line,
     setHighlight,
