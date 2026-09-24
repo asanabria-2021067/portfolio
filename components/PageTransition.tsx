@@ -13,7 +13,7 @@ export default function PageTransition({ children }: { children: React.ReactNode
       gsap.fromTo(
         containerRef.current,
         { opacity: 0, scale: 0.98 },
-        { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" }
+        { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out", clearProps: "transform" }
       );
     });
     return () => ctx.revert();

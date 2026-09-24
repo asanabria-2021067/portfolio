@@ -8,13 +8,17 @@ Personal portfolio for Angel Sanabria, VMware Engineer Jr. & Full Stack Develope
 
 ## Features
 
-- **Dark / Light mode** — system-aware with manual toggle
+- **VS Code–style workbench** — title bar with menus and command center, activity bar, resizable side bar, editor tabs with breadcrumbs, status bar and an empty-editor watermark
+- **Explorer** — file tree of the portfolio; `.tsx` files open pages as tabs, PDFs open in a viewer, source files open on GitHub, `README.md` / `package.json` print in the terminal
+- **Search** — full-text search across every page (indexes the server-rendered HTML plus GitHub projects) with in-page highlighting, or search by file name
+- **Source Control** — live GitHub contribution graph, streaks and most active public repos (GraphQL API), plus a "commit" box that emails Angel
+- **Extensions** — installable extensions that change the workspace: Daylight (light) theme, Aurora theme, Zen Mode, Pixel Pet and Local Clock (saved in `localStorage`)
+- **Command palette & terminal** — `Ctrl+P` / `Ctrl+Shift+P` and an integrated terminal (`Ctrl+\``) with `help`, `ls`, `cat`, `contact`, `theme`, `ext install …`
 - **EN / ES i18n** — full bilingual support via a context-based locale provider; no external i18n library
-- **IDE-style file tree navigation** — sidebar that mirrors VS Code's explorer panel
 - **GitHub API integration** — server-side proxy route fetches repos, commit counts, stars, forks, and language tags with pagination and rate-limit handling
 - **PDF viewer modal** — CV opens in an in-page modal without leaving the portfolio
 - **GSAP animations** — entrance, hover, and scroll-triggered motion on all Bento cards
-- **Mobile responsive** — bottom navigation bar replaces the sidebar on small screens, with a popover "More" menu for secondary routes
+- **Mobile responsive** — the activity bar becomes a bottom tab bar and the side bar opens as a drawer
 
 ---
 
@@ -61,7 +65,7 @@ GITHUB_TOKEN=your_personal_access_token
 1. Go to **GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)**
 2. Click **Generate new token (classic)**
 3. Set a descriptive name, e.g. `portfolio-api-read`
-4. Select scopes: `read:user` and `public_repo`
+4. Select scopes: `read:user` and `repo` (private repos are only counted, never listed)
 5. Click **Generate token** and copy the value immediately
 
 Without a token the app still runs, but GitHub's unauthenticated rate limit (60 req/hr) may cause API calls to fail under repeated reloads.
@@ -80,23 +84,26 @@ Open http://localhost:3000 in your browser.
 
 ```
 ├── app/                    # Next.js App Router
-│   ├── api/                # Route Handlers — GitHub API proxy with caching
+│   ├── activity/           # Full GitHub contribution graph
+│   ├── api/                # Route Handlers — GitHub projects + contributions proxy with caching
 │   ├── certifications/     # Certifications & diplomas page
 │   ├── contact/            # Contact bento page
 │   ├── projects/           # Repository grid with GitHub data
 │   ├── stack/              # Tech stack breakdown
 │   ├── globals.css         # Design tokens (colors, radius, spacing)
+│   ├── workbench.css       # VS Code–style shell, themes and panels
 │   ├── layout.tsx          # Root layout, metadata, font loading
 │   └── page.tsx            # Home — Bento grid entry point
 ├── components/             # Shared React components
 │   ├── BentoCard.tsx       # Card container with GSAP hover effects
-│   ├── FileTreeNav.tsx     # IDE-style sidebar navigation
-│   ├── BottomNav.tsx       # Mobile bottom bar with popover
+│   ├── workbench/          # IDE shell: activity bar, views, tabs, terminal, palette, extensions
 │   ├── FeaturedProject.tsx # UVGenius highlight card
 │   ├── Hero.tsx            # Name, title, and metadata strip
 │   └── PreferencesProvider.tsx  # Locale and theme context
 ├── lib/
-│   └── github.ts           # GitHub fetch utilities and local overrides
+│   ├── contributions.ts    # GitHub GraphQL contribution calendar + stats
+│   ├── github.ts           # GitHub fetch utilities and local overrides
+│   └── workspace.ts        # Virtual file tree shown in the explorer
 └── public/
     └── assets/             # Static images, CV PDF, logo SVG
 ```
