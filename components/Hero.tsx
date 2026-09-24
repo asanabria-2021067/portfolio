@@ -19,10 +19,10 @@ export default function Hero() {
       <p className="text-[19px] text-fg-dim mb-[18px] font-normal">
         <strong className="text-fg font-semibold">VMware Engineer (VKS)</strong> & <strong className="text-fg font-semibold">Full Stack Developer</strong>
       </p>
-      <p className="text-[15.5px] text-fg-dim leading-[1.6] max-w-[540px] mb-6 text-pretty">
+      <p className="text-[15.5px] text-fg-dim leading-[1.6] max-w-[600px] mb-6 text-pretty">
         {locale === "en"
-          ? "Building cloud-native infrastructure and scalable modern applications. I work across the stack, from vSphere and Kubernetes clusters to React frontends and AI-powered platforms."
-          : "Construyo infraestructura cloud-native y aplicaciones modernas escalables. Trabajo de punta a punta: desde clusters vSphere y Kubernetes hasta frontends React y plataformas con IA."}
+          ? "I build scalable, modern applications from end to end: React and Next.js frontends, APIs and microservices with NestJS, Django and Go, iOS apps in Swift, and AI-powered integrations. I also run VKS clusters on VMware Cloud Foundation, so I take projects from design all the way to production."
+          : "Desarrollo aplicaciones modernas y escalables de punta a punta: frontends con React y Next.js, APIs y microservicios con NestJS, Django y Go, apps iOS en Swift e integraciones con IA. Además administro clústeres VKS sobre VMware Cloud Foundation, así que llevo los proyectos desde el diseño hasta producción."}
       </p>
       <div className="mt-auto flex gap-[22px] flex-wrap pt-[18px] border-t border-[var(--line)]">
         <div className="flex flex-col gap-1">
