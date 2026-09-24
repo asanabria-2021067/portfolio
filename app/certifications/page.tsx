@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
 import CertificationCard from "@/components/CertificationCard";
 import BentoCard from "@/components/BentoCard";
 import { usePreferences } from "@/components/PreferencesProvider";
-import PdfModal from "@/components/PdfModal";
+import { useWorkbench } from "@/components/workbench/WorkbenchProvider";
 
 const LOGOS = {
   FM: "https://frontendmasters.com/static-assets/core/m-transparent.webp",
@@ -19,10 +18,11 @@ const LOGOS = {
 
 export default function CertificationsPage() {
   const { locale } = usePreferences();
-  const [activePdf, setActivePdf] = useState<{ link: string; name: string } | null>(null);
+  const { openDocument } = useWorkbench();
 
-  const handleViewPdf = (link: string, name: string) => {
-    setActivePdf({ link, name });
+  // certificates open as a PDF tab in the editor, like any other file
+  const handleViewPdf = (link: string) => {
+    openDocument(link);
   };
 
   return (
@@ -366,13 +366,6 @@ export default function CertificationsPage() {
         leftText="© 2026 — Angel Sanabria"
         midText={locale === "en" ? "Constant learning · Continuous improvement" : "Aprendizaje constante · Mejora continua"}
         rightText={locale === "en" ? "Updated May 2026" : "Actualizado Mayo 2026"}
-      />
-
-      <PdfModal
-        isOpen={!!activePdf}
-        link={activePdf?.link ?? ""}
-        name={activePdf?.name ?? ""}
-        onClose={() => setActivePdf(null)}
       />
     </div>
   );

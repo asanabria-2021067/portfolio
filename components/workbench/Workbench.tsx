@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { clsx } from "clsx";
 import { usePreferences } from "../PreferencesProvider";
-import PdfModal from "../PdfModal";
 import { WorkbenchProvider, useWorkbench } from "./WorkbenchProvider";
 import TitleBar from "./TitleBar";
 import ActivityBar, { MobileBar } from "./ActivityBar";
@@ -12,9 +11,10 @@ import EditorArea from "./EditorArea";
 import StatusBar from "./StatusBar";
 import CommandPalette from "./CommandPalette";
 import TerminalPanel from "./TerminalPanel";
+import { Confetti } from "./Effects";
 
 function Frame({ children }: { children: React.ReactNode }) {
-  const { sidebarOpen, terminalOpen, zen, setZen, pdf, closePdf, isMobile } = useWorkbench();
+  const { sidebarOpen, terminalOpen, zen, setZen, isMobile, isInstalled } = useWorkbench();
   const { locale } = usePreferences();
   const [terminalMounted, setTerminalMounted] = useState(false);
 
@@ -48,7 +48,7 @@ function Frame({ children }: { children: React.ReactNode }) {
           {locale === "en" ? "Exit Zen Mode (Esc)" : "Salir del modo Zen (Esc)"}
         </button>
       )}
-      <PdfModal isOpen={Boolean(pdf)} link={pdf?.link ?? ""} name={pdf?.name ?? ""} onClose={closePdf} />
+      {isInstalled("confetti") && <Confetti />}
     </div>
   );
 }

@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePreferences, type Theme } from "../PreferencesProvider";
-import { useWorkbench } from "./WorkbenchProvider";
-import { EXTENSIONS, type ExtensionId } from "./extensions";
+import { useWorkbench, type PetSpecies } from "./WorkbenchProvider";
+import { EXTENSIONS, celebrate, type ExtensionId } from "./extensions";
 import { CloseIcon, TerminalIcon } from "./icons";
 import {
   ALL_FILES,
@@ -18,18 +18,19 @@ import {
 type Line = { kind: "cmd" | "out" | "err" | "ok"; content: React.ReactNode };
 
 const PROMPT = "angel@portfolio:~/portfolio$";
-const COMMANDS = ["help", "ls", "cat", "open", "whoami", "contact", "cv", "theme", "lang", "ext", "git", "date", "echo", "history", "clear", "exit"];
+const COMMANDS = ["help", "ls", "cat", "open", "whoami", "contact", "cv", "hire", "pet", "theme", "lang", "ext", "git", "date", "echo", "history", "clear", "exit"];
 
 const PACKAGE_JSON = `{
   "name": "angel-sanabria",
-  "role": "VMware Engineer Jr. & Full Stack Developer",
+  "role": "VMware Engineer (VKS) & Full Stack Developer",
   "location": "Guatemala (GMT-6)",
   "education": "Computer Science — Universidad del Valle de Guatemala",
   "dependencies": {
     "languages": ["TypeScript", "JavaScript", "Python", "Go", "Java"],
     "frameworks": ["Next.js", "React", "NestJS", "Django", "Node.js", "Flask", "Tailwind CSS"],
     "databases": ["PostgreSQL", "MongoDB", "MySQL", "Redis", "Neo4j"],
-    "infra": ["VMware", "Docker", "Kubernetes", "Azure", "AWS", "GitHub Actions"]
+    "vmware": ["VCF 9", "vSphere", "VKS / Supervisor", "NSX", "Avi", "VCF Automation"],
+    "infra": ["Docker", "Kubernetes", "Nginx", "Linux", "Azure", "AWS", "GitHub Actions"]
   },
   "scripts": {
     "hire": "mailto:${EMAIL}"
@@ -40,7 +41,7 @@ function readme(locale: "en" | "es") {
   return locale === "en"
     ? `# Angel Sanabria
 
-VMware Engineer Jr. & Full Stack Developer from Guatemala.
+VMware Engineer (VKS) & Full Stack Developer from Guatemala.
 I work on VMware Cloud Foundation infrastructure (Supervisor, VKS, NSX)
 and build full-stack web apps with Next.js, NestJS and friends.
 Computer Science student at Universidad del Valle de Guatemala (UVG).
@@ -48,7 +49,7 @@ Computer Science student at Universidad del Valle de Guatemala (UVG).
 Run \`contact\` to reach me or \`cv\` to see my resume.`
     : `# Angel Sanabria
 
-VMware Engineer Jr. y desarrollador full stack de Guatemala.
+VMware Engineer (VKS) y desarrollador full stack de Guatemala.
 Trabajo con infraestructura VMware Cloud Foundation (Supervisor, VKS, NSX)
 y construyo aplicaciones web full stack con Next.js, NestJS y más.
 Estudiante de Ciencias de la Computación en la Universidad del Valle de Guatemala (UVG).
@@ -85,6 +86,8 @@ export default function TerminalPanel() {
     install,
     uninstall,
     availableThemes,
+    pets,
+    setPets,
   } = useWorkbench();
   const [lines, setLines] = useState<Line[]>([]);
   const [input, setInput] = useState("");
@@ -118,14 +121,16 @@ export default function TerminalPanel() {
   contact             how to reach me       cv             open my resume
   theme [name]        list / set theme      lang <en|es>   change language
   ext [list|install|uninstall] <id>        manage extensions
-  git status          repo status           date · echo · history · clear · exit`
+  pet [list|add|remove] <species>          manage your pixel pets
+  hire                🎉                    git status · date · echo · history · clear · exit`
               : `Comandos disponibles:
   ls [dir]            listar archivos       cat <archivo>  mostrar un archivo
   open <archivo>      abrir un archivo      whoami         ¿quién es Angel?
   contact             cómo contactarme      cv             abrir mi CV
   theme [nombre]      ver / cambiar tema    lang <en|es>   cambiar idioma
   ext [list|install|uninstall] <id>        gestionar extensiones
-  git status          estado del repo       date · echo · history · clear · exit`
+  pet [list|add|remove] <especie>          gestionar tus mascotas
+  hire                🎉                    git status · date · echo · history · clear · exit`
           );
           break;
         case "ls": {
@@ -171,11 +176,41 @@ export default function TerminalPanel() {
           }
           break;
         }
+        case "hire":
+          print(en ? "Excellent choice. Opening your email client… 🎉" : "Excelente decisión. Abriendo tu correo… 🎉", "ok");
+          celebrate();
+          window.setTimeout(() => {
+            window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(en ? "Let's work together" : "Trabajemos juntos")}`;
+          }, 700);
+          break;
+        case "pet": {
+          const [action, species] = args;
+          const valid = ["blob", "cat", "ghost", "chick"] as PetSpecies[];
+          if (!installed.includes("pixel-pet")) {
+            print(en ? "Pixel Pets isn't installed. Run: ext install pixel-pet" : "Pixel Pets no está instalada. Ejecuta: ext install pixel-pet", "err");
+          } else if (!action || action === "list") {
+            print(`${en ? "Pets" : "Mascotas"}: ${pets.join(", ")}  ·  ${en ? "species" : "especies"}: ${valid.join(", ")}`);
+          } else if (action === "add" && valid.includes(species as PetSpecies)) {
+            if (pets.length >= 4) print(en ? "You already have 4 pets 🐾" : "Ya tienes 4 mascotas 🐾", "err");
+            else {
+              setPets([...pets, species as PetSpecies]);
+              print(`${en ? "Welcome" : "Bienvenido"}, ${species}! 🐾`, "ok");
+            }
+          } else if (action === "remove" && pets.length > 1) {
+            const index = species ? pets.lastIndexOf(species as PetSpecies) : pets.length - 1;
+            if (index === -1) print(`pet: ${species}: ${en ? "not found" : "no encontrada"}`, "err");
+            else {
+              setPets(pets.filter((_, i) => i !== index));
+              print(en ? "Bye bye 👋" : "Adiós 👋", "ok");
+            }
+          } else print(en ? "usage: pet [list|add|remove] <blob|cat|ghost|chick>" : "uso: pet [list|add|remove] <blob|cat|ghost|chick>", "err");
+          break;
+        }
         case "whoami":
           print(
             en
-              ? "angel — VMware Engineer Jr. & Full Stack Developer · Guatemala · open to opportunities"
-              : "angel — VMware Engineer Jr. y desarrollador full stack · Guatemala · disponible para oportunidades"
+              ? "angel — VMware Engineer (VKS) & Full Stack Developer · Guatemala · open to opportunities"
+              : "angel — VMware Engineer (VKS) y desarrollador full stack · Guatemala · disponible para oportunidades"
           );
           break;
         case "contact":
@@ -265,7 +300,7 @@ export default function TerminalPanel() {
       }
       setLines((current) => [...current, ...out]);
     },
-    [en, locale, openFile, commands, availableThemes, theme, setTheme, setLocale, installed, install, uninstall, history, setTerminalOpen]
+    [en, locale, openFile, commands, availableThemes, theme, setTheme, setLocale, installed, install, uninstall, history, setTerminalOpen, pets, setPets]
   );
 
   // commands sent from elsewhere (e.g. clicking README.md in the explorer)

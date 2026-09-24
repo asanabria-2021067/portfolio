@@ -4,10 +4,45 @@ import { useState } from "react";
 import { clsx } from "clsx";
 import { usePreferences } from "../../PreferencesProvider";
 import { useWorkbench } from "../WorkbenchProvider";
-import { EXTENSIONS, type ExtensionInfo } from "../extensions";
+import { EXTENSIONS, iconUrl, type ExtensionInfo } from "../extensions";
+import { PET_NAMES, PET_SPECIES, PetSprite } from "../PixelPet";
 import { Section } from "./ExplorerView";
 import { CheckIcon, CloseIcon } from "../icons";
 import { t } from "@/lib/workspace";
+
+function PetPicker() {
+  const { locale } = usePreferences();
+  const { pets, setPets } = useWorkbench();
+  return (
+    <div className="wb-pet-picker">
+      <span className="wb-pet-picker-label">{t(locale, `Your pets (${pets.length}/4)`, `Tus mascotas (${pets.length}/4)`)}</span>
+      <div className="wb-pet-row">
+        {pets.map((species, index) => (
+          <button
+            key={`${species}-${index}`}
+            type="button"
+            className="wb-pet-chip is-owned"
+            onClick={() => pets.length > 1 && setPets(pets.filter((_, i) => i !== index))}
+            title={pets.length > 1 ? t(locale, "Remove", "Quitar") : undefined}
+          >
+            <PetSprite species={species} px={2} />
+            {pets.length > 1 && <span className="wb-pet-remove">×</span>}
+          </button>
+        ))}
+      </div>
+      {pets.length < 4 && (
+        <div className="wb-pet-row">
+          {PET_SPECIES.map((species) => (
+            <button key={species} type="button" className="wb-pet-chip" onClick={() => setPets([...pets, species])} title={t(locale, `Add ${PET_NAMES[species].en}`, `Agregar ${PET_NAMES[species].es}`)}>
+              <PetSprite species={species} px={2} />
+              <span>+ {locale === "en" ? PET_NAMES[species].en : PET_NAMES[species].es}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function ExtensionCard({ ext }: { ext: ExtensionInfo }) {
   const { locale, theme, setTheme } = usePreferences();
@@ -19,8 +54,9 @@ function ExtensionCard({ ext }: { ext: ExtensionInfo }) {
   return (
     <div className={clsx("wb-ext", expanded && "is-expanded")}>
       <button type="button" className="wb-ext-main" onClick={() => setExpanded(!expanded)} aria-expanded={expanded}>
-        <span className="wb-ext-icon" style={{ color: ext.accent, borderColor: `${ext.accent}55`, background: `${ext.accent}14` }}>
-          {ext.icon}
+        <span className="wb-ext-icon" style={{ borderColor: `${ext.accent}55`, background: `${ext.accent}14` }}>
+          {/* eslint-disable-next-line @next/next/no-img-element -- icon served by the public Iconify API */}
+          <img src={iconUrl(ext.icon)} alt="" width={28} height={28} loading="lazy" />
         </span>
         <span className="wb-ext-text">
           <span className="wb-ext-name">
@@ -37,6 +73,7 @@ function ExtensionCard({ ext }: { ext: ExtensionInfo }) {
           {locale === "en" ? ext.contributesEn : ext.contributesEs}
         </p>
       )}
+      {installed && ext.id === "pixel-pet" && <PetPicker />}
       <div className="wb-ext-actions">
         {installed && ext.theme && !themeActive && (
           <button type="button" className="wb-secondary-btn wb-small" onClick={() => setTheme(ext.theme!)}>

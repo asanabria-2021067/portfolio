@@ -5,13 +5,13 @@ import { usePreferences } from "./PreferencesProvider";
 
 const experiences = [
   {
-    role: "Jr. VMware Engineer",
+    role: "VMware Engineer · VKS",
     company: "Grupo Quattro",
     period: "Now",
     bullets: [
-      "vSphere & Kubernetes on VMware",
-      "Supervisor Cluster & Tanzu",
-      "Cloud-native infrastructure management",
+      "VKS clusters & Supervisor on VMware Cloud Foundation 9",
+      "NSX networking and VCF Automation self-service blueprints",
+      "Internal monitoring apps & API integrations (SD-WAN)",
     ],
   },
   {

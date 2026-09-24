@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useSyncExternalStore } from "react";
 
-export type Theme = "dark" | "light" | "aurora";
+export type Theme = "dark" | "light" | "aurora" | "rose";
 export type Locale = "en" | "es";
 
 interface PreferencesContextValue {
@@ -20,7 +20,7 @@ const LOCALE_KEY = "portfolio-locale";
 const CHANGE_EVENT = "portfolio-preferences-change";
 
 function normalizeTheme(value: string | null): Theme {
-  return value === "light" || value === "dark" || value === "aurora" ? value : "dark";
+  return value === "light" || value === "dark" || value === "aurora" || value === "rose" ? value : "dark";
 }
 
 function normalizeLocale(value: string | null): Locale {

@@ -5,148 +5,163 @@ import Footer from "@/components/Footer";
 import { usePreferences } from "@/components/PreferencesProvider";
 import { clsx } from "clsx";
 
-const categories = [
+type Tech = { label: string; icon: string; mono?: boolean; color?: string };
+
+// Icons come from the public Iconify API (logos / simple-icons / carbon sets)
+const VMW = "#78b6f0";
+const categories: { titleEn: string; titleEs: string; span: string; items: Tech[] }[] = [
   {
-    titleEn: "Programming Languages",
-    titleEs: "Lenguajes de Programación",
+    titleEn: "VMware & Infrastructure",
+    titleEs: "VMware e Infraestructura",
+    span: "md:col-span-6",
     items: [
-      { label: "TypeScript", color: "#3178c6" },
-      { label: "JavaScript", color: "#f7df1e" },
-      { label: "Python", color: "#3776ab" },
-      { label: "Go", color: "#00add8" },
-      { label: "Java", color: "#openjdk" },
-      { label: "HTML5", color: "#e34f26" },
-      { label: "CSS3", color: "#1572b6" },
+      { label: "VMware Cloud Foundation 9", icon: "mdi:cloud-cog", color: VMW },
+      { label: "vSphere / vCenter", icon: "carbon:virtual-machine", color: VMW },
+      { label: "VKS · Supervisor", icon: "logos:kubernetes" },
+      { label: "NSX", icon: "carbon:network-overlay", color: VMW },
+      { label: "Avi Load Balancer", icon: "carbon:load-balancer-vpc", color: VMW },
+      { label: "VCF Automation", icon: "carbon:flow", color: VMW },
+      { label: "VeloCloud SD-WAN", icon: "carbon:network-4", color: VMW },
+      { label: "Tanzu", icon: "carbon:container-software", color: VMW },
+      { label: "Linux / Ubuntu", icon: "logos:ubuntu" },
+      { label: "Cisco Networking", icon: "simple-icons:cisco", color: "#1BA0D7" },
     ],
   },
   {
-    titleEn: "Frameworks & Libraries",
-    titleEs: "Frameworks y Librerías",
+    titleEn: "Languages",
+    titleEs: "Lenguajes",
+    span: "md:col-span-3",
     items: [
-      { label: "Next.js", color: "#ffffff" },
-      { label: "React", color: "#61dafb" },
-      { label: "NestJS", color: "#e0234e" },
-      { label: "Django", color: "#0c4b33" },
-      { label: "Node.js", color: "#68a063" },
-      { label: "Express.js", color: "#828282" },
-      { label: "Flask", color: "#828282" },
-      { label: "Tailwind CSS", color: "#38bdf8" },
-      { label: "Prisma", color: "#2d3748" },
+      { label: "TypeScript", icon: "logos:typescript-icon" },
+      { label: "JavaScript", icon: "logos:javascript" },
+      { label: "Python", icon: "logos:python" },
+      { label: "Go", icon: "logos:go" },
+      { label: "Java", icon: "logos:java" },
+      { label: "C++", icon: "logos:c-plusplus" },
+      { label: "Swift", icon: "logos:swift" },
+      { label: "PHP", icon: "logos:php" },
+      { label: "SQL", icon: "vscode-icons:file-type-sql" },
+      { label: "Bash", icon: "logos:bash-icon" },
+      { label: "HTML5", icon: "logos:html-5" },
+      { label: "CSS3", icon: "logos:css-3" },
+      { label: "YAML", icon: "logos:yaml" },
+    ],
+  },
+  {
+    titleEn: "Frontend & Mobile",
+    titleEs: "Frontend y Móvil",
+    span: "md:col-span-3",
+    items: [
+      { label: "React", icon: "logos:react" },
+      { label: "Next.js", icon: "logos:nextjs-icon", mono: true },
+      { label: "Vue", icon: "logos:vue" },
+      { label: "Vite", icon: "logos:vitejs" },
+      { label: "Tailwind CSS", icon: "logos:tailwindcss-icon" },
+      { label: "GSAP", icon: "logos:greensock-icon" },
+      { label: "Framer Motion", icon: "logos:framer", mono: true },
+      { label: "Leaflet", icon: "simple-icons:leaflet", color: "#199900" },
+      { label: "SwiftUI", icon: "logos:swift" },
+      { label: "Xcode", icon: "logos:xcode" },
+    ],
+  },
+  {
+    titleEn: "Backend & APIs",
+    titleEs: "Backend y APIs",
+    span: "md:col-span-4",
+    items: [
+      { label: "Node.js", icon: "logos:nodejs-icon" },
+      { label: "NestJS", icon: "logos:nestjs" },
+      { label: "Express", icon: "simple-icons:express", mono: true },
+      { label: "Django", icon: "logos:django-icon" },
+      { label: "Flask", icon: "logos:flask", mono: true },
+      { label: "Laravel", icon: "logos:laravel" },
+      { label: "Prisma", icon: "logos:prisma", mono: true },
+      { label: "GraphQL", icon: "logos:graphql" },
+      { label: "REST · OpenAPI", icon: "logos:swagger" },
+      { label: "WebSockets", icon: "logos:socket-io", mono: true },
+      { label: "OAuth · Entra ID", icon: "logos:microsoft-icon" },
+      { label: "JWT", icon: "logos:jwt-icon" },
     ],
   },
   {
     titleEn: "Databases",
     titleEs: "Bases de Datos",
+    span: "md:col-span-2",
     items: [
-      { label: "PostgreSQL", color: "#336791" },
-      { label: "MongoDB", color: "#47a248" },
-      { label: "MySQL", color: "#00758f" },
-      { label: "Redis", color: "#dc382d" },
-      { label: "Neo4j", color: "#008cc1" },
+      { label: "PostgreSQL", icon: "logos:postgresql" },
+      { label: "MySQL", icon: "logos:mysql-icon" },
+      { label: "MongoDB", icon: "logos:mongodb-icon" },
+      { label: "Redis", icon: "logos:redis" },
+      { label: "Neo4j", icon: "simple-icons:neo4j", color: "#4581C3" },
+      { label: "Supabase", icon: "logos:supabase-icon" },
+      { label: "Firebase", icon: "logos:firebase" },
     ],
   },
   {
     titleEn: "DevOps & Cloud",
     titleEs: "DevOps y Cloud",
+    span: "md:col-span-3",
     items: [
-      { label: "Docker", color: "#2496ed" },
-      { label: "Kubernetes", color: "#326ce5" },
-      { label: "Azure", color: "#0089d6" },
-      { label: "GitHub Actions", color: "#2088ff" },
-      { label: "VMware", color: "#717074" },
-      { label: "Vercel", color: "#ffffff" },
-      { label: "AWS", color: "#ff9900" },
-      { label: "GHCR (CI/CD)", color: "#2088ff" },
-      { label: "Firebase", color: "#ffca28" },
+      { label: "Docker", icon: "logos:docker-icon" },
+      { label: "Kubernetes", icon: "logos:kubernetes" },
+      { label: "Helm", icon: "logos:helm" },
+      { label: "Nginx", icon: "logos:nginx" },
+      { label: "GitHub Actions", icon: "logos:github-actions" },
+      { label: "GHCR", icon: "logos:github-icon", mono: true },
+      { label: "Azure", icon: "logos:microsoft-azure" },
+      { label: "AWS", icon: "logos:aws", mono: true },
+      { label: "Vercel", icon: "logos:vercel-icon", mono: true },
+      { label: "Netlify", icon: "logos:netlify-icon" },
+      { label: "Cloudflare", icon: "logos:cloudflare-icon" },
     ],
   },
   {
-    titleEn: "Developer Tools",
-    titleEs: "Herramientas de Desarrollo",
+    titleEn: "AI, IoT & Tools",
+    titleEs: "IA, IoT y Herramientas",
+    span: "md:col-span-3",
     items: [
-      { label: "Git", color: "#f05032" },
-      { label: "Postman", color: "#ff6c37" },
-      { label: "Figma", color: "#f24e1e" },
-      { label: "Notion", color: "#ffffff" },
-      { label: "Neovim", color: "#57a143" },
-      { label: "Supabase", color: "#3ecf8e" },
-      { label: "Cloudflare", color: "#f38020" },
-      { label: "VS Code", color: "#007acc" },
+      { label: "Claude / Claude Code", icon: "logos:claude-icon" },
+      { label: "OpenAI API", icon: "logos:openai-icon", mono: true },
+      { label: "ESP32", icon: "simple-icons:espressif", color: "#E7352C" },
+      { label: "Arduino", icon: "logos:arduino" },
+      { label: "MQTT", icon: "simple-icons:mqtt", color: "#a855f7" },
+      { label: "Git", icon: "logos:git-icon" },
+      { label: "Postman", icon: "logos:postman-icon" },
+      { label: "Figma", icon: "logos:figma" },
+      { label: "Notion", icon: "logos:notion-icon", mono: true },
+      { label: "VS Code", icon: "logos:visual-studio-code" },
+      { label: "Neovim", icon: "logos:neovim" },
     ],
   },
 ];
 
-function getTechIcon(label: string): string {
-  const mapping: { [key: string]: string } = {
-    "TypeScript": "typescript",
-    "JavaScript": "javascript",
-    "Python": "python",
-    "Go": "go",
-    "Java": "openjdk",
-    "HTML5": "html5",
-    "CSS3": "/assets/images/css.png",
-    "Next.js": "nextdotjs/white",
-    "React": "react",
-    "NestJS": "nestjs",
-    "Django": "django",
-    "Node.js": "nodedotjs",
-    "Express.js": "express/white",
-    "Flask": "flask/white",
-    "Tailwind CSS": "tailwindcss",
-    "Prisma": "prisma/white",
-    "PostgreSQL": "postgresql",
-    "MongoDB": "mongodb",
-    "MySQL": "mysql",
-    "Redis": "redis",
-    "Neo4j": "neo4j",
-    "Docker": "docker",
-    "Kubernetes": "kubernetes",
-    "Azure": "/assets/images/azure.png",
-    "GitHub Actions": "githubactions",
-    "VMware": "vmware/white",
-    "Vercel": "vercel/white",
-    "Supabase": "supabase",
-    "AWS": "/assets/images/aws.png",
-    "GHCR (CI/CD)": "github/white",
-    "Firebase": "firebase",
-    "Git": "git",
-    "Postman": "postman",
-    "Figma": "figma",
-    "Notion": "notion/white",
-    "Neovim": "neovim",
-    "Cloudflare": "cloudflare",
-    "VS Code": "/assets/images/vscode.png"
-  };
-  const slug = mapping[label] || label.toLowerCase().replace(/[^a-z0-9]/g, "");
-  if (slug.startsWith("/")) {
-    return slug;
-  }
-  return `https://cdn.simpleicons.org/${slug}`;
+function techIcon(tech: Tech) {
+  const [prefix, name] = tech.icon.split(":");
+  const color = tech.color ? `?color=${encodeURIComponent(tech.color)}` : "";
+  return `https://api.iconify.design/${prefix}/${name}.svg${color}`;
 }
 
 interface TechTileProps {
-  label: string;
-  icon: string;
-  className?: string;
+  tech: Tech;
 }
 
-function TechTile({ label, icon, className }: TechTileProps) {
+function TechTile({ tech }: TechTileProps) {
   return (
-    <div className={clsx(
-      "flex flex-col items-center justify-center p-3 rounded-xl border border-[var(--line)] bg-white/[0.015] hover:border-white/20 hover:bg-white/[0.05] hover:scale-[1.04] hover:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.5)] transition-all duration-200 gap-2 min-h-[90px] w-full group",
-      className
-    )}>
+    <div className="flex flex-col items-center justify-center p-3 rounded-xl border border-[var(--line)] bg-white/[0.015] hover:border-white/20 hover:bg-white/[0.05] hover:scale-[1.04] hover:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.5)] transition-all duration-200 gap-2 min-h-[90px] w-full group">
       <img
-        src={icon}
-        alt={label}
-        className="w-7.5 h-7.5 object-contain shrink-0 transition-all duration-200 brightness-[0.85] group-hover:brightness-100 group-hover:scale-[1.06]"
+        src={techIcon(tech)}
+        alt={tech.label}
+        className={clsx(
+          "w-7.5 h-7.5 object-contain shrink-0 transition-all duration-200 brightness-[0.95] group-hover:brightness-100 group-hover:scale-[1.06]",
+          tech.mono && "tech-mono"
+        )}
         loading="lazy"
         onError={(e) => {
-          e.currentTarget.style.display = "none";
+          e.currentTarget.style.visibility = "hidden";
         }}
       />
       <span className="text-[11px] sm:text-[11.5px] text-fg-dim font-mono font-medium tracking-tight text-center leading-snug max-w-full px-0.5 group-hover:text-fg break-words whitespace-normal">
-        {label}
+        {tech.label}
       </span>
     </div>
   );
@@ -154,74 +169,6 @@ function TechTile({ label, icon, className }: TechTileProps) {
 
 export default function StackPage() {
   const { locale } = usePreferences();
-
-  // Grid spans: 
-  // Programming Languages & Frameworks span 3 columns each (Total 6 in row 1).
-  // Databases (spans 2), DevOps (spans 3), Tools (spans 1) (Total 6 in row 2).
-  // Currently learning spans 6 columns (Total 6 in row 3).
-  const spans = [
-    "col-span-1 md:col-span-6", // Languages
-    "col-span-1 md:col-span-4", // Frameworks
-    "col-span-1 md:col-span-2", // Databases
-    "col-span-1 md:col-span-3", // DevOps
-    "col-span-1 md:col-span-3", // Tools
-  ];
-
-  const whyStackItems = locale === "en"
-    ? [
-        {
-          label: "Next.js over Vite + React",
-          detail:
-            "Chose Next.js for its App Router, server-side Route Handlers (used as a GitHub API proxy with caching), and Vercel-native deployment. For a portfolio that fetches real data, SSR and route handlers matter.",
-        },
-        {
-          label: "NestJS for back-end projects",
-          detail:
-            "When building UVGenius (a monorepo platform), NestJS gave me dependency injection, decorators, and a modular architecture that scaled across 34+ database entities without becoming a spaghetti Express app.",
-        },
-        {
-          label: "PostgreSQL over MongoDB",
-          detail:
-            "Relational data with clear schemas (users, projects, associations) benefits from foreign keys, constraints, and transactions. Used MongoDB in earlier projects and found schema flexibility a liability at scale.",
-        },
-        {
-          label: "Docker Compose for local and production parity",
-          detail:
-            "UVGenius runs 4 services (PostgreSQL, Redis, NestJS backend, reverse proxy) under a single docker-compose.yml. This means the app behaves the same on my machine and on a VPS.",
-        },
-        {
-          label: "TypeScript strict mode throughout",
-          detail:
-            "Caught real bugs during development. Combined with Prisma's generated types, the entire UVGenius data layer is type-safe end to end.",
-        },
-      ]
-    : [
-        {
-          label: "Next.js sobre Vite + React",
-          detail:
-            "Elegí Next.js por su App Router, los Route Handlers del lado del servidor (usados como proxy para la API de GitHub con caché) y el despliegue nativo en Vercel. Para un portafolio que obtiene datos reales, SSR y los manejadores de rutas son determinantes.",
-        },
-        {
-          label: "NestJS para proyectos de back-end",
-          detail:
-            "Al construir UVGenius (plataforma monorepo), NestJS me dio inyección de dependencias, decoradores y una arquitectura modular que escaló a través de 34+ entidades de base de datos sin convertirse en un Express espagueti.",
-        },
-        {
-          label: "PostgreSQL sobre MongoDB",
-          detail:
-            "Los datos relacionales con esquemas definidos (usuarios, proyectos, asociaciones) se benefician de claves foráneas, restricciones y transacciones. Usé MongoDB en proyectos anteriores y encontré que la flexibilidad de esquema se convierte en un pasivo a escala.",
-        },
-        {
-          label: "Docker Compose para paridad local y producción",
-          detail:
-            "UVGenius corre 4 servicios (PostgreSQL, Redis, backend NestJS, proxy inverso) bajo un único docker-compose.yml. Esto significa que la app se comporta igual en mi máquina y en un VPS.",
-        },
-        {
-          label: "TypeScript en modo estricto en todo el stack",
-          detail:
-            "Detectó errores reales durante el desarrollo. Combinado con los tipos generados por Prisma, toda la capa de datos de UVGenius es type-safe de extremo a extremo.",
-        },
-      ];
 
   return (
     <div className="flex flex-col gap-8">
@@ -236,54 +183,22 @@ export default function StackPage() {
         </h1>
         <p className="text-fg-dim text-[15px] leading-[1.55] max-w-[600px] m-0">
           {locale === "en"
-            ? "A comprehensive overview of the programming languages, framework ecosystems, database systems, and DevOps/cloud tools that I use to design and build scalable products."
-            : "Una vista detallada de los lenguajes de programación, frameworks, bases de datos y herramientas de DevOps y nube que utilizo para construir soluciones robustas."}
+            ? "Everything I work with: from VMware Cloud Foundation and VKS clusters to full-stack web apps, APIs, databases, mobile and IoT."
+            : "Todo con lo que trabajo: desde VMware Cloud Foundation y clústeres VKS hasta aplicaciones web full stack, APIs, bases de datos, móvil e IoT."}
         </p>
       </header>
 
-      {/* Why this stack reasoning card */}
-      <BentoCard className="col-span-1 !p-[22px] sm:!p-[28px] flex flex-col gap-4">
-        <div className="text-[12px] font-semibold text-fg uppercase tracking-[0.12em] font-mono border-b border-white/5 pb-2">
-          {locale === "en" ? "Why this stack" : "Por qué este stack"}
-        </div>
-        <ol className="list-none p-0 m-0 flex flex-col gap-4">
-          {whyStackItems.map((item, i) => (
-            <li key={i} className="flex flex-col gap-[3px]">
-              <span className="text-[12px] font-mono font-semibold text-fg tracking-tight">
-                {item.label}
-              </span>
-              <span className="text-[13.5px] text-fg-dim leading-[1.55]">
-                {item.detail}
-              </span>
-            </li>
-          ))}
-        </ol>
-      </BentoCard>
-
       {/* Categories Grid - Symmetrical 3-Row Sized Grid */}
       <main className="grid grid-cols-1 md:grid-cols-6 gap-6">
-        {categories.map((cat, idx) => (
-          <BentoCard key={idx} className={`${spans[idx]} !p-[22px] sm:!p-[28px] flex flex-col gap-4`}>
-            <div className="text-[12px] font-semibold text-fg uppercase tracking-[0.12em] font-mono border-b border-white/5 pb-2">
-              {locale === "en" ? cat.titleEn : cat.titleEs}
+        {categories.map((cat) => (
+          <BentoCard key={cat.titleEn} className={`col-span-1 ${cat.span} !p-[22px] sm:!p-[28px] flex flex-col gap-4`}>
+            <div className="flex items-center justify-between text-[12px] font-semibold text-fg uppercase tracking-[0.12em] font-mono border-b border-white/5 pb-2">
+              <span>{locale === "en" ? cat.titleEn : cat.titleEs}</span>
+              <span className="text-fg-mute font-normal tracking-normal">{cat.items.length}</span>
             </div>
-            <div className={clsx(
-              "grid gap-2.5 my-auto",
-              idx === 0 && "grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5", // Languages
-              idx === 1 && "grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5", // Frameworks
-              idx === 2 && "grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-2", // Databases
-              idx === 3 && "grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-3", // DevOps
-              idx === 4 && "grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-2"  // Tools
-            )}>
-              {cat.items.map((item, itemIdx) => (
-                <TechTile
-                  key={item.label}
-                  label={item.label}
-                  icon={getTechIcon(item.label)}
-                  className={clsx(
-                    idx === 2 && itemIdx === 4 && "col-span-2 md:col-span-2 lg:col-span-2" // Neo4j stretches in Databases grid
-                  )}
-                />
+            <div className="grid gap-2.5 grid-cols-[repeat(auto-fill,minmax(96px,1fr))]">
+              {cat.items.map((tech) => (
+                <TechTile key={tech.label} tech={tech} />
               ))}
             </div>
           </BentoCard>

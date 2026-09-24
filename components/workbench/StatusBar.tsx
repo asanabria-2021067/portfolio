@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { usePreferences } from "../PreferencesProvider";
 import { useWorkbench } from "./WorkbenchProvider";
+import { THEME_NAMES } from "./extensions";
 import { BranchIcon, ErrorIcon, SyncIcon, WarningIcon } from "./icons";
-import { LANGUAGE_LABEL, fileForRoute, t } from "@/lib/workspace";
+import { LANGUAGE_LABEL, t } from "@/lib/workspace";
 
-const THEME_LABEL = { dark: "Angel Dark", light: "Daylight", aurora: "Aurora" } as const;
 
 function Clock() {
   const { locale } = usePreferences();
@@ -33,11 +33,35 @@ function Clock() {
   );
 }
 
+function ReadingTime({ pathname }: { pathname: string }) {
+  const { locale } = usePreferences();
+  const [words, setWords] = useState<number | null>(null);
+
+  useEffect(() => {
+    const count = () => {
+      const root = document.querySelector<HTMLElement>("[data-editor-content]");
+      const text = root?.innerText ?? "";
+      setWords(text.split(/\s+/).filter((word) => /[\p{L}\p{N}]/u.test(word)).length);
+    };
+    // pages animate in and load data, so count a couple of times
+    const timers = [400, 2500].map((delay) => window.setTimeout(count, delay));
+    return () => timers.forEach(window.clearTimeout);
+  }, [pathname, locale]);
+
+  if (words === null) return null;
+  const minutes = Math.max(1, Math.round(words / 220));
+  return (
+    <span className="wb-status-item" title={t(locale, `${words} words`, `${words} palabras`)}>
+      📖 {t(locale, `${minutes} min read`, `${minutes} min de lectura`)}
+    </span>
+  );
+}
+
 export default function StatusBar() {
   const pathname = usePathname();
   const { locale, toggleLocale, theme } = usePreferences();
-  const { showView, setTerminalOpen, terminalOpen, availableThemes, cycleTheme, isInstalled, setZen, editorEmpty } = useWorkbench();
-  const file = editorEmpty ? undefined : fileForRoute(pathname);
+  const { showView, setTerminalOpen, terminalOpen, availableThemes, cycleTheme, isInstalled, setZen, activeTab } = useWorkbench();
+  const file = activeTab;
 
   return (
     <footer className="wb-statusbar">
@@ -59,6 +83,7 @@ export default function StatusBar() {
       </div>
 
       <div className="wb-status-group">
+        {isInstalled("reading-time") && activeTab?.kind === "route" && <ReadingTime pathname={pathname} />}
         {isInstalled("local-clock") && <Clock />}
         <span className="wb-status-item wb-status-hire">
           <span className="pulse" />
@@ -73,7 +98,7 @@ export default function StatusBar() {
         )}
         {availableThemes.length > 1 && (
           <button type="button" className="wb-status-item" onClick={cycleTheme} title={t(locale, "Switch color theme", "Cambiar tema de color")}>
-            {theme === "light" ? "☀" : theme === "aurora" ? "✦" : "☾"} {THEME_LABEL[theme]}
+            {theme === "light" ? "☀" : theme === "aurora" ? "✦" : theme === "rose" ? "✿" : "☾"} {THEME_NAMES[theme]}
           </button>
         )}
         <button type="button" className="wb-status-item" onClick={toggleLocale} title={t(locale, "Cambiar a español", "Switch to English")}>

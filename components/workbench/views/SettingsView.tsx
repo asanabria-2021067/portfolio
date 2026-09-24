@@ -1,11 +1,11 @@
 "use client";
 
 import { clsx } from "clsx";
-import { usePreferences, type Theme } from "../../PreferencesProvider";
+import { usePreferences } from "../../PreferencesProvider";
+import { THEME_NAMES } from "../extensions";
 import { useWorkbench } from "../WorkbenchProvider";
 import { t } from "@/lib/workspace";
 
-const THEME_NAMES: Record<Theme, string> = { dark: "Angel Dark", light: "Daylight", aurora: "Aurora" };
 
 const SHORTCUTS: [string, string, string][] = [
   ["Ctrl+P", "Go to file", "Ir a archivo"],

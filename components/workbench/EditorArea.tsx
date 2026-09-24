@@ -5,65 +5,48 @@ import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 import { usePreferences } from "../PreferencesProvider";
 import { useWorkbench } from "./WorkbenchProvider";
-import { FileBadge } from "./views/ExplorerView";
-import { ChevronIcon, CloseIcon } from "./icons";
-import { fileForRoute, t } from "@/lib/workspace";
-import PixelPet from "./PixelPet";
+import { CloseIcon } from "./icons";
+import { FileIcon } from "./FileIcon";
+import { t } from "@/lib/workspace";
+import PixelPets from "./PixelPet";
+import PdfViewer, { ImageViewer } from "./PdfViewer";
+import Minimap from "./Minimap";
+import { Snow, SparkleCursor } from "./Effects";
 
 function Tabs() {
-  const pathname = usePathname();
-  const { tabs, openFile, closeTab, editorEmpty } = useWorkbench();
+  const { tabs, activeTab, activateTab, closeTab } = useWorkbench();
   const activeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     activeRef.current?.scrollIntoView({ block: "nearest", inline: "nearest" });
-  }, [pathname, tabs.length]);
+  }, [activeTab?.id, tabs.length]);
 
   if (tabs.length === 0) return <div className="wb-tabs wb-tabs--empty" />;
 
   return (
     <div className="wb-tabs" role="tablist">
-      {tabs.map((href) => {
-        const file = fileForRoute(href);
-        if (!file) return null;
-        const active = href === pathname && !editorEmpty;
+      {tabs.map((tab) => {
+        const active = tab.id === activeTab?.id;
         return (
           <div
-            key={href}
+            key={tab.id}
             ref={active ? activeRef : undefined}
             role="tab"
             aria-selected={active}
             className={clsx("wb-tab", active && "is-active")}
-            onAuxClick={(event) => event.button === 1 && closeTab(href)}
+            onAuxClick={(event) => event.button === 1 && closeTab(tab.id)}
+            title={tab.kind === "route" ? `app/${tab.name}` : tab.href}
           >
-            <button type="button" className="wb-tab-main" onClick={() => openFile(file)}>
-              <FileBadge ext={file.ext} />
-              <span>{file.name}</span>
+            <button type="button" className="wb-tab-main" onClick={() => activateTab(tab)}>
+              <FileIcon ext={tab.ext} />
+              <span>{tab.name}</span>
             </button>
-            <button type="button" className="wb-tab-close" onClick={() => closeTab(href)} aria-label={`Close ${file.name}`}>
+            <button type="button" className="wb-tab-close" onClick={() => closeTab(tab.id)} aria-label={`Close ${tab.name}`}>
               <CloseIcon size={13} />
             </button>
           </div>
         );
       })}
-    </div>
-  );
-}
-
-function Breadcrumbs() {
-  const pathname = usePathname();
-  const file = fileForRoute(pathname);
-  if (!file) return null;
-  const parts = file.path.split("/");
-  return (
-    <div className="wb-breadcrumbs" aria-label="Breadcrumb">
-      {parts.map((part, index) => (
-        <span key={part} className="wb-crumb">
-          {index === parts.length - 1 ? <FileBadge ext={file.ext} /> : null}
-          <span>{part}</span>
-          {index < parts.length - 1 && <ChevronIcon size={11} />}
-        </span>
-      ))}
     </div>
   );
 }
@@ -108,7 +91,8 @@ function Watermark() {
 /** Highlights search matches inside the editor using the CSS Custom Highlight API. */
 function useSearchHighlight(container: React.RefObject<HTMLDivElement | null>) {
   const pathname = usePathname();
-  const { highlightQuery, highlightLine, editorEmpty } = useWorkbench();
+  const { highlightQuery, highlightLine, activeTab } = useWorkbench();
+  const editorEmpty = activeTab?.kind !== "route";
   const { locale } = usePreferences();
 
   useEffect(() => {
@@ -165,10 +149,12 @@ function useSearchHighlight(container: React.RefObject<HTMLDivElement | null>) {
 
 export default function EditorArea({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { editorEmpty, zoom, isInstalled } = useWorkbench();
+  const { activeTab, zoom, isInstalled } = useWorkbench();
   const scrollRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   useSearchHighlight(contentRef);
+  const showingPage = activeTab?.kind === "route";
+  const minimap = isInstalled("minimap") && showingPage;
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: 0 });
@@ -184,15 +170,20 @@ export default function EditorArea({ children }: { children: React.ReactNode }) 
         }}
       />
       <Tabs />
-      {!editorEmpty && <Breadcrumbs />}
-      <div className="wb-editor-body">
-        <div ref={scrollRef} className={clsx("wb-content", editorEmpty && "is-hidden")}>
+      <div className={clsx("wb-editor-body", minimap && "has-minimap")}>
+        {/* the page stays mounted while a document tab is on top, so its state survives */}
+        <div ref={scrollRef} className={clsx("wb-content", !showingPage && "is-hidden")}>
           <div ref={contentRef} data-editor-content style={{ zoom }}>
             {children}
           </div>
         </div>
-        {editorEmpty && <Watermark />}
-        {isInstalled("pixel-pet") && <PixelPet />}
+        {activeTab?.kind === "pdf" && <PdfViewer key={activeTab.id} href={activeTab.href} name={activeTab.name} />}
+        {activeTab?.kind === "image" && <ImageViewer key={activeTab.id} href={activeTab.href} name={activeTab.name} />}
+        {!activeTab && <Watermark />}
+        {minimap && <Minimap scrollRef={scrollRef} contentRef={contentRef} />}
+        {isInstalled("let-it-snow") && <Snow />}
+        {isInstalled("sparkle-cursor") && <SparkleCursor />}
+        {isInstalled("pixel-pet") && <PixelPets />}
       </div>
     </section>
   );

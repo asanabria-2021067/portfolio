@@ -17,7 +17,7 @@ export default function Hero() {
         <span className="grad-text">Angel Sanabria.</span>
       </h1>
       <p className="text-[19px] text-fg-dim mb-[18px] font-normal">
-        <strong className="text-fg font-semibold">VMware Engineer Jr.</strong> & <strong className="text-fg font-semibold">Full Stack Developer</strong>
+        <strong className="text-fg font-semibold">VMware Engineer (VKS)</strong> & <strong className="text-fg font-semibold">Full Stack Developer</strong>
       </p>
       <p className="text-[15.5px] text-fg-dim leading-[1.6] max-w-[540px] mb-6 text-pretty">
         {locale === "en"
