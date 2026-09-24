@@ -22,15 +22,13 @@ const categories: { titleEn: string; titleEs: string; span: string; items: Tech[
       { label: "Avi Load Balancer", icon: "carbon:load-balancer-vpc", color: VMW },
       { label: "VCF Automation", icon: "carbon:flow", color: VMW },
       { label: "VeloCloud SD-WAN", icon: "carbon:network-4", color: VMW },
-      { label: "Tanzu", icon: "carbon:container-software", color: VMW },
       { label: "Linux / Ubuntu", icon: "logos:ubuntu" },
-      { label: "Cisco Networking", icon: "simple-icons:cisco", color: "#1BA0D7" },
     ],
   },
   {
     titleEn: "Languages",
     titleEs: "Lenguajes",
-    span: "md:col-span-3",
+    span: "md:col-span-4",
     items: [
       { label: "TypeScript", icon: "logos:typescript-icon" },
       { label: "JavaScript", icon: "logos:javascript" },
@@ -39,29 +37,20 @@ const categories: { titleEn: string; titleEs: string; span: string; items: Tech[
       { label: "Java", icon: "logos:java" },
       { label: "C++", icon: "logos:c-plusplus" },
       { label: "Swift", icon: "logos:swift" },
+      { label: "Kotlin", icon: "logos:kotlin-icon" },
       { label: "PHP", icon: "logos:php" },
-      { label: "SQL", icon: "vscode-icons:file-type-sql" },
-      { label: "Bash", icon: "logos:bash-icon" },
-      { label: "HTML5", icon: "logos:html-5" },
-      { label: "CSS3", icon: "logos:css-3" },
-      { label: "YAML", icon: "logos:yaml" },
     ],
   },
   {
-    titleEn: "Frontend & Mobile",
-    titleEs: "Frontend y Móvil",
-    span: "md:col-span-3",
+    titleEn: "Markup, Query & Scripting",
+    titleEs: "Marcado, Consultas y Scripting",
+    span: "md:col-span-2",
     items: [
-      { label: "React", icon: "logos:react" },
-      { label: "Next.js", icon: "logos:nextjs-icon", mono: true },
-      { label: "Vue", icon: "logos:vue" },
-      { label: "Vite", icon: "logos:vitejs" },
-      { label: "Tailwind CSS", icon: "logos:tailwindcss-icon" },
-      { label: "GSAP", icon: "logos:greensock-icon" },
-      { label: "Framer Motion", icon: "logos:framer", mono: true },
-      { label: "Leaflet", icon: "simple-icons:leaflet", color: "#199900" },
-      { label: "SwiftUI", icon: "logos:swift" },
-      { label: "Xcode", icon: "logos:xcode" },
+      { label: "HTML5", icon: "logos:html-5" },
+      { label: "CSS3", icon: "logos:css-3" },
+      { label: "SQL", icon: "vscode-icons:file-type-sql" },
+      { label: "Bash", icon: "logos:bash-icon" },
+      { label: "YAML", icon: "logos:yaml" },
     ],
   },
   {
@@ -70,6 +59,7 @@ const categories: { titleEn: string; titleEs: string; span: string; items: Tech[
     span: "md:col-span-4",
     items: [
       { label: "Node.js", icon: "logos:nodejs-icon" },
+      { label: "Go", icon: "logos:go" },
       { label: "NestJS", icon: "logos:nestjs" },
       { label: "Express", icon: "simple-icons:express", mono: true },
       { label: "Django", icon: "logos:django-icon" },
@@ -94,7 +84,24 @@ const categories: { titleEn: string; titleEs: string; span: string; items: Tech[
       { label: "Redis", icon: "logos:redis" },
       { label: "Neo4j", icon: "simple-icons:neo4j", color: "#4581C3" },
       { label: "Supabase", icon: "logos:supabase-icon" },
-      { label: "Firebase", icon: "logos:firebase" },
+      { label: "Firebase", icon: "logos:firebase-icon" },
+    ],
+  },
+  {
+    titleEn: "Frontend & Mobile",
+    titleEs: "Frontend y Móvil",
+    span: "md:col-span-3",
+    items: [
+      { label: "React", icon: "logos:react" },
+      { label: "Next.js", icon: "logos:nextjs-icon", mono: true },
+      { label: "Vue", icon: "logos:vue" },
+      { label: "Vite", icon: "logos:vitejs" },
+      { label: "Tailwind CSS", icon: "logos:tailwindcss-icon" },
+      { label: "GSAP", icon: "logos:greensock-icon" },
+      { label: "Framer Motion", icon: "logos:framer", mono: true },
+      { label: "Leaflet", icon: "simple-icons:leaflet", color: "#199900" },
+      { label: "SwiftUI", icon: "logos:swift" },
+      { label: "Xcode", icon: "logos:xcode" },
     ],
   },
   {
@@ -113,24 +120,22 @@ const categories: { titleEn: string; titleEs: string; span: string; items: Tech[
       { label: "Vercel", icon: "logos:vercel-icon", mono: true },
       { label: "Netlify", icon: "logos:netlify-icon" },
       { label: "Cloudflare", icon: "logos:cloudflare-icon" },
+      { label: "MongoDB Atlas", icon: "logos:mongodb-icon" },
     ],
   },
   {
-    titleEn: "AI, IoT & Tools",
-    titleEs: "IA, IoT y Herramientas",
-    span: "md:col-span-3",
+    titleEn: "AI & Tools",
+    titleEs: "IA y Herramientas",
+    span: "md:col-span-6",
     items: [
       { label: "Claude / Claude Code", icon: "logos:claude-icon" },
       { label: "OpenAI API", icon: "logos:openai-icon", mono: true },
-      { label: "ESP32", icon: "simple-icons:espressif", color: "#E7352C" },
-      { label: "Arduino", icon: "logos:arduino" },
-      { label: "MQTT", icon: "simple-icons:mqtt", color: "#a855f7" },
       { label: "Git", icon: "logos:git-icon" },
       { label: "Postman", icon: "logos:postman-icon" },
       { label: "Figma", icon: "logos:figma" },
       { label: "Notion", icon: "logos:notion-icon", mono: true },
       { label: "VS Code", icon: "logos:visual-studio-code" },
-      { label: "Neovim", icon: "logos:neovim" },
+      { label: "Neovim", icon: "simple-icons:neovim", color: "#57A143" },
     ],
   },
 ];
@@ -183,8 +188,8 @@ export default function StackPage() {
         </h1>
         <p className="text-fg-dim text-[15px] leading-[1.55] max-w-[600px] m-0">
           {locale === "en"
-            ? "Everything I work with: from VMware Cloud Foundation and VKS clusters to full-stack web apps, APIs, databases, mobile and IoT."
-            : "Todo con lo que trabajo: desde VMware Cloud Foundation y clústeres VKS hasta aplicaciones web full stack, APIs, bases de datos, móvil e IoT."}
+            ? "Everything I work with: from VMware Cloud Foundation and VKS clusters to full-stack web apps, APIs, databases and mobile."
+            : "Todo con lo que trabajo: desde VMware Cloud Foundation y clústeres VKS hasta aplicaciones web full stack, APIs, bases de datos y móvil."}
         </p>
       </header>
 
@@ -216,9 +221,9 @@ export default function StackPage() {
               {locale === "en" ? "Currently learning & focusing" : "Aprendiendo y enfocándome ahora"}
             </span>
           </div>
-          <ul className="list-none p-0 m-0 flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-2">
+          <ul className="list-none p-0 m-0 flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
             <li className="flex items-start gap-2.5 text-[13.5px] text-fg-dim before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:mt-[7px] before:shrink-0">
-              <span>Vue.js & ecosystem</span>
+              <span>Rust</span>
             </li>
             <li className="flex items-start gap-2.5 text-[13.5px] text-fg-dim before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:mt-[7px] before:shrink-0">
               <span>{locale === "en" ? "Advanced cloud-native architectures" : "Arquitecturas cloud-native avanzadas"}</span>
@@ -228,6 +233,9 @@ export default function StackPage() {
             </li>
             <li className="flex items-start gap-2.5 text-[13.5px] text-fg-dim before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:mt-[7px] before:shrink-0">
               <span>{locale === "en" ? "Kubernetes operator development" : "Desarrollo de operadores de Kubernetes"}</span>
+            </li>
+            <li className="flex items-start gap-2.5 text-[13.5px] text-fg-dim before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-purple-accent before:shadow-[0_0_6px_var(--color-purple-accent)] before:mt-[7px] before:shrink-0">
+              <span>{locale === "en" ? "Microservices, monoliths & modular monoliths" : "Microservicios, monolitos y monolitos modulares"}</span>
             </li>
           </ul>
         </BentoCard>
