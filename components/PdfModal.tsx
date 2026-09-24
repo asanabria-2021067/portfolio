@@ -1,5 +1,7 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePreferences } from "./PreferencesProvider";
 
@@ -13,7 +15,15 @@ interface PdfModalProps {
 export default function PdfModal({ isOpen, link, name, onClose }: PdfModalProps) {
   const { locale } = usePreferences();
 
-  return (
+  // rendered into <body> so transformed/scrolling ancestors (editor area, page transitions) can't clip it
+  const isClient = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+  if (!isClient) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6">
@@ -88,6 +98,7 @@ export default function PdfModal({ isOpen, link, name, onClose }: PdfModalProps)
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Inter_Tight, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import "./workbench.css";
 import PageTransition from "@/components/PageTransition";
-import FileTreeNav from "@/components/FileTreeNav";
 import { PreferencesProvider } from "@/components/PreferencesProvider";
-import BottomNav from "@/components/BottomNav";
+import Workbench from "@/components/workbench/Workbench";
 
 const interTight = Inter_Tight({
   variable: "--font-inter",
@@ -37,18 +36,9 @@ export default function RootLayout({
       <body className="antialiased">
         <PreferencesProvider>
           <div className="ambient" />
-          <div className="shell">
-            <Navbar />
-            <div className="ide-layout">
-              <aside className="ft-sidebar">
-                <FileTreeNav />
-              </aside>
-              <div className="ide-main">
-                <PageTransition>{children}</PageTransition>
-              </div>
-            </div>
-          </div>
-          <BottomNav />
+          <Workbench>
+            <PageTransition>{children}</PageTransition>
+          </Workbench>
         </PreferencesProvider>
       </body>
     </html>
